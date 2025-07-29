@@ -1,0 +1,104 @@
+
+/* Testimonial Card Styling */
+/* .testimonial-card {
+    background-color: #1c1c22;
+    padding: 2.5rem;
+    border-radius: 10px 30px 30px 30px; 
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% / 3 - 1.5rem); 
+} */
+
+
+.testimonial-card {
+    background-color: #1c1c22;
+    padding: 2.5rem;
+    border-radius: 10px 30px 30px 30px; 
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 320px; /* fixed width ensures no overlap in horizontal scroll */
+    margin-right: 1.5rem; /* match the gap in .carousel-track */
+}
+
+
+
+.testimonial-card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-card-quote-mark {
+    font-size: 5rem;
+    font-weight: 900;
+    color: #ADFF2F; 
+    line-height: 0.5;
+    margin-bottom: 1.5rem;
+    user-select: none;
+}
+
+.testimonial-card-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.25rem;
+}
+
+.testimonial-card-role {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-card-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #d1d5db;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* Avatar Styling */
+.testimonial-card-avatar-wrapper {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 80px;
+    height: 80px;
+    background-color: #101012;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testimonial-card-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 0.75rem;
+    object-fit: cover;
+}
+
+.corner-icon {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    color: #1c1c22; 
+}
+
+.corner-icon.top-right {
+    top: -1px; 
+    right: -1px;
+    transform: rotate(90deg);
+}
+
+.corner-icon.bottom-left {
+    bottom: -1px;
+    left: -1px;
+    transform: rotate(-90deg);
+}
