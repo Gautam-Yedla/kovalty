@@ -22,7 +22,7 @@ const Testimonials: React.FC = () => {
 
 
       {/* Infinite carousel section */}
-      <InfiniteCarousel speed={3}>
+      <InfiniteCarousel speed={20}>
         {testimonialsData.map((testimonial, index) => (
           <TestimonialCard key={index} testimonial={testimonial} />
         ))}

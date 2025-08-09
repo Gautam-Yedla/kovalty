@@ -6,3 +6,55 @@
  /* @tailwind base;
  @tailwind components;
  @tailwind utilities; */
+
+/* Brand Color Variables */
+:root {
+  /* Primary Brand Colors */
+  --kovalty-blue: #54a9e0;
+  --kovalty-gray: #626262;
+  
+  /* Color Variations */
+  --kovalty-blue-light: #7bb8e6;
+  --kovalty-blue-dark: #3d7ba8;
+  --kovalty-gray-light: #8a8a8a;
+  --kovalty-gray-dark: #4a4a4a;
+  
+  /* Background Colors */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2a2a2a;
+  --bg-tertiary: #3a3a3a;
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #a0a0a0;
+  
+  /* Border Colors */
+  --border-primary: var(--kovalty-gray);
+  --border-secondary: var(--kovalty-blue);
+  
+  /* Accent Colors */
+  --accent-primary: var(--kovalty-blue);
+  --accent-secondary: var(--kovalty-gray);
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

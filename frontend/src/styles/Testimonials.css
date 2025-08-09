@@ -1,6 +1,6 @@
 /* Testimonials Section General Styling */
 .testimonials-section {
-    background-color: #101012;
+    background-color: var(--bg-primary);
     padding: 6rem 0;
     width: 100%;
     overflow: hidden;
@@ -24,11 +24,11 @@
 
 .testimonials-tag-wrapper {
     display: inline-block;
-    background-color: rgba(167, 139, 250, 0.1); /* Semi-transparent purple */
+    background-color: rgba(84, 169, 224, 0.1); /* Semi-transparent blue */
     border-radius: 9999px;
     padding: 0.1rem;
     backdrop-filter: blur(6px);
-    border: 1px solid rgba(167, 139, 250, 0.2);
+    border: 1px solid rgba(84, 169, 224, 0.2);
     margin-bottom: 1rem;
 }
 
@@ -37,7 +37,7 @@
     padding: 0.25rem 0.75rem;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #c4b5fd; /* Light purple */
+    color: var(--accent-primary);
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
@@ -45,14 +45,14 @@
 .testimonials-heading {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #f9fafb;
+    color: var(--text-primary);
     margin: 0 0 1rem 0;
     line-height: 1.2;
 }
 
 .testimonials-subheading {
     font-size: 1.125rem;
-    color: #9ca3af;
+    color: var(--text-muted);
     max-width: 500px;
 }
 
@@ -68,9 +68,9 @@
 }
 
 .read-all-button {
-    background-color: #C2FA69;
-    color: #0F0F0F;
-    border: 1px solid #C2FA69;
+    background-color: var(--accent-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--accent-primary);
     border-radius: 1.25rem; /* 20px */
     padding: 1rem 1.5rem;
     display: flex;
@@ -84,7 +84,7 @@
 
 .read-all-button:hover {
     transform: scale(1.03);
-    box-shadow: 0 10px 20px rgba(194, 250, 105, 0.2);
+    box-shadow: 0 10px 20px rgba(84, 169, 224, 0.2);
 }
 
 .read-all-avatars {
@@ -96,8 +96,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 3px solid #C2FA69;
-    background-color: #C2FA69;
+    border: 3px solid var(--accent-primary);
+    background-color: var(--accent-primary);
     margin-left: -16px;
     object-fit: cover;
 }
@@ -127,17 +127,24 @@
 /* Responsive Design */
 @media (max-width: 1200px) {
     .testimonial-card {
-        width: calc(100% / 2 - 1.5rem); /* 2 cards */
+        width: 350px; /* Slightly smaller for tablets */
+        min-width: 350px;
     }
 }
 
-
 @media (max-width: 768px) {
     .testimonial-card {
-        width: 80%; /* 1 card */
+        width: 320px; /* Larger than before for mobile */
+        min-width: 320px;
     }
     .testimonials-heading {
-        font-size: 2.5rem;
+        font-size: 2rem;
+    }
+    .infinite-carousel-inner {
+        gap: 1rem;
+    }
+    .carousel-track {
+        gap: 1rem;
     }
 }
 
@@ -157,49 +164,37 @@
 
 
 .infinite-carousel-outer {
-    overflow: hidden;
-    width: 100%;
-    padding: 1rem 0;
-  
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
-    mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
-  }
-  
-  .infinite-carousel-inner {
-    display: flex;
-    /* width: max-content; */
-    gap: 1.5rem;
-    will-change: transform;
-    animation-name: autoScrollContinuous;
-  }
+  overflow: hidden;
+  width: 100%;
+  padding: 1rem 0;
+  position: relative;
+}
 
+.infinite-carousel-inner {
+  display: flex;
+  gap: 1.5rem;
+  will-change: transform;
+  animation: autoScrollContinuous linear infinite;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
 
+.carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
 
-  .infinite-carousel-track {
-    display: flex;
-    width: fit-content;
-    animation-name: scroll-carousel;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    will-change: transform;
+@keyframes autoScrollContinuous {
+  0% {
+    transform: translateX(0);
   }
-  
-  .carousel-content {
-    display: flex;
-    gap: 1.5rem;
+  100% {
+    transform: translateX(-33.333%);
   }
-  
-  /* You already have this keyframe animation */
-  @keyframes autoScrollContinuous {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-  
-  .infinite-carousel-outer:hover .infinite-carousel-inner {
-    animation-play-state: paused;
-  }
+}
+
+.infinite-carousel-outer:hover .infinite-carousel-inner {
+  animation-play-state: paused;
+}
   

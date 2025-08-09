@@ -1,0 +1,42 @@
+/* Root container */
+.aboutus-root {
+	min-height: 100vh;
+	background: #1a1a1a;
+	color: #ffffff;
+}
+
+/* Hero Section */
+.aboutus-hero {
+	position: relative;
+	overflow: hidden;
+	background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+	padding: 5rem 1.5rem;
+}
+.aboutus-hero-bg {
+	position: absolute;
+	inset: 0;
+	background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%2354a9e0" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+}
+.aboutus-hero-content {
+	position: relative;
+	max-width: 96rem;
+	margin: 0 auto;
+	text-align: center;
+}
+.aboutus-title {
+	font-size: 3rem;
+	font-weight: bold;
+	margin-bottom: 1.5rem;
+	background: linear-gradient(90deg, #54a9e0, #7bb8e6);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+}
+.aboutus-subtitle {
+	font-size: 1.25rem;
+	color: #e0e0e0;
+	max-width: 48rem;
+	margin: 0 auto;
+	line-height: 1.6;
+}

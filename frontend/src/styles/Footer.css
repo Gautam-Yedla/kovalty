@@ -16,10 +16,10 @@ main {
 
 /* Footer Component Styles */
 .footer {
-    background-color: #101012; /* Dark background from image */
+    background-color: var(--bg-primary);
     width: 100%;
     padding-top: 4rem; /* 64px */
-    color: #9ca3af; /* text-gray-400 */
+    color: var(--text-muted);
 }
 
 .footer-container {
@@ -37,7 +37,7 @@ main {
 
 /* Headings */
 .footer-heading {
-    color: #f9fafb; /* text-gray-50 */
+    color: var(--text-primary);
     font-size: 1.125rem; /* 18px */
     font-weight: 600; /* semibold */
     margin-bottom: 24px;
@@ -52,22 +52,22 @@ main {
 .footer-form-wrapper {
     display: flex;
     align-items: center;
-    background-color: #ffffff;
+    background-color: var(--text-primary);
     border-radius: 0.5rem; /* rounded-lg */
     padding: 4px;
-    border: 1px solid #d1d5db; /* gray-300 */
+    border: 1px solid var(--border-primary);
     transition: all 0.2s ease-in-out;
 }
 
 .footer-form-wrapper:focus-within {
-    border-color: #3b82f6; /* blue-500 */
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(84, 169, 224, 0.2);
 }
 
 .footer-input {
     flex-grow: 1;
     background-color: transparent;
-    color: #111827; /* gray-900 */
+    color: var(--bg-primary);
     border: none;
     padding: 0.5rem 0.75rem; /* py-2 px-3 */
     font-size: 1rem;
@@ -83,12 +83,12 @@ main {
 }
 
 .footer-input::placeholder {
-    color: #6b7280; /* gray-500 */
+    color: var(--text-muted);
 }
 
 .footer-button {
-    background-color: #3b82f6; /* blue-500 */
-    color: white;
+    background-color: var(--accent-primary);
+    color: var(--text-primary);
     font-weight: 500;
     border-radius: 0.375rem; /* rounded-md */
     padding: 0.5rem 1rem; /* py-2 px-4 */
@@ -100,22 +100,22 @@ main {
 }
 
 .footer-button:hover:not(:disabled) {
-    background-color: #2563eb;
+    background-color: var(--kovalty-blue-dark);
 }
 
 .footer-button:disabled {
-    background-color: #93c5fd;
+    background-color: var(--kovalty-blue-light);
     cursor: not-allowed;
 }
 
 .success-message {
-    background-color: #1e293b;
-    color: #f0fdf4;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
     padding: 1rem;
     border-radius: 0.5rem;
     text-align: center;
     font-weight: 500;
-    border: 1px solid #22c55e;
+    border: 1px solid var(--accent-primary);
 }
 
 /* List of Links (Quick Link, Resources) */
@@ -134,7 +134,7 @@ main {
 }
 
 .footer-link {
-    color: #d1d5db; /* gray-300 */
+    color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.2s ease;
     cursor: pointer;
@@ -142,7 +142,7 @@ main {
 }
 
 .footer-link:hover {
-    color: #2563eb;
+    color: var(--accent-primary);
 }
 
 .footer-contact {
@@ -157,7 +157,7 @@ main {
 }
 
 .footer-divider {
-    background-color: #374151; /* gray-700 */
+    background-color: var(--border-primary);
     height: 1px;
     width: 100%;
     position: absolute;
@@ -172,7 +172,7 @@ main {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: #3b82f6;
+    background-color: var(--accent-primary);
     border: none;
     border-radius: 0.5rem; /* 8px */
     width: 48px;
@@ -186,14 +186,14 @@ main {
 }
 
 .footer-up-arrow:hover {
-    background-color: #2563eb;
+    background-color: var(--kovalty-blue-dark);
     transform: translate(-50%, -50%) scale(1.05);
 }
 
 .footer-up-arrow > svg {
     width: 24px;
     height: 24px;
-    color: white;
+    color: var(--text-primary);
     animation: bounce-icon 2s ease-in-out infinite;
 }
 

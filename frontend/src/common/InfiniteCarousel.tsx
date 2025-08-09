@@ -1,39 +1,5 @@
-// import React from 'react';
-
-// interface InfiniteCarouselProps {
-//   children: React.ReactNode;
-//   speed?: number;
-// }
-
-// const InfiniteCarousel: React.FC<InfiniteCarouselProps> = ({ 
-//   children, 
-//   speed = 50 
-// }) => (
-//   <div className="overflow-hidden">
-//     <div 
-//       className="flex animate-scroll"
-//       style={{
-//         animationDuration: `${speed}s`,
-//         animationTimingFunction: 'linear',
-//         animationIterationCount: 'infinite'
-//       }}
-//     >
-//       {children}
-//       {children}
-//     </div>
-//   </div>
-// );
-
-// export default InfiniteCarousel;
-
-
-
-
-
-
-
 import React from 'react';
-import '../styles/Testimonials.css'
+import '../styles/Testimonials.css';
 
 interface InfiniteCarouselProps {
   children: React.ReactNode;
@@ -42,20 +8,34 @@ interface InfiniteCarouselProps {
 
 const InfiniteCarousel: React.FC<InfiniteCarouselProps> = ({ 
   children, 
-  speed = 50
-}) => (
-  <div className="infinite-carousel-outer">
-    <div 
-      className="infinite-carousel-inner"
-      style={{
-        animationDuration: `${speed}s`,
-        animationTimingFunction: 'linear',
-        animationIterationCount: 'infinite'
-      }}
-    >
-      {children}
+  speed = 30
+}) => {
+  // Convert children to array to duplicate them
+  const childrenArray = React.Children.toArray(children);
+  
+  return (
+    <div className="infinite-carousel-outer">
+      <div 
+        className="infinite-carousel-inner"
+        style={{
+          animationDuration: `${speed}s`,
+        }}
+      >
+        {/* First set of items */}
+        <div className="carousel-track">
+          {childrenArray}
+        </div>
+        {/* Duplicate set for seamless loop */}
+        <div className="carousel-track">
+          {childrenArray}
+        </div>
+        {/* Third set to ensure smooth transition */}
+        <div className="carousel-track">
+          {childrenArray}
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default InfiniteCarousel;

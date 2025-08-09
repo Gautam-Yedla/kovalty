@@ -31,6 +31,24 @@ export const testimonialsData = [
     text: 'We used to struggle with data management, but with Saskask, it\'s a breeze. From integrating platforms to AI analysis, it\'s like having an extra team member who never sleeps!',
     avatar: 'https://i.pravatar.cc/150?img=11',
   },
+  {
+    name: 'Athena Chen',
+    role: 'CONTENT CREATOR',
+    text: 'The content optimization tools are incredible! I\'ve seen a 40% increase in engagement since using Saskask. The AI suggestions are always spot-on and help me create better content.',
+    avatar: 'https://i.pravatar.cc/150?img=15',
+  },
+  {
+    name: 'Marcus Rodriguez',
+    role: 'BUSINESS ANALYST',
+    text: 'Saskask has transformed our data analysis workflow. The automated reporting saves us hours every week, and the insights are always actionable. Highly recommended!',
+    avatar: 'https://i.pravatar.cc/150?img=16',
+  },
+  {
+    name: 'Luna Patel',
+    role: 'CUSTOMER SUCCESS MANAGER',
+    text: 'The customer insights we get from Saskask are invaluable. We can now predict customer needs before they even ask, leading to much better satisfaction scores.',
+    avatar: 'https://i.pravatar.cc/150?img=17',
+  },
 ];
 
 export const buttonAvatars = [

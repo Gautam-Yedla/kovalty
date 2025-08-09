@@ -1,0 +1,30 @@
+/* Responsive Services Wrapper */
+.desktop-services,
+.mobile-services {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.desktop-services {
+  width: 100%;
+}
+
+.mobile-services {
+  width: 100%;
+}
+
+/* Smooth transition when switching between desktop and mobile */
+.desktop-services[style*="display: none"],
+.mobile-services[style*="display: none"] {
+  opacity: 0;
+}
+
+.desktop-services[style*="display: block"],
+.mobile-services[style*="display: block"] {
+  opacity: 1;
+}
+
+/* Ensure proper spacing and layout */
+.desktop-services > *,
+.mobile-services > * {
+  width: 100%;
+} 

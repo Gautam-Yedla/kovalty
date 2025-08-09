@@ -3,7 +3,7 @@ import { ContactArrowIcon, ChevronDownIcon } from '../icons/Icons';
 import { navItems, services } from '../data/header';
 import '../styles/Header.css';
 import Logo from "../assets/kovalty_logo.png"
-
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
@@ -13,6 +13,7 @@ const Header = () => {
 
   const navRef = useRef<HTMLUListElement>(null);
   const [underlineStyle, setUnderlineStyle] = useState<CSSProperties>({});
+  const navigate = useNavigate();
 
   const handleNavClick = (item: string) => {
     setActiveNav(item);
@@ -26,7 +27,7 @@ const Header = () => {
       setIsServicesOpen(false);
     }
   };
-  
+
   const handleServicesToggle = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsServicesOpen(prev => !prev);
@@ -38,7 +39,7 @@ const Header = () => {
         const activeLiElement = Array.from(navRef.current.children).find(
           (child) => (child as HTMLElement).dataset.navitem === activeNav
         ) as HTMLLIElement | undefined;
-        
+
         if (activeLiElement && navItems.includes(activeNav)) {
           setUnderlineStyle({
             left: activeLiElement.offsetLeft,
@@ -51,7 +52,7 @@ const Header = () => {
         setUnderlineStyle({});
       }
     };
-    
+
     calculateUnderline();
     window.addEventListener('resize', calculateUnderline);
     return () => window.removeEventListener('resize', calculateUnderline);
@@ -80,19 +81,26 @@ const Header = () => {
           <nav className={`header-nav ${isMenuOpen ? 'header-nav--open' : ''}`}>
             <div className="header-nav-wrapper">
               <ul ref={navRef} className="header-nav-list">
-                {navItems.map((item) => (
-                  <li key={item} data-navitem={item} className="header-nav-item">
-                    <a
-                      href={`#${item.toLowerCase()}`}
-                      onClick={(e) => { e.preventDefault(); handleNavClick(item); }}
-                      className={`header-nav-link ${ activeNav === item ? 'header-nav-link--active' : '' }`}
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-                
-                <li 
+                {navItems.map((item) => {
+                  let to = '/404';
+                  if (item === 'Home') to = '/';
+                  else if (item === 'Project') to = '/project';
+                  else if (item === 'About') to = '/about';
+                  else if (item === 'Blog') to = '/blog';
+                  return (
+                    <li key={item} data-navitem={item} className="header-nav-item">
+                      <Link
+                        to={to}
+                        className={`header-nav-link ${activeNav === item ? 'header-nav-link--active' : ''}`}
+                        onClick={() => { handleNavClick(item); }}
+                      >
+                        {item}
+                      </Link>
+                    </li>
+                  );
+                })}
+
+                <li
                   className="header-nav-item header-nav-item--dropdown-container"
                   onMouseEnter={() => window.innerWidth >= 1024 && setIsServicesOpen(true)}
                   onMouseLeave={() => window.innerWidth >= 1024 && setIsServicesOpen(false)}
@@ -104,19 +112,24 @@ const Header = () => {
                   </a>
                   <div className={`header-dropdown-menu-wrapper ${isServicesOpen ? 'header-dropdown-menu-wrapper--open' : ''}`}>
                     <ul className="header-dropdown-menu">
-                        {services.map(service => (
-                            <li key={service} className="header-dropdown-item">
-                                <a href={`#${service.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} 
-                                   onClick={() => {
-                                      setActiveNav('Services'); // This will remove underline
-                                      setIsMenuOpen(false);
-                                      setIsServicesOpen(false);
-                                   }}
-                                   className="header-dropdown-link">
-                                    {service}
-                                </a>
-                            </li>
-                        ))}
+                      {services.map(service => {
+                        const servicePath = '/services/' + service.toLowerCase().replace(/ & /g, '').replace(/ /g, '-');
+                        return (
+                          <li key={service} className="header-dropdown-item">
+                            <Link
+                              to={servicePath}
+                              className="header-dropdown-link"
+                              onClick={() => {
+                                setActiveNav('Services');
+                                setIsMenuOpen(false);
+                                setIsServicesOpen(false);
+                              }}
+                            >
+                              {service}
+                            </Link>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 </li>
@@ -132,15 +145,22 @@ const Header = () => {
 
           <div className="header-actions">
             <div className="header-contact">
-              <button className="header-contact-button">
+              <button
+                className="header-contact-button"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  setActiveNav('Contact');
+                  navigate('/contact');
+                }}
+              >
                 <span>CONTACT</span>
                 <ContactArrowIcon className="header-contact-button-icon" />
               </button>
             </div>
             <div className="header-mobile-menu-toggle">
-              <button 
-                onClick={toggleMenu} 
-                className={`header-mobile-menu-button ${isMenuOpen ? 'open' : ''}`} 
+              <button
+                onClick={toggleMenu}
+                className={`header-mobile-menu-button ${isMenuOpen ? 'open' : ''}`}
                 aria-label="Toggle menu"
                 aria-expanded={isMenuOpen}
               >
