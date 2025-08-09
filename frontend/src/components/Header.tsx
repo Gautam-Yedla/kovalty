@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect, type CSSProperties } from 'react';
+import { useState, useRef, useEffect, useCallback, type CSSProperties } from 'react';
 import { ContactArrowIcon, ChevronDownIcon } from '../icons/Icons';
 import { navItems, services } from '../data/header';
 import '../styles/Header.css';
 import Logo from "../assets/kovalty_logo.png"
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 
 const Header = () => {
@@ -14,6 +14,18 @@ const Header = () => {
   const navRef = useRef<HTMLUListElement>(null);
   const [underlineStyle, setUnderlineStyle] = useState<CSSProperties>({});
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Function to determine active nav based on current path
+  const getActiveNavFromPath = useCallback((pathname: string): string => {
+    if (pathname === '/') return 'Home';
+    if (pathname === '/about') return 'About';
+    if (pathname === '/project') return 'Project';
+    if (pathname === '/blog') return 'Blog';
+    if (pathname === '/contact') return 'Contact';
+    if (pathname.startsWith('/services/')) return 'Services';
+    return 'Home'; // Default fallback
+  }, []);
 
   const handleNavClick = (item: string) => {
     setActiveNav(item);
@@ -32,6 +44,12 @@ const Header = () => {
     e.preventDefault();
     setIsServicesOpen(prev => !prev);
   };
+
+  // Sync activeNav with current location on route change or page reload
+  useEffect(() => {
+    const currentNav = getActiveNavFromPath(location.pathname);
+    setActiveNav(currentNav);
+  }, [location.pathname, getActiveNavFromPath]);
 
   useEffect(() => {
     const calculateUnderline = () => {
@@ -106,7 +124,11 @@ const Header = () => {
                   onMouseLeave={() => window.innerWidth >= 1024 && setIsServicesOpen(false)}
                   data-navitem="Services"
                 >
-                  <a href="#services" onClick={handleServicesToggle} className="header-nav-link header-nav-link--dropdown">
+                  <a 
+                    href="#services" 
+                    onClick={handleServicesToggle} 
+                    className={`header-nav-link header-nav-link--dropdown ${activeNav === 'Services' ? 'header-nav-link--active' : ''}`}
+                  >
                     Services
                     <ChevronDownIcon className={`header-dropdown-icon ${isServicesOpen ? 'header-dropdown-icon--open' : ''}`} />
                   </a>
