@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/ServiceStyling/MobileCards.css';
 
 import type { ServiceCard, MobileCardsProps } from '../types';
@@ -55,8 +56,10 @@ const defaultServices: ServiceCard[] = [
     },
 ];
 
+
 const MobileCards: React.FC<MobileCardsProps> = ({ services = defaultServices }) => {
     const [activeCard, setActiveCard] = useState<number | null>(null);
+    const navigate = useNavigate();
 
     const togglePopup = (cardId: number) => {
         setActiveCard(activeCard === cardId ? null : cardId);
@@ -67,21 +70,20 @@ const MobileCards: React.FC<MobileCardsProps> = ({ services = defaultServices })
         setActiveCard(null);
     };
 
-
-        const learnMore = (service: string) => {
-                // Convert service name to slug used in /services/:slug
-                let slug = '';
-                switch (service) {
-                    case 'Application Development': slug = 'application-development'; break;
-                    case 'Mobile App Development': slug = 'mobile-app-development'; break;
-                    case 'Product Management': slug = 'product-management'; break;
-                    case 'QA & Automation': slug = 'qa-automation'; break;
-                    case 'Cloud Services': slug = 'cloud-services'; break;
-                    case 'AI & ML': slug = 'ai-ml'; break;
-                    default: slug = service.toLowerCase().replace(/ /g, '-');
-                }
-                window.location.href = `/services/${slug}`;
-        };
+    const learnMore = (service: string) => {
+        // Convert service name to slug used in /services/:slug
+        let slug = '';
+        switch (service) {
+            case 'Application Development': slug = 'application-development'; break;
+            case 'Mobile App Development': slug = 'mobile-app-development'; break;
+            case 'Product Management': slug = 'product-management'; break;
+            case 'QA & Automation': slug = 'qa-automation'; break;
+            case 'Cloud Services': slug = 'cloud-services'; break;
+            case 'AI & ML': slug = 'ai-ml'; break;
+            default: slug = service.toLowerCase().replace(/ /g, '-');
+        }
+        navigate(`/services/${slug}`);
+    };
 
     const handleOutsideClick = (event: React.MouseEvent) => {
         if (!(event.target as Element).closest('.mobile-cards-card')) {
