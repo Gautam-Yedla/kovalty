@@ -1,0 +1,202 @@
+/* Fade-in slide-up animation for the hero section */
+.hero-section {
+  /* removed top: 100px; padding will be used for spacing */
+  padding-top: 100px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow-x: hidden; /* Prevents horizontal scroll */
+  box-sizing: border-box; /* Ensures padding is included in height calculation */
+  animation: fadeInUp 1.2s ease-out forwards;
+  background: radial-gradient(ellipse at center, 
+    rgba(59, 130, 246, 0.3) 0%,
+    rgba(29, 78, 216, 0.2) 25%,
+    rgba(0, 0, 0, 0.9) 70%,
+    #000 100%);
+}
+
+/* Floating background blobs */
+.bg-element {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+  z-index: -1; /* Ensure they are behind the content */
+}
+
+.bg-element:nth-child(1) {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  top: 10%;
+  left: 0;
+  animation-delay: 0s;
+}
+
+.bg-element:nth-child(2) {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, #1e40af, #3b82f6);
+  top: 60%;
+  right: 0;
+  animation-delay: 2s;
+}
+
+.bg-element:nth-child(3) {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, #dbeafe, #3b82f6);
+  top: 30%;
+  right: 20%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(120deg); }
+  66% { transform: translateY(10px) rotate(240deg); }
+}
+
+/* Text animations */
+.main-title {
+  font-size: clamp(2.5rem, 8vw, 5rem); /* Adjusted clamp for better mobile scaling */
+  font-weight: 800;
+  margin-bottom: 20px; /* Reduced margin */
+  line-height: 1.1;
+  letter-spacing: -2px;
+  opacity: 0;
+  animation: fadeInDown 1s ease forwards;
+  animation-delay: 0.3s;
+  margin-top: 40px;
+}
+
+.highlight {
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 4vw, 1.5rem); /* Adjusted clamp */
+  margin-bottom: 25px; /* Reduced margin */
+  font-weight: 300;
+  max-width: 800px;
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+  animation-delay: 0.6s;
+  line-height: 1.6; /* Improved line height for readability */
+}
+
+/* Call-to-action button with pulse effect */
+.cta-button {
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
+  border: none;
+  padding: 18px 40px;
+  border-radius: 50px;
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 30px 0 60px 0; /* Adjusted margins */
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards, pulse 2.5s infinite;
+  animation-delay: 1s;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition */
+}
+
+.cta-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3); }
+  50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4); }
+}
+
+/* =================================================================== */
+/* ============== RESPONSIVE DESIGN (TABLET & MOBILE) ================ */
+/* =================================================================== */
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding-left: 1.5rem; /* Add horizontal padding */
+    padding-right: 1.5rem;
+    padding-top: 80px; /* Adjust top spacing */
+  }
+
+  .main-title {
+    letter-spacing: -1.5px; /* Reduce negative letter-spacing for readability */
+  }
+
+  .subtitle {
+    max-width: 90%; /* Allow subtitle to use more width */
+  }
+
+  .cta-button {
+    font-size: 16px; /* Slightly smaller font */
+    padding: 16px 32px; /* Adjust padding */
+    margin: 25px 0 50px 0;
+  }
+
+  /* Adjust background blobs for smaller screens */
+  .bg-element:nth-child(1) {
+    width: 200px;
+    height: 200px;
+    top: 5%;
+    left: -50px;
+  }
+
+  .bg-element:nth-child(2) {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    right: -40px;
+  }
+
+  .bg-element:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    top: 25%;
+    right: 10%;
+  }
+}
+
+
+/* =================================================================== */
+/* ============= RESPONSIVE DESIGN (SMALL MOBILE) =================== */
+/* =================================================================== */
+
+@media (max-width: 480px) {
+  .main-title {
+    line-height: 1.2; /* Tighter line height for large text */
+  }
+
+  /* Hide one of the less prominent blobs to declutter */
+  .bg-element:nth-child(3) {
+    display: none;
+  }
+}

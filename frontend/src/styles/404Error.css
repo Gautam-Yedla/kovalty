@@ -52,3 +52,57 @@
   background: var(--kovalty-blue-dark);
   transform: scale(1.04);
 }
+
+
+/* Tablet & mobile adjustments */
+@media (max-width: 768px) {
+  .error404-wrapper {
+    padding-top: 60px; /* slightly less top padding */
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .error404-content {
+    padding: 2rem 1.5rem; /* reduced padding for smaller screens */
+    border-radius: 1rem;
+  }
+
+  .error404-title {
+    font-size: 1.75rem;
+  }
+
+  .error404-message {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .error404-home-btn {
+    padding: 0.65rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Small mobile adjustments */
+@media (max-width: 480px) {
+  .error404-wrapper {
+    padding-top: 50px;
+  }
+
+  .error404-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .error404-title {
+    font-size: 1.5rem;
+  }
+
+  .error404-message {
+    font-size: 0.95rem;
+  }
+
+  .error404-home-btn {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}

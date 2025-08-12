@@ -27,19 +27,19 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email Us',
-      details: 'hello@kovalty.com',
+      details: 'info@kovalty.com',
       description: 'Send us an email anytime'
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: '+1 (555) 123-4567',
+      details: '+91 76618 05678',
       description: 'Mon-Fri from 8am to 6pm'
     },
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: '123 Tech Street, San Francisco, CA 94105',
+      details: 'Plot No 54, Tripura Landmark-II,\nBowrampet, Hyderabad - 500043,\nTelangana, India',
       description: 'Come say hello at our office'
     }
   ];
@@ -47,14 +47,14 @@ const Contact = () => {
   return (
     <section id="contact" className="contact-section">
       <div className="contact-container">
-        <div className="contact-header">
+        {/* <div className="contact-header">
           <h2 className="contact-title">
             Get In Touch
           </h2>
           <p className="contact-description">
             Ready to transform your business with technology? Let's discuss your project and explore how we can help you achieve your goals.
           </p>
-        </div>
+        </div> */}
 
         <div className="contact-grid">
           <div className="contact-info-blocks">
@@ -73,7 +73,14 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="contact-info-title">{info.title}</h4>
-                    <p className="contact-info-details">{info.details}</p>
+                    <p className="contact-info-details">
+                      {info.details.split('\n').map((line, i) => (
+                        <React.Fragment key={i}>
+                          {line}
+                          {i < info.details.split('\n').length - 1 && <br />}
+                        </React.Fragment>
+                      ))}
+                    </p>
                     <p className="contact-info-desc">{info.description}</p>
                   </div>
                 </div>

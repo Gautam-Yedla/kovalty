@@ -1,5 +1,3 @@
-// data/testimonials.ts
-
 export const testimonialsData = [
   {
     name: 'Finnian Graves',

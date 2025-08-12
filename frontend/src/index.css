@@ -2,42 +2,36 @@
 @import "tailwindcss/utilities";
  */
 
-/* Google Fonts Import - Professional Classic Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
 
- /* @tailwind base;
- @tailwind components;
- @tailwind utilities; */
-
-/* Brand Color Variables & Typography */
 :root {
   /* Primary Brand Colors */
-  --kovalty-blue: #54a9e0;
-  --kovalty-gray: #626262;
+
+  /* --kovalty-blue: #54a9e0;
+  --kovalty-gray: #626262; */
   
-  /* Color Variations */
+
+  --kovalty-blue: #3b82f6;
   --kovalty-blue-light: #7bb8e6;
-  --kovalty-blue-dark: #3d7ba8;
-  --kovalty-gray-light: #8a8a8a;
-  --kovalty-gray-dark: #4a4a4a;
-  
-  /* Background Colors */
+  --kovalty-blue-dark: #1e40af;
+
+  /* Only black and white backgrounds */
   --bg-primary: #000000;
-  --bg-secondary: #2a2a2a;
-  --bg-tertiary: #3a3a3a;
-  
-  /* Text Colors */
+  --bg-secondary: #1d2233;
+  --bg-tertiary: #232946;
+
+  /* Only white and blue text colors */
   --text-primary: #ffffff;
   --text-secondary: #e0e0e0;
-  --text-muted: #a0a0a0;
-  
+  --text-muted: #b6d0fa;
+
   /* Border Colors */
-  --border-primary: var(--kovalty-gray);
-  --border-secondary: var(--kovalty-blue);
-  
+  --border-primary: #3b82f6;
+  --border-secondary: #1e40af;
+
   /* Accent Colors */
-  --accent-primary: var(--kovalty-blue);
-  --accent-secondary: var(--kovalty-gray);
+  --accent-primary: #3b82f6;
+  --accent-secondary: #1e40af;
 
   /* Professional Typography System */
   /* Font Families */
@@ -115,6 +109,16 @@ body {
   text-rendering: optimizeLegibility;
   background-color: var(--bg-primary);
   color: var(--text-primary);
+}
+
+/* Prevent header from overlapping content */
+.app-main {
+  padding-top: 130px;
+}
+
+/* Prevent anchor links and sticky sections from hiding under the header */
+section, [class*="section"], .stack-area, .mobile-cards-container, .testimonials-section {
+  scroll-margin-top: 130px;
 }
 
 /* Typography Hierarchy */

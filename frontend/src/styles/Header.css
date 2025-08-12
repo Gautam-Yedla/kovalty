@@ -1,33 +1,32 @@
-/* General Header Styling */
+/* Existing and new styles for the header component */
 .header {
-    background-color: var(--bg-secondary);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 0;
+    max-width: 1200px;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.5rem;
+    background: rgba(var(--bg-secondary-rgb, 15, 15, 35), 0.95);
+    border-radius: 25px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .header-container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-    .header-container {
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
-}
-
-@media (min-width: 1024px) {
-    .header-container {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
 }
 
 .header-content {
@@ -35,146 +34,69 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
 }
 
-/* Logo
-.header-logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-}
-
-.header-logo-icon {
-    color: #C0FE33;
-    height: 1.5rem;
-    width: 1.5rem;
-} */
-
-/* .header-logo-text {
-    margin-left: 5rem;
-    font-size: 2.25rem;
-    line-height: 2rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    letter-spacing: 0.025em;
-} */
-
-.header-logo-img {
-    height: 40px;
-    width: 120px;
-    transform: scale(2.5);
-    /* max-width: 200px;
-    max-height: 80px;
-    object-fit: contain; */
-    transition: transform 0.3s ease-in-out;
-    pointer-events: auto;
-    object-fit: contain;
-    cursor: pointer;
-}
-
-.header-logo-img:hover {
-    transform: scale(3);
-}
-
-
-
-/* Navigation - Mobile First Compact Dropdown Panel */
+/* --- Desktop Navigation --- */
 .header-nav {
-    position: absolute;
-    top: calc(100% + 0.5rem); /* Position below header with a small gap */
-    right: 0; /* Align to the right */
-    width: 240px; /* Narrower width */
-    background-color: var(--bg-secondary);
-    z-index: 50;
-    padding: 0.5rem; /* Compact padding */
-    border: 1px solid var(--border-primary);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    border-radius: 0.75rem;
-    
-    /* Hidden state */
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(0) scale(0.95);
-    transform-origin: top right; /* Animate from top right corner */
-    transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.2s ease-out, visibility 0.2s;
-}
-
-.header-nav--open {
-    /* Visible state */
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
+    display: flex;
+    flex: 1;
+    justify-content: center;
 }
 
 .header-nav-wrapper {
     position: relative;
-    width: 100%;
+    width: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .header-nav-list {
     display: flex;
-    flex-direction: column;
-    align-items: stretch; /* Stretch items to fill width */
-    gap: 0.25rem; /* Gap between links */
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
     list-style: none;
     margin: 0;
     padding: 0;
-    width: 100%;
 }
 
 .header-nav-item {
-    width: 100%;
+    position: relative;
 }
 
 .header-nav-link {
-    color: var(--text-secondary);
     text-decoration: none;
-    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-    font-size: 0.95rem; /* Compact font size */
+    color: var(--text-primary);
     font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.65rem 1rem;
+    transition: all 0.2s ease;
+    position: relative;
+    border-radius: 25px;
+    letter-spacing: 0.3px;
+    font-family: 'Inter', sans-serif;
     display: block;
-    padding: 0.6rem 1rem; /* Compact padding */
-    border-radius: 0.5rem;
-    width: 100%;
-    text-align: left;
 }
 
-/* Remove focus outline for header navigation links */
-.header-nav-link:focus,
-.header-nav-link:focus-visible {
-    outline: none;
-    box-shadow: none;
-}
-
-/* Remove focus outline for services dropdown trigger */
-.header-nav-link--dropdown:focus,
-.header-nav-link--dropdown:focus-visible {
-    outline: none;
-    box-shadow: none;
-}
-
-/* Hover effect: Highlight words only */
 .header-nav-link:hover {
-    color: var(--accent-primary);
-    background-color: transparent;
+    background: var(--hover-bg, rgba(255, 255, 255, 0.1));
 }
 
 .header-nav-link--active {
-    color: var(--accent-primary);
-    background-color: transparent;
+    background: var(--active-bg, rgba(255, 255, 255, 0.15));
 }
 
 .header-nav-link--dropdown {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Space between text and icon */
-    gap: 0.3rem;
+    gap: 0.5rem;
 }
 
 .header-dropdown-icon {
-    margin-left: 0;
-    height: 0.85rem;
-    width: 0.85rem;
+    height: 1rem;
+    width: 1rem;
     transition: transform 0.3s ease;
 }
 
@@ -182,334 +104,340 @@
     transform: rotate(180deg);
 }
 
-
-.header-underline-track,
-.header-underline {
-    display: none; /* Hidden on mobile by default */
-}
-
-
-/* Services Dropdown - Mobile (Accordion) */
+/* --- Services Dropdown --- */
 .header-nav-item--dropdown-container {
-    width: 100%;
+    position: relative;
 }
 
 .header-dropdown-menu-wrapper {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out;
-    background-color: rgba(0,0,0,0.1);
-    border-radius: 0.5rem;
-    margin-top: 0.25rem;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-top: 1rem;
+    width: 240px;
+    background: rgba(var(--bg-secondary-rgb, 15, 15, 35), 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 0.75rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-dropdown-menu-wrapper--open {
-    max-height: 500px; /* A large enough value to show all items */
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 .header-dropdown-menu {
     list-style: none;
-    padding: 0.5rem;
+    padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
 }
 
-.header-dropdown-item {
-    width: 100%;
-}
-
 .header-dropdown-link {
     display: block;
-    padding: 0.6rem 1rem;
+    padding: 0.75rem 1rem;
     font-size: 0.9rem;
     color: var(--text-secondary);
     text-decoration: none;
-    border-radius: 0.375rem;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-/* Remove focus outline for dropdown links */
-.header-dropdown-link:focus,
-.header-dropdown-link:focus-visible {
-    outline: none;
-    box-shadow: none;
+    border-radius: 15px;
+    transition: all 0.2s ease;
 }
 
 .header-dropdown-link:hover {
-    background-color: rgba(84, 169, 224, 0.1);
+    background: var(--hover-bg, rgba(255, 255, 255, 0.1));
     color: var(--accent-primary);
+    transform: translateX(2px);
 }
 
-
-/* Desktop Navigation Overrides */
-@media (min-width: 1024px) {
-    .header-nav {
-        position: static;
-        top: auto;
-        right: auto;
-        width: auto;
-        background-color: transparent;
-        z-index: auto;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        transition: none;
-        display: block;
-        height: auto;
-        padding: 0;
-        border: none;
-        box-shadow: none;
-        border-radius: 0;
-    }
-
-    .header-nav-wrapper {
-      width: auto;
-    }
-
-    .header-nav-list {
-        flex-direction: row;
-        align-items: center;
-        gap: 0;
-    }
-
-    .header-nav-item {
-        width: auto;
-        padding: 0.5rem 1rem;
-    }
-    
-    .header-nav-link {
-        font-size: 1rem;
-        line-height: 1.5rem;
-        font-weight: 500;
-        display: inline-flex;
-        padding: 0;
-        border-radius: 0;
-        text-align: center;
-    }
-
-    .header-nav-link:hover {
-        color: var(--accent-primary);
-        background-color: transparent;
-    }
-
-    .header-nav-link--active {
-        color: var(--accent-primary);
-        background-color: transparent;
-    }
-
-    .header-nav-link--dropdown {
-      justify-content: center;
-    }
-
-    /* Move underline closer to nav items by reducing the bottom offset */
-    .header-underline-track {
-        display: block;
-        position: absolute;
-        bottom: -4px; /* was -13px, now much closer */
-        left: 0;
-        right: 0;
-        height: 1px;
-        background-color: var(--border-primary);
-    }
-    
-    .header-underline {
-        display: block;
-        position: absolute;
-        bottom: -4px; /* was -13px, now much closer */
-        height: 2px;
-        background-color: var(--accent-primary);
-        transition: all 0.3s ease-out;
-    }
-
-    /* Desktop Services Dropdown */
-    .header-nav-item--dropdown-container {
-        position: relative;
-    }
-
-    .header-dropdown-menu-wrapper {
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-top: 1rem;
-        width: 240px;
-        background-color: var(--bg-secondary);
-        border: 1px solid var(--border-primary);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-        border-radius: 0.75rem;
-        padding: 0.5rem;
-        max-height: none;
-        overflow: visible;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateX(-50%) translateY(10px);
-        transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.2s ease-out, visibility 0.2s;
-    }
-
-    .header-dropdown-menu-wrapper--open {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0);
-    }
-    
-    .header-dropdown-menu {
-        background-color: transparent;
-        padding: 0;
-    }
-
-    .header-dropdown-link {
-        font-size: 0.95rem;
-    }
-}
-
-/* Header Actions (Contact and Toggle) */
+/* --- Header Actions & Contact Button --- */
 .header-actions {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-/* Contact Button */
 .header-contact-button {
+    background: #ffffff;
+    color: #000000;
+    padding: 0.75rem 1.25rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    border: 2px solid #ffffff;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    background-color: var(--accent-primary);
-    color: var(--text-primary);
-    padding: 0.75rem 1.5rem;
-    font-weight: 700;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    border-radius: 0.375rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Remove focus outline for contact button */
-.header-contact-button:focus,
-.header-contact-button:focus-visible {
-    outline: none;
-    box-shadow: none;
+    gap: 0.5rem;
 }
 
 .header-contact-button:hover {
-    background-color: var(--kovalty-blue-light);
-    transform: scale(1.05);
-}
-
-.header-contact-button span {
-    margin-right: 0.5rem;
+    background: #000000;
+    color: #ffffff;
+    transform: translateY(-1px);
 }
 
 .header-contact-button-icon {
     height: 0.75rem;
     width: 0.75rem;
-    color: var(--text-primary);
+    transition: transform 0.2s ease;
 }
 
-@media (max-width: 640px) {
-    .header-contact-button {
-        padding: 0.5rem 1rem;
-        font-size: 0.75rem;
-    }
-     .header-contact-button span {
-        display: none; /* Hide text on very small screens */
-    }
-     .header-contact-button-icon {
-        height: 1rem;
-        width: 1rem;
-    }
+.header-contact-button:hover .header-contact-button-icon {
+    transform: translateX(2px);
 }
 
-/* Mobile Menu Toggle */
+/* --- Mobile Menu Toggle / Hamburger (Initially Hidden) --- */
 .header-mobile-menu-toggle {
-    display: block;
-    z-index: 60; /* Above overlay */
-}
-
-@media (min-width: 1024px) {
-    .header-mobile-menu-toggle {
-        display: none;
-    }
+    display: none; /* Hidden on desktop */
+    z-index: 1003; /* Ensure it's above other header content */
 }
 
 .header-mobile-menu-button {
-    background: none;
+    background: transparent;
     border: none;
-    color: var(--text-primary);
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    transition: all 0.2s ease-in-out;
-}
-
-/* Remove focus outline for mobile menu button */
-.header-mobile-menu-button:focus,
-.header-mobile-menu-button:focus-visible {
-    outline: none;
-    box-shadow: none;
+    padding: 10px;
+    position: relative;
 }
 
 .hamburger-box {
-    width: 24px;
-    height: 18px;
+    width: 30px;
+    height: 24px;
+    display: inline-block;
     position: relative;
 }
 
 .hamburger-inner,
 .hamburger-inner::before,
 .hamburger-inner::after {
-    width: 24px;
-    height: 2.5px;
-    background-color: var(--text-primary);
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
     border-radius: 4px;
     position: absolute;
-    transition-property: transform;
-    transition-duration: 0.22s;
-    transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-}
-
-.hamburger-inner {
-    top: 50%;
-    transform: translateY(-50%);
-    transition: background-color 0.1s 0.22s ease-in;
+    transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
 }
 
 .hamburger-inner::before,
 .hamburger-inner::after {
-    content: '';
+    content: "";
     display: block;
 }
 
 .hamburger-inner::before {
-    top: -8px;
-    transition: top 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    top: -10px;
 }
 
 .hamburger-inner::after {
-    bottom: -8px;
-    transition: bottom 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    bottom: -10px;
 }
 
-/* Animation state when menu is open */
+/* Hamburger to "X" Animation */
 .header-mobile-menu-button.open .hamburger-inner {
-    background-color: transparent;
-    transition-delay: 0s;
+    background-color: transparent; /* Center bar fades out */
 }
 
 .header-mobile-menu-button.open .hamburger-inner::before {
-    top: 0;
-    transform: rotate(45deg);
-    transition: top 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translateY(10px) rotate(45deg);
 }
 
 .header-mobile-menu-button.open .hamburger-inner::after {
-    bottom: 0;
-    transform: rotate(-45deg);
-    transition: bottom 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+
+/* =================================================================== */
+/* ============== MOBILE RESPONSIVENESS (Below 1000px) =============== */
+/* =================================================================== */
+
+@media (max-width: 999px) {
+  /* --- General Header Adjustments --- */
+  .header {
+    width: 100%;
+    top: 0;
+    left: 0;
+    transform: none;
+    border-radius: 0;
+    padding: 1rem 1.5rem; /* Slightly reduced padding for a tighter header */
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  .header-content {
+    justify-content: center; /* Center the contact button */
+    position: relative; /* Ensure positioning context for children */
+  }
+
+  .header-contact {
+    order: 1; /* Central item */
+    display: flex;
+    align-items: center; /* Vertically center the contact button */
+    height: 100%; /* Ensure it takes the full height of the header */
+  }
+
+  /* --- Contact Button (Smaller Size) --- */
+  .header-contact-button {
+    padding: 0.5rem 0.9rem; /* Reduced padding for smaller size */
+    font-size: 0.8rem; /* Smaller font size */
+    border-radius: 25px; /* Slightly smaller border-radius for proportionality */
+    gap: 0.4rem; /* Reduced gap between text and icon */
+  }
+
+  .header-contact-button-icon {
+    height: 0.6rem; /* Smaller icon */
+    width: 0.6rem; /* Smaller icon */
+  }
+
+  /* --- Navigation (Unchanged) --- */
+  .header-nav {
+    position: fixed;
+    top: 70px; /* Adjusted to account for smaller header height */
+    right: 1.5rem;
+    width: auto;
+    height: auto;
+    z-index: 1002;
+    background: rgba(var(--bg-secondary-rgb, 15, 15, 35), 0.98);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border-radius: 18px;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transform-origin: top right;
+    transform: scale(0.95) translateY(-10px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  }
+
+  .header-nav--open {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) translateY(0);
+  }
+
+  .header-nav-list {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .header-nav-link {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.25rem;
+    text-align: left;
+    width: 100%;
+    color: var(--text-secondary);
+  }
+
+  .header-nav-link:hover,
+  .header-nav-link--active {
+    background: none;
+    color: var(--text-primary);
+  }
+
+  .header-nav-link::after {
+    display: none;
+  }
+
+  /* --- Mobile Dropdown (Unchanged) --- */
+  .header-dropdown-menu-wrapper {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 0.5rem;
+    padding-left: 1.25rem;
+    width: auto;
+    border-radius: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .header-dropdown-menu-wrapper--open {
+    max-height: 500px;
+  }
+
+  .header-dropdown-link {
+    font-size: 1rem;
+    color: var(--text-secondary);
+  }
+
+  .header-dropdown-link:hover {
+    background: none;
+    transform: none;
+    color: var(--accent-primary);
+  }
+
+  /* --- Show Hamburger and position it on the right (Smaller Size) --- */
+  .header-actions {
+    order: 2; /* Right-most item */
+    position: absolute;
+    right: -0.5rem;
+    top: 80%; /* Center vertically */
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center; /* Ensure hamburger is vertically centered */
+  }
+
+  .header-mobile-menu-toggle {
+    display: block;
+  }
+
+  .header-mobile-menu-button {
+    padding: 8px; /* Reduced padding for smaller touch area */
+  }
+
+  .hamburger-box {
+    width: 24px; /* Reduced width for smaller hamburger */
+    height: 20px; /* Reduced height for smaller hamburger */
+  }
+
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    width: 24px; /* Match the reduced width */
+    height: 1.5px; /* Thinner lines for a smaller appearance */
+  }
+
+  .hamburger-inner::before {
+    top: -8px; /* Adjusted for smaller hamburger */
+  }
+
+  .hamburger-inner::after {
+    bottom: -8px; /* Adjusted for smaller hamburger */
+  }
+
+  /* Hamburger to "X" Animation (Unchanged) */
+  .header-mobile-menu-button.open .hamburger-inner {
+    background-color: transparent;
+  }
+
+  .header-mobile-menu-button.open .hamburger-inner::before {
+    transform: translateY(8px) rotate(45deg); /* Adjusted for smaller hamburger */
+  }
+
+  .header-mobile-menu-button.open .hamburger-inner::after {
+    transform: translateY(-8px) rotate(-45deg); /* Adjusted for smaller hamburger */
+  }
 }
