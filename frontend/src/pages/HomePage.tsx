@@ -2,6 +2,7 @@ import { Phone, ArrowRight } from 'lucide-react'
 import '../styles/HomePage.css'; 
 import HeroSection from '../components/HeroSection';
 import { servicesData } from '../data/services';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
@@ -21,9 +22,9 @@ const HomePage = () => {
 
           <div className="home-services-grid">
             {servicesData.map((service) => (
-              <a
+              <Link
                 key={service.slug}
-                href={`/services/${service.slug}`}
+                to={`/services/${service.slug}`}
                 className="home-service-card"
               >
                 <h3 className="home-service-title">{service.title}</h3>
@@ -31,7 +32,7 @@ const HomePage = () => {
                   {service.description}
                 </p>
                 <span className="home-service-link">Explore More →</span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -47,15 +48,15 @@ const HomePage = () => {
           </p>
 
           <div className="home-cta-buttons">
-            <a href="/contact" className="home-cta-button-primary">
+            <Link to="/contact" className="home-cta-button-primary">
               <Phone className="home-cta-button-icon" />
               Schedule Free Consultation
-            </a>
+            </Link>
 
-            <a href="/services" className="home-cta-button-secondary">
+            <Link to="/services" className="home-cta-button-secondary">
               <ArrowRight className="home-cta-button-icon" />
               Explore Our Services
-            </a>
+            </Link>
           </div>
 
           {/* <div className="home-cta-contact">
