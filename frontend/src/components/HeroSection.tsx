@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import '../styles/HeroSection.css';
+import { Link } from 'react-router-dom';
 
 const HeroSection: React.FC = () => {
   useEffect(() => {
@@ -38,11 +39,9 @@ const HeroSection: React.FC = () => {
           We're an IT services company that helps you streamline your operations and <span className="brand-multiplier">accelerate your business growth</span>
         </p>
 
-        <button className="cta-button" onClick={() => { /* Add your click handler here */ }}>
-          <a href="/contact" className="cta-link">
-              Contact Us
-            </a>
-        </button>
+        <Link to="/contact" className="cta-button cta-link">
+          Contact Us
+        </Link>
       </section>
     </>
   );
