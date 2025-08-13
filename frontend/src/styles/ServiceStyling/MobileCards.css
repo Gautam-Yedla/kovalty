@@ -1,28 +1,8 @@
-/*
- * ENHANCED MOBILE CARDS STYLES
- * Modern, glassmorphism-inspired design with improved interactions
- */
-/* 
-:root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --dark-gradient: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  --card-shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.2);
-  --text-primary: #2d3748;
-  --text-secondary: #718096;
-  --text-light: #ffffff;
-  --border-radius: 20px;
-  --border-radius-sm: 12px;
-  --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-} */
 
 .mobile-cards-container {
     font-family: var(--font-primary);
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-primary) 100%);
+    /* background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-primary) 100%); */
+    background-color: var(--bg-primary);
     padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 4vw, 2.5rem);
     color: var(--text-primary);
     line-height: 1.7;
@@ -41,7 +21,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="%23ffffff" fill-opacity="0.05"/><circle cx="80" cy="80" r="1" fill="%23ffffff" fill-opacity="0.05"/><circle cx="40" cy="60" r="1" fill="%23ffffff" fill-opacity="0.05"/><circle cx="60" cy="40" r="1" fill="%23ffffff" fill-opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    background-color: var(--bg-primary);
     pointer-events: none;
     z-index: -1;
 }
@@ -55,12 +35,12 @@
 .mobile-cards-header::before {
     content: '';
     position: absolute;
-    top: -2rem;
+    top: -4rem;
     left: 50%;
     transform: translateX(-50%);
     width: 100px;
     height: 4px;
-    background: var(--accent-primary);
+    background: var(--bg-primary);
     border-radius: 2px;
     opacity: 0.7;
 }
@@ -113,18 +93,18 @@
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, var(--kovalty-blue) 0%, var(--kovalty-blue-dark) 100%);
-    opacity: 0;
-    transition: var(--transition-smooth);
-    z-index: -1;
-}
-
-.mobile-cards-card::after {
+/* .mobile-cards-header::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--accent-primary);
+    border-radius: 2px;
+    opacity: 0.7;
+} */
     left: 0;
     width: 100%;
     height: 6px;
@@ -284,11 +264,11 @@
 }
 
 .mobile-cards-learn-more-btn {
-    background: var(--dark-gradient);
-    color: var(--text-light);
-    border: none;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
     padding: 0.9rem 2rem;
-    border-radius: var(--border-radius-sm);
+    border-radius: 8px;
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
@@ -300,32 +280,21 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-.mobile-cards-learn-more-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
 .mobile-cards-close-popup {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid var(--glass-border);
-    width: 40px;
-    height: 40px;
+    background: var(--bg-primary);
+    border: 2px solid var(--glass-border);
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     transition: var(--transition-smooth);
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     color: var(--text-secondary);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);

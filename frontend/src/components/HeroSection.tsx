@@ -36,7 +36,7 @@ const HeroSection: React.FC = () => {
         </h1>
 
         <p className="subtitle">
-          We're an IT services company that helps you streamline your operations and <span className="brand-multiplier">accelerate your business growth</span>
+          We envision a world where technology empowers businesses to reach their full potential. By harnessing our expertise and innovative mindset,<span className="brand-multiplier"> we strive to become a trusted partner for organizations navigating the complexities of the digital age.</span>
         </p>
 
         <Link to="/contact" className="cta-button cta-link">

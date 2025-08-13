@@ -66,7 +66,7 @@ const MobileCards: React.FC<MobileCardsProps> = ({ services = defaultServices })
     };
 
     const closePopup = (event: React.MouseEvent) => {
-        event.stopPropagation();
+        event.stopPropagation(); // Prevent parent click
         setActiveCard(null);
     };
 
@@ -114,31 +114,33 @@ const MobileCards: React.FC<MobileCardsProps> = ({ services = defaultServices })
                         <div className="mobile-cards-content">
                             <div className="mobile-cards-icon-wrapper">
                                 <div className="mobile-cards-icon">{service.icon}</div>
-                    </div>
+                            </div>
                             <div className="mobile-cards-service-name">{service.serviceName}</div>
                             <h3>{service.title}</h3>
                         </div>
-                        <div className="mobile-cards-popup" onClick={handlePopupClick}>
-                            <button className="mobile-cards-close-popup" onClick={closePopup}>
-                                &times;
-                            </button>
-                            <div className="mobile-cards-popup-header">
-                                <div className="mobile-cards-popup-icon">{service.icon}</div>
-                        <div>
-                                    <div className="mobile-cards-popup-service-name">{service.serviceName}</div>
-                                    <div className="mobile-cards-popup-title">{service.title}</div>
-                        </div>
-                    </div>
-                            <div className="mobile-cards-popup-description">
-                                {service.description}
-                    </div>
-                            <button
-                                className="mobile-cards-learn-more-btn"
-                                onClick={() => learnMore(service.serviceName.toLowerCase().replace(' ', '-'))}
-                            >
-                                Learn More
-                            </button>
-                        </div>
+                        {activeCard === service.id && (
+                            <div className="mobile-cards-popup" onClick={handlePopupClick}>
+                                <button className="mobile-cards-close-popup" onClick={closePopup}>
+                                    &times;
+                                </button>
+                                <div className="mobile-cards-popup-header">
+                                    <div className="mobile-cards-popup-icon">{service.icon}</div>
+                                    <div>
+                                        <div className="mobile-cards-popup-service-name">{service.serviceName}</div>
+                                        <div className="mobile-cards-popup-title">{service.title}</div>
+                                    </div>
+                                </div>
+                                <div className="mobile-cards-popup-description">
+                                    {service.description}
+                                </div>
+                                <button
+                                    className="mobile-cards-learn-more-btn"
+                                    onClick={() => learnMore(service.serviceName.toLowerCase().replace(' ', '-'))}
+                                >
+                                    Learn More
+                                </button>
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>

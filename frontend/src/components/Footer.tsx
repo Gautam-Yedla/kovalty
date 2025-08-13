@@ -2,7 +2,7 @@
 import "../styles/Footer.css";
 import { ScrollToTopIcon } from "../icons/Icons";
 import { Mail, Phone } from "lucide-react";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const Footer = () => {
 
@@ -13,18 +13,13 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        <nav className="footer-nav">
+        {/* <nav className="footer-nav">
           <ul className="footer-nav-list">
             <li className="footer-nav-item">
               <Link to="/" className="footer-nav-link">
                 Home
               </Link>
             </li>
-            {/* <li className="footer-nav-item">
-              <Link to="/project" className="footer-nav-link">
-                Projects
-              </Link>
-            </li> */}
             <li className="footer-nav-item">
               <Link to="/about" className="footer-nav-link">
                 About
@@ -41,7 +36,7 @@ const Footer = () => {
               </Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
         <div className="footer-content">
           <div className="footer-contact-info">
             <p className="footer-contact-text">Drop us a Line at :</p>

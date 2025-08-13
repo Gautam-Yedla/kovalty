@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { services } from "../../data/services";
 import ServiceCard from "../../cards/ServiceCard";
 import "../../styles/ServiceStyling/Services.css";
-import approachVenn from "../../assets/approach-venn.jpg";
 
 const Services: React.FC = () => {
   const stackRef = useRef<HTMLDivElement>(null);
@@ -72,23 +71,8 @@ const Services: React.FC = () => {
         </div>
         <div className="right">{renderedCards}</div>
       </div>
-      {/* Our Approach Section */}
-      <section className="services-approach-section">
-        <div className="services-approach-container">
-          <h2 className="services-approach-title">Our Approach</h2>
-          <p className="services-approach-text">
-            At Kovalty Technologies, we believe in the synergy of Technology,
-            Product, and Customer Success. Our integrated approach ensures
-            innovative solutions, robust products, and exceptional client
-            experiences.
-          </p>
-          <img
-            src={approachVenn}
-            alt="Technology, Product, Customer Success Venn Diagram"
-            className="services-approach-image"
-          />
-        </div>
-      </section>
+
+
     </>
   );
 };

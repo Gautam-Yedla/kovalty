@@ -28,3 +28,96 @@
 .mobile-services > * {
   width: 100%;
 } 
+
+
+
+/* =================================== */
+/* == Our Principles Section Styles == */
+/* =================================== */
+
+.principles-section {
+  background-color: #000000;
+  padding: 60px 20px;
+  font-family: sans-serif;
+}
+
+/* NEWLY ADDED HEADER STYLES */
+.principles-header {
+  color: #ffffff;
+  font-size: 42px; /* A larger size for a main heading */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px; /* Space between header and cards */
+}
+
+.principles-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.principle-card {
+  background-color: #12121d; /* Dark purplish background for the card */
+  padding: 30px 25px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.principle-icon-wrapper {
+  width: 44px;
+  height: 44px;
+  background-color: #6e44ff; /* Vibrant purple from the image */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  color: #ffffff;
+  font-size: 22px;
+}
+
+.principle-title {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+.principle-description {
+  color: #e0e0e0;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --- Responsive Adjustments --- */
+
+/* For tablets and smaller devices */
+@media (max-width: 992px) {
+  .principles-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .principles-header {
+    font-size: 36px; /* Adjust header size for tablets */
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 576px) {
+  .principles-container {
+    grid-template-columns: 1fr;
+  }
+  .principles-header {
+    font-size: 30px; /* Adjust header size for phones */
+    margin-bottom: 30px;
+  }
+  .principle-title {
+    font-size: 20px;
+  }
+  .principle-description {
+    font-size: 15px;
+  }
+}

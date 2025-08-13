@@ -73,20 +73,6 @@ const Header = () => {
       <div className="header-container">
         {/* The order of elements is changed to facilitate flexbox layout on mobile */}
         <div className="header-content">
-          <div className="header-contact">
-            <button
-              className="header-contact-button"
-              onClick={() => {
-                setIsMenuOpen(false);
-                setActiveNav("Contact");
-                navigate("/contact");
-              }}
-            >
-              <span>CONTACT</span>
-              <ContactArrowIcon className="header-contact-button-icon" />
-            </button>
-          </div>
-
           <nav className={`header-nav ${isMenuOpen ? "header-nav--open" : ""}`}>
             <div className="header-nav-wrapper">
               <ul ref={navRef} className="header-nav-list">
@@ -195,6 +181,19 @@ const Header = () => {
                 </div>
               </button>
             </div>
+          </div>
+          <div className="header-contact">
+            <button
+              className="header-contact-button"
+              onClick={() => {
+                setIsMenuOpen(false);
+                setActiveNav("Contact");
+                navigate("/contact");
+              }}
+            >
+              <span>CONTACT</span>
+              <ContactArrowIcon className="header-contact-button-icon" />
+            </button>
           </div>
         </div>
       </div>
