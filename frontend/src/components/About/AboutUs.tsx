@@ -28,7 +28,7 @@ const AboutUsPage = () => {
             <div className="aboutus-story-content">
               <h2>Our Story</h2>
               <p className="aboutus-story-text">
-                Founded in 2018, Kovalty Technologies emerged from a simple yet powerful vision: to make enterprise-grade IT solutions accessible to businesses of all sizes. Our founders, having witnessed countless organizations struggle with outdated technology and complex digital transformations, set out to create a different kind of IT partner.
+                Founded in 2024, Kovalty Technologies emerged from a simple yet powerful vision: to make enterprise-grade IT solutions accessible to businesses of all sizes. Our founders, having witnessed countless organizations struggle with outdated technology and complex digital transformations, set out to create a different kind of IT partner.
               </p>
               <p className="aboutus-story-text">
                 From our humble beginnings as a small consulting firm to becoming a trusted technology partner for hundreds of organizations worldwide, our journey has been driven by one constant: our unwavering commitment to our clients' success.
