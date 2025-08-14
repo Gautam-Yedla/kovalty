@@ -2,7 +2,7 @@ import { Star, Users, Award, Shield, Code, Cloud, Lock, Lightbulb, Heart, Target
 import '../../styles/About/AboutUs.css';
 // import FAQs from '../FAQs/FAQs';
 // import Testimonials from '../Testimonials';
-import { teamMembers } from '../../data/aboutUs'; 
+// import { teamMembers } from '../../data/aboutUs'; 
 
 const AboutUsPage = () => {
 
@@ -114,7 +114,7 @@ const AboutUsPage = () => {
       </section>
 
       {/* Meet the Team */}
-      <section className="aboutus-team-section">
+      {/* <section className="aboutus-team-section">
         <div className="aboutus-team-container">
           <div className="aboutus-section-header">
             <h2>Meet the Team</h2>
@@ -126,7 +126,6 @@ const AboutUsPage = () => {
           <div className="aboutus-team-grid">
             {teamMembers.map((member, index) => (
               <div key={index} className="aboutus-team-card">
-                {/* Placeholder for professional photo */}
                 <div className="aboutus-team-avatar">
                   <Users />
                 </div>
@@ -144,7 +143,7 @@ const AboutUsPage = () => {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Why Choose Us */}
       <section className="aboutus-choose-section">
@@ -176,7 +175,7 @@ const AboutUsPage = () => {
             </div>
           </div>
           
-          <div className="aboutus-certifications-box">
+          {/* <div className="aboutus-certifications-box">
             <h3>Certifications & Partnerships</h3>
             <div className="aboutus-certifications-grid">
               <div className="aboutus-certification-item">
@@ -196,7 +195,7 @@ const AboutUsPage = () => {
                 <p>CISSP Certified Team</p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
