@@ -1,100 +1,89 @@
-/* ======================= */
-/* Our Services Section    */
-/* ======================= */
 .home-services-section {
-  padding: 64px 0;
-  background: rgba(31, 41, 55, 0.5); /* Similar to bg-gray-800/50 */
+	padding: 64px 0;
+	background: rgba(31, 41, 55, 0.5);
 }
 
 .home-services-container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+	max-width: 1120px;
+	margin: 0 auto;
+	padding: 0 1.5rem;
 }
 
 .home-services-header {
-  text-align: center;
+	text-align: center;
 }
 
 .home-services-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
+	font-size: 2rem;
+	font-weight: 700;
+	color: #fff;
 }
 
 .home-services-subtitle {
-  margin-top: 0.75rem;
-  font-size: 1.125rem;
-  color: #9ca3af;
+	margin-top: 0.75rem;
+	font-size: 1.125rem;
+	color: #9ca3af;
 }
 
 .home-services-grid {
-  margin-top: 4rem;
-  display: grid;
-  gap: 2rem;
+	margin-top: 4rem;
+	display: grid;
+	gap: 2rem;
 }
 
 @media (min-width: 768px) {
-  .home-services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+	.home-services-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media (min-width: 1024px) {
-  .home-services-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+	.home-services-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
 
 .home-service-card {
-  display: block;
-  padding: 2rem;
-  background: #111827;
-  border-radius: 0.75rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  text-decoration: none;
-  transition: all 0.3s ease;
+	display: block;
+	padding: 2rem;
+	background: #111827;
+	border-radius: 0.75rem;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+	text-decoration: none;
+	transition: all 0.3s ease;
 }
 
 .home-service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+	transform: translateY(-8px);
+	box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
 }
 
 .home-service-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #fff;
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #fff;
 }
 
 .home-service-description {
-  margin-top: 0.5rem;
-  color: #9ca3af;
+	margin-top: 0.5rem;
+	color: #9ca3af;
 }
 
 .home-service-link {
-  margin-top: 1rem;
-  display: inline-block;
-  font-weight: 600;
-  color: #60a5fa;
-  transition: color 0.3s ease;
+	margin-top: 1rem;
+	display: inline-block;
+	font-weight: 600;
+	color: #60a5fa;
+	transition: color 0.3s ease;
 }
 
 .home-service-card:hover .home-service-link {
-  color: #93c5fd;
+	color: #93c5fd;
 }
-
-
-
-
-
-
-
 
 /* Our Approach Section */
 .home-approach-section {
-	/* background: linear-gradient(135deg, #181c2a 0%, #2a1840 100%); */
-	padding: 64px 0; /* Maintained for desktop */
+	padding: 64px 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -108,7 +97,7 @@
 	padding: 32px 24px;
 	border-radius: 24px;
 	background: rgba(20, 20, 40, 0.7);
-	box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 }
 
 .home-approach-title {
@@ -128,12 +117,12 @@
 
 .home-approach-image {
 	width: 340px;
-	max-width: 100%; /* Ensures image is responsive */
-	height: auto; /* Maintains aspect ratio */
+	max-width: 100%;
+	height: auto;
 	margin: 0 auto;
 	display: block;
 	border-radius: 18px;
-	box-shadow: 0 4px 24px rgba(123,92,255,0.18);
+	box-shadow: 0 4px 24px rgba(123, 92, 255, 0.18);
 	background: transparent;
 }
 
@@ -141,7 +130,7 @@
 /* Call to Action Section */
 .home-cta-section {
 	padding: 5rem 1.5rem;
-	background: linear-gradient(90deg, var( --bg-primary), var(--bg-tertiary), var(--bg-primary));
+	background: linear-gradient(90deg, var(--bg-primary), var(--bg-tertiary), var(--bg-primary));
 }
 
 .home-cta-container {
@@ -268,65 +257,54 @@
 }
 
 
-/* =================================================================== */
-/* ============== RESPONSIVE DESIGN (TABLET & MOBILE) ================ */
-/* =================================================================== */
-
 @media (max-width: 768px) {
-	/* --- Approach Section --- */
 	.home-approach-section {
-		padding: 48px 0; /* Reduce vertical padding */
+		padding: 48px 0;
 		margin-top: 20px;
 	}
 
 	.home-approach-container {
-		padding: 24px 16px; /* Reduce horizontal padding */
+		padding: 24px 16px;
 	}
 
 	.home-approach-title {
-		font-size: 1.8rem; /* Adjust font size */
+		font-size: 1.8rem;
 	}
 
 	.home-approach-text {
-		font-size: 1rem; /* Adjust font size */
+		font-size: 1rem;
 		margin-bottom: 24px;
 	}
 
-	/* --- CTA Section --- */
 	.home-cta-section {
-		padding: 4rem 1rem; /* Reduce padding */
+		padding: 4rem 1rem;
 	}
 
 	.home-cta-title {
-		font-size: 1.75rem; /* Adjust font size */
+		font-size: 1.75rem;
 	}
 
 	.home-cta-text {
-		font-size: 1.1rem; /* Adjust font size */
+		font-size: 1.1rem;
 	}
 }
 
-/* =================================================================== */
-/* ============= RESPONSIVE DESIGN (SMALL MOBILE) =================== */
-/* =================================================================== */
 
 @media (max-width: 480px) {
-	/* --- CTA Section --- */
 	.home-cta-title {
-		font-size: 1.5rem; /* Further adjust font size */
+		font-size: 1.5rem;
 	}
 
 	.home-cta-text {
-		font-size: 1rem; /* Further adjust font size */
+		font-size: 1rem;
 	}
-	
-	/* Adjust button padding and font size for small screens */
+
 	.home-cta-button-primary,
 	.home-cta-button-secondary {
 		padding: 0.8rem 1.5rem;
 		font-size: 0.9rem;
-		width: 100%; /* Make buttons full-width */
-		justify-content: center; /* Center button content */
-		max-width: 320px; /* Optional: constrain max-width */
+		width: 100%;
+		justify-content: center;
+		max-width: 320px;
 	}
 }

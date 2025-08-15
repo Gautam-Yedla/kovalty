@@ -1,4 +1,3 @@
-/* Responsive Services Wrapper */
 .desktop-services,
 .mobile-services {
   transition: opacity 0.3s ease-in-out;
@@ -12,7 +11,6 @@
   width: 100%;
 }
 
-/* Smooth transition when switching between desktop and mobile */
 .desktop-services[style*="display: none"],
 .mobile-services[style*="display: none"] {
   opacity: 0;
@@ -23,17 +21,10 @@
   opacity: 1;
 }
 
-/* Ensure proper spacing and layout */
-.desktop-services > *,
-.mobile-services > * {
+.desktop-services>*,
+.mobile-services>* {
   width: 100%;
-} 
-
-
-
-/* =================================== */
-/* == Our Principles Section Styles == */
-/* =================================== */
+}
 
 .principles-section {
   background-color: #000000;
@@ -41,13 +32,12 @@
   font-family: sans-serif;
 }
 
-/* NEWLY ADDED HEADER STYLES */
 .principles-header {
   color: #ffffff;
-  font-size: 42px; /* A larger size for a main heading */
+  font-size: 42px;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 40px; /* Space between header and cards */
+  margin-bottom: 40px;
 }
 
 .principles-container {
@@ -59,7 +49,7 @@
 }
 
 .principle-card {
-  background-color: #12121d; /* Dark purplish background for the card */
+  background-color: #12121d;
   padding: 30px 25px;
   border-radius: 20px;
   display: flex;
@@ -69,7 +59,7 @@
 .principle-icon-wrapper {
   width: 44px;
   height: 44px;
-  background-color: #6e44ff; /* Vibrant purple from the image */
+  background-color: #6e44ff;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -93,30 +83,30 @@
   margin: 0;
 }
 
-/* --- Responsive Adjustments --- */
-
-/* For tablets and smaller devices */
 @media (max-width: 992px) {
   .principles-container {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .principles-header {
-    font-size: 36px; /* Adjust header size for tablets */
+    font-size: 36px;
   }
 }
 
-/* For mobile devices */
 @media (max-width: 576px) {
   .principles-container {
     grid-template-columns: 1fr;
   }
+
   .principles-header {
-    font-size: 30px; /* Adjust header size for phones */
+    font-size: 30px;
     margin-bottom: 30px;
   }
+
   .principle-title {
     font-size: 20px;
   }
+
   .principle-description {
     font-size: 15px;
   }

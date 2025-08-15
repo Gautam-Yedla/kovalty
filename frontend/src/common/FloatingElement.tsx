@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface FloatingElementProps {
   delay: number;
@@ -6,12 +6,12 @@ interface FloatingElementProps {
   color: string;
 }
 
-const FloatingElement: React.FC<FloatingElementProps> = ({ 
-  delay, 
-  size, 
-  color 
+const FloatingElement: React.FC<FloatingElementProps> = ({
+  delay,
+  size,
+  color,
 }) => (
-  <div 
+  <div
     className={`absolute rounded-full ${color} opacity-20 animate-float`}
     style={{
       width: `${size}px`,
@@ -19,7 +19,7 @@ const FloatingElement: React.FC<FloatingElementProps> = ({
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       animationDelay: `${delay}ms`,
-      animationDuration: `${3000 + Math.random() * 2000}ms`
+      animationDuration: `${3000 + Math.random() * 2000}ms`,
     }}
   />
 );

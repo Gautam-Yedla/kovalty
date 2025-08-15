@@ -27,7 +27,7 @@ export interface Brand {
 
 export interface ServiceCard {
   id: number;
-  icon: string;
+  icon: React.ReactNode;
   serviceName: string;
   title: string;
   description: string;

@@ -1,16 +1,14 @@
-import { Phone, ArrowRight } from 'lucide-react'
-import '../styles/HomePage.css'; 
-import HeroSection from '../components/HeroSection';
-import { servicesData } from '../data/services';
-import { Link } from 'react-router-dom';
+import { Phone, ArrowRight } from "lucide-react";
+import "../styles/HomePage.css";
+import HeroSection from "../components/HeroSection";
+import { servicesData } from "../data/services";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
     <>
       <HeroSection />
 
-
-      {/* Our Services Section */}
       <section className="home-services-section">
         <div className="home-services-container">
           <div className="home-services-header">
@@ -38,7 +36,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
       <section className="home-cta-section">
         <div className="home-cta-container">
           <h2 className="home-cta-title">Ready to Transform Your Business?</h2>
@@ -74,6 +71,6 @@ const HomePage = () => {
       </section>
     </>
   );
-}
+};
 
-export default HomePage
+export default HomePage;

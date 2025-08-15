@@ -1,6 +1,6 @@
-import React from 'react';
-import type { Brand } from '../types';
-import '../styles/cardStyling/BrandLogoStyling.css';
+import React from "react";
+import type { Brand } from "../types";
+import "../styles/cardStyling/BrandLogoStyling.css";
 
 interface BrandLogoProps {
   brand: Brand;

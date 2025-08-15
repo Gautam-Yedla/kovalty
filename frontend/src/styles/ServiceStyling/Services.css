@@ -11,28 +11,28 @@
   max-width: 900px;
   width: 100%;
   margin: 0 auto;
-  display: flex;                /* New: side-by-side layout */
+  display: flex;
   align-items: center;
-  gap: 40px;                    /* Space between image and text */
-  text-align: left;             /* Left-align text */
+  gap: 40px;
+  text-align: left;
 }
 
 .services-approach-image {
-  flex: 0 0 340px;               /* Fixed width for image column */
+  flex: 0 0 340px;
   max-width: 340px;
   width: 100%;
   border-radius: 18px;
-  box-shadow: 0 4px 24px 0 rgba(59,130,246,0.10);
+  box-shadow: 0 4px 24px 0 rgba(59, 130, 246, 0.10);
   display: block;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .services-approach-image:hover {
-  box-shadow: 0 8px 32px 0 rgba(59,130,246,0.18);
+  box-shadow: 0 8px 32px 0 rgba(59, 130, 246, 0.18);
 }
 
 .services-approach-content {
-  flex: 1;                       /* Take remaining space */
+  flex: 1;
 }
 
 .services-approach-title {
@@ -59,14 +59,16 @@
 
 @media (max-width: 700px) {
   .services-approach-container {
-    flex-direction: column;      /* Stack on mobile */
+    flex-direction: column;
     text-align: center;
     padding: 0 8px;
   }
+
   .services-approach-image {
     max-width: 220px;
     margin-bottom: 20px;
   }
+
   .services-approach-title {
     font-size: 1.5rem;
   }
@@ -75,53 +77,52 @@
 
 
 .stack-area {
-    width: 100%;
-    height: 100vh + ((cardCount - 1) * triggerDistance);
-    position: relative;
-    background: var(--bg-primary);
-    display: flex;
-  }
-  
-  .left,
-  .right {
-    height: 100vh;
-    flex-basis: 50%;
-    position: sticky;
-    top: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    box-sizing: border-box;
-  }
-  
-  .title {
-    width: 420px;
-    font-size: 84px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    line-height: 88px;
-  }
-  
-  .sub-title {
-    width: 420px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    margin-top: 30px;
-    margin-bottom: 100px;
-    text-align: left;
-  }
-  
-  .sub-title button {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    padding: 15px 30px;
-    background: var(--accent-primary);
-    color: var(--text-primary);
-    border-radius: 8mm;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  
+  width: 100%;
+  height: 100vh + ((cardCount - 1) * triggerDistance);
+  position: relative;
+  background: var(--bg-primary);
+  display: flex;
+}
+
+.left,
+.right {
+  height: 100vh;
+  flex-basis: 50%;
+  position: sticky;
+  top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.title {
+  width: 420px;
+  font-size: 84px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  line-height: 88px;
+}
+
+.sub-title {
+  width: 420px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  margin-top: 30px;
+  margin-bottom: 100px;
+  text-align: left;
+}
+
+.sub-title button {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  padding: 15px 30px;
+  background: var(--accent-primary);
+  color: var(--text-primary);
+  border-radius: 8mm;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 20px;
+}

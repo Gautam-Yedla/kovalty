@@ -1,47 +1,49 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, Clock, Globe } from 'lucide-react';
-import '../../styles/Contact/ContactForm.css';
+import React, { useState } from "react";
+import { Mail, Phone, MapPin, Send, Clock, Globe } from "lucide-react";
+import "../../styles/Contact/ContactForm.css";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    message: ''
+    name: "",
+    email: "",
+    company: "",
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission here
+    console.log("Form submitted:", formData);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const contactInfo = [
     {
       icon: Mail,
-      title: 'Email Us',
-      details: 'info@kovalty.com',
-      description: 'Send us an email anytime'
+      title: "Email Us",
+      details: "info@kovalty.com",
+      description: "Send us an email anytime",
     },
     {
       icon: Phone,
-      title: 'Call Us',
-      details: '+91 76618 05678',
-      description: 'Mon-Fri from 8am to 6pm'
+      title: "Call Us",
+      details: "+91 76618 05678",
+      description: "Mon-Fri from 8am to 6pm",
     },
     {
       icon: MapPin,
-      title: 'Visit Us',
-      details: 'Plot No 54, Tripura Landmark-II,\nBowrampet, Hyderabad - 500043,\nTelangana, India',
-      description: 'Come say hello at our office'
-    }
+      title: "Visit Us",
+      details:
+        "Plot No 54, Tripura Landmark-II,\nBowrampet, Hyderabad - 500043,\nTelangana, India",
+      description: "Come say hello at our office",
+    },
   ];
 
   return (
@@ -61,7 +63,9 @@ const Contact = () => {
             <div>
               <h3 className="contact-subtitle">Let's Start a Conversation</h3>
               <p className="contact-subdesc">
-                Whether you have a specific project in mind or just want to explore possibilities, we're here to help. Our team of experts is ready to discuss your needs and provide tailored solutions.
+                Whether you have a specific project in mind or just want to
+                explore possibilities, we're here to help. Our team of experts
+                is ready to discuss your needs and provide tailored solutions.
               </p>
             </div>
 
@@ -74,10 +78,10 @@ const Contact = () => {
                   <div>
                     <h4 className="contact-info-title">{info.title}</h4>
                     <p className="contact-info-details">
-                      {info.details.split('\n').map((line, i) => (
+                      {info.details.split("\n").map((line, i) => (
                         <React.Fragment key={i}>
                           {line}
-                          {i < info.details.split('\n').length - 1 && <br />}
+                          {i < info.details.split("\n").length - 1 && <br />}
                         </React.Fragment>
                       ))}
                     </p>
@@ -93,14 +97,16 @@ const Contact = () => {
                 <h4 className="contact-extra-title">Response Time</h4>
               </div>
               <p className="contact-extra-desc">
-                We typically respond to all inquiries within 24 hours during business days.
+                We typically respond to all inquiries within 24 hours during
+                business days.
               </p>
               <div className="contact-extra-row">
                 <Globe className="icon-svg" />
                 <h4 className="contact-extra-title">Global Reach</h4>
               </div>
               <p className="contact-extra-desc">
-                We work with clients across multiple time zones and can accommodate meetings at your convenience.
+                We work with clients across multiple time zones and can
+                accommodate meetings at your convenience.
               </p>
             </div>
           </div>
@@ -168,10 +174,7 @@ const Contact = () => {
                   placeholder="Tell us about your project, timeline, and specific requirements..."
                 />
               </div>
-              <button
-                type="submit"
-                className="contact-submit-btn"
-              >
+              <button type="submit" className="contact-submit-btn">
                 Send Message
                 <Send className="icon-svg ml-2" />
               </button>

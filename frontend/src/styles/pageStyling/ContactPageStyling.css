@@ -1,9 +1,9 @@
-/* Fade-in keyframes */
 @keyframes fadeInUp {
   0% {
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -11,7 +11,6 @@
 }
 
 
-/* Apply fade-in to the whole page wrapper */
 .contact-page-wrapper {
   min-height: 100vh;
   background: var(--bg-primary);
@@ -21,8 +20,6 @@
   align-items: center;
   padding-top: 80px;
   margin-top: 100px;
-
-  /* Animation */
   animation: fadeInUp 0.8s ease-out forwards;
 }
 
@@ -62,6 +59,7 @@
     max-width: 100%;
     padding: 0 1rem 4rem 1rem;
   }
+
   .contact-page-header {
     padding: 0 1rem;
   }

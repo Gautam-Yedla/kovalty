@@ -1,8 +1,9 @@
-// cards/TestimonialCard.tsx
-
-import React from 'react';
-import { CornerCurveBottomLeftIcon, CornerCurveTopRightIcon } from '../icons/Icons';
-import '../styles/cardStyling/TestimonialCardStyling.css'
+import React from "react";
+import {
+  CornerCurveBottomLeftIcon,
+  CornerCurveTopRightIcon,
+} from "../icons/Icons";
+import "../styles/cardStyling/TestimonialCardStyling.css";
 
 export interface Testimonial {
   name: string;
@@ -22,7 +23,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
         <span className="testimonial-card-quote-mark">”</span>
         <p className="testimonial-card-name">{testimonial.name}</p>
         <p className="testimonial-card-role">{testimonial.role}</p>
-        <blockquote className="testimonial-card-text">{testimonial.text}</blockquote>
+        <blockquote className="testimonial-card-text">
+          {testimonial.text}
+        </blockquote>
         <div className="testimonial-card-avatar-wrapper">
           <img
             src={testimonial.avatar}

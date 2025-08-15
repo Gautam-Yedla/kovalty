@@ -1,9 +1,9 @@
-import React from 'react';
-import { ReadAllArrowIcon } from '../icons/Icons';
-import '../styles/Testimonials.css';
-import InfiniteCarousel from '../common/InfiniteCarousel';
-import TestimonialCard from '../cards/TestimonialCard';
-import { testimonialsData, buttonAvatars } from '../data/testimonials';
+import React from "react";
+import { ReadAllArrowIcon } from "../icons/Icons";
+import "../styles/Testimonials.css";
+import InfiniteCarousel from "../common/InfiniteCarousel";
+import TestimonialCard from "../cards/TestimonialCard";
+import { testimonialsData, buttonAvatars } from "../data/testimonials";
 
 const Testimonials: React.FC = () => {
   return (
@@ -13,23 +13,22 @@ const Testimonials: React.FC = () => {
           <div className="testimonials-tag-wrapper">
             <span className="testimonials-tag">TESTIMONIALS</span>
           </div>
-          <h2 className="testimonials-heading">Real stories from beloved clients</h2>
+          <h2 className="testimonials-heading">
+            Real stories from beloved clients
+          </h2>
           <p className="testimonials-subheading">
-            See how businesses just like yours are leveling up with a little help from our AI magic!
+            See how businesses just like yours are leveling up with a little
+            help from our AI magic!
           </p>
         </div>
       </div>
 
-
-      {/* Infinite carousel section */}
       <InfiniteCarousel speed={20}>
         {testimonialsData.map((testimonial, index) => (
           <TestimonialCard key={index} testimonial={testimonial} />
         ))}
       </InfiniteCarousel>
 
-
-      {/* Read All Button */}
       <div className="testimonials-footer">
         <a href="#reviews" className="read-all-button">
           <div className="read-all-avatars">
@@ -48,7 +47,6 @@ const Testimonials: React.FC = () => {
           </div>
         </a>
       </div>
-
     </section>
   );
 };

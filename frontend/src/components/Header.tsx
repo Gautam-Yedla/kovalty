@@ -1,9 +1,4 @@
-import {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-} from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { ContactArrowIcon, ChevronDownIcon } from "../icons/Icons";
 import { navItems, services } from "../data/header";
 import "../styles/Header.css";
@@ -14,7 +9,9 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
-  const navRef = useRef(null);
+  const navContainerRef = useRef<HTMLDivElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -34,24 +31,21 @@ const Header = () => {
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
-    // When opening the main menu, ensure the services submenu is closed
     if (!isMenuOpen) {
       setIsServicesOpen(false);
     }
   };
-  
-  // Handler for the "Services" link
-  const handleServicesToggle = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    // On mobile (below 1000px), prevent navigation and toggle the submenu
+
+  const handleServicesToggle = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
     if (window.innerWidth < 1000) {
-      e.preventDefault(); // Prevents the <Link> from navigating
-      setIsServicesOpen((prev) => !prev); // Toggles the services dropdown
+      e.preventDefault();
+      setIsServicesOpen((prev) => !prev);
     } else {
-      // On desktop, navigate to the services page
       setActiveNav("Services");
       setIsMenuOpen(false);
       setIsServicesOpen(false);
-      navigate('/services');
     }
   };
 
@@ -61,7 +55,26 @@ const Header = () => {
   }, [location.pathname, getActiveNavFromPath]);
 
   useEffect(() => {
-    // Prevent body scroll when the mobile menu is open
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isMenuOpen &&
+        navContainerRef.current &&
+        !navContainerRef.current.contains(event.target as Node) &&
+        menuButtonRef.current &&
+        !menuButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
     return () => {
       document.body.style.overflow = "unset";
@@ -71,11 +84,13 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-container">
-        {/* The order of elements is changed to facilitate flexbox layout on mobile */}
         <div className="header-content">
-          <nav className={`header-nav ${isMenuOpen ? "header-nav--open" : ""}`}>
+          <nav
+            ref={navContainerRef}
+            className={`header-nav ${isMenuOpen ? "header-nav--open" : ""}`}
+          >
             <div className="header-nav-wrapper">
-              <ul ref={navRef} className="header-nav-list">
+              <ul className="header-nav-list">
                 {navItems.map((item) => {
                   if (item === "Services") {
                     return (
@@ -102,9 +117,7 @@ const Header = () => {
                           Services
                           <ChevronDownIcon
                             className={`header-dropdown-icon ${
-                              isServicesOpen
-                                ? "header-dropdown-icon--open"
-                                : ""
+                              isServicesOpen ? "header-dropdown-icon--open" : ""
                             }`}
                           />
                         </Link>
@@ -116,13 +129,31 @@ const Header = () => {
                           }`}
                         >
                           <ul className="header-dropdown-menu">
+                            <li className="header-dropdown-item">
+                              <Link
+                                to="/services"
+                                className="header-dropdown-link"
+                                onClick={() => {
+                                  setActiveNav("Services");
+                                  setIsMenuOpen(false);
+                                  setIsServicesOpen(false);
+                                }}
+                              >
+                                All Services
+                              </Link>
+                            </li>
                             {services.map((service) => {
-                              const servicePath = "/services/" + service
-                                .toLowerCase()
-                                .replace(/ & /g, "-")
-                                .replace(/ /g, "-");
+                              const servicePath =
+                                "/services/" +
+                                service
+                                  .toLowerCase()
+                                  .replace(/ & /g, "-")
+                                  .replace(/ /g, "-");
                               return (
-                                <li key={service} className="header-dropdown-item">
+                                <li
+                                  key={service}
+                                  className="header-dropdown-item"
+                                >
                                   <Link
                                     to={servicePath}
                                     className="header-dropdown-link"
@@ -149,7 +180,11 @@ const Header = () => {
                   else if (item === "Contact") to = "/contact";
 
                   return (
-                    <li key={item} data-navitem={item} className="header-nav-item">
+                    <li
+                      key={item}
+                      data-navitem={item}
+                      className="header-nav-item"
+                    >
                       <Link
                         to={to}
                         className={`header-nav-link ${
@@ -165,10 +200,11 @@ const Header = () => {
               </ul>
             </div>
           </nav>
-          
+
           <div className="header-actions">
             <div className="header-mobile-menu-toggle">
               <button
+                ref={menuButtonRef}
                 onClick={toggleMenu}
                 className={`header-mobile-menu-button ${
                   isMenuOpen ? "open" : ""

@@ -1,4 +1,3 @@
-/* Root container */
 .aboutus-root {
     min-height: 100vh;
     background-color: var(--bg-primary);
@@ -7,7 +6,6 @@
     margin-top: 100px;
 }
 
-/* ---------------------------------- Hero Section ---------------------------------- */
 .aboutus-hero {
     position: relative;
     overflow: hidden;
@@ -47,22 +45,20 @@
     line-height: 1.6;
 }
 
-/* Mobile adjustments for hero section */
 @media (max-width: 767px) {
     .aboutus-hero {
-        padding: 3rem 1rem; /* Adjust padding for smaller screens */
+        padding: 3rem 1rem;
     }
 
     .aboutus-title {
-        font-size: 2.5rem; /* Smaller title font size on mobile */
+        font-size: 2.5rem;
     }
 
     .aboutus-subtitle {
-        font-size: 1rem; /* Smaller subtitle font size on mobile */
+        font-size: 1rem;
     }
 }
 
-/* Tablet and larger title sizing */
 @media (min-width: 768px) {
     .aboutus-title {
         font-size: 3.75rem;
@@ -73,7 +69,6 @@
     }
 }
 
-/* ---------------------------------- Our Story & Mission Section ---------------------------------- */
 .aboutus-story-section {
     padding: 5rem 1.5rem;
     background-color: var(--bg-secondary);
@@ -90,14 +85,13 @@
     align-items: center;
 }
 
-/* Mobile adjustments for story section */
 @media (max-width: 767px) {
     .aboutus-story-section {
         padding: 3rem 1rem;
     }
-    
+
     .aboutus-story-grid {
-        grid-template-columns: 1fr; /* Stack content vertically on mobile */
+        grid-template-columns: 1fr;
     }
 
     .aboutus-story-content h2 {
@@ -106,7 +100,6 @@
     }
 }
 
-/* Tablet and larger story grid */
 @media (min-width: 768px) {
     .aboutus-story-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -158,10 +151,9 @@
     gap: 1.5rem;
 }
 
-/* Mobile adjustments for values grid */
 @media (max-width: 575px) {
     .aboutus-values-grid {
-        grid-template-columns: 1fr; /* Single column on extra small screens */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -196,7 +188,6 @@
     margin: 0;
 }
 
-/* ---------------------------------- What We Do Section ---------------------------------- */
 .aboutus-services-section {
     padding: 5rem 1.5rem;
     background-color: var(--bg-primary);
@@ -226,7 +217,6 @@
     margin: 0 auto;
 }
 
-/* Mobile adjustments for services section */
 @media (max-width: 767px) {
     .aboutus-services-section {
         padding: 3rem 1rem;
@@ -243,9 +233,9 @@
     .aboutus-section-header p {
         font-size: 1rem;
     }
-    
+
     .aboutus-services-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -319,7 +309,6 @@
     margin: 0;
 }
 
-/* ---------------------------------- Meet the Team Section ---------------------------------- */
 .aboutus-team-section {
     padding: 5rem 1.5rem;
     background-color: var(--bg-secondary);
@@ -336,14 +325,13 @@
     margin-bottom: 3rem;
 }
 
-/* Mobile adjustments for team grid */
 @media (max-width: 767px) {
     .aboutus-team-section {
         padding: 3rem 1rem;
     }
-    
+
     .aboutus-team-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -428,7 +416,6 @@
     margin: 0;
 }
 
-/* ---------------------------------- Why Choose Us Section ---------------------------------- */
 .aboutus-choose-section {
     padding: 5rem 1.5rem;
     background-color: var(--bg-primary);
@@ -445,14 +432,13 @@
     margin-bottom: 3rem;
 }
 
-/* Mobile adjustments for benefits grid */
 @media (max-width: 767px) {
     .aboutus-choose-section {
         padding: 3rem 1rem;
     }
-    
+
     .aboutus-benefits-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -513,10 +499,9 @@
     gap: 1.5rem;
 }
 
-/* Mobile adjustments for certifications grid */
 @media (max-width: 575px) {
     .aboutus-certifications-grid {
-        grid-template-columns: 1fr; /* Single column on extra small screens */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -552,7 +537,6 @@
     color: var(--text-primary);
 }
 
-/* ---------------------------------- Client Testimonials Section ---------------------------------- */
 .aboutus-testimonials-section {
     padding: 5rem 1.5rem;
     background-color: var(--bg-secondary);
@@ -568,14 +552,13 @@
     gap: 2rem;
 }
 
-/* Mobile adjustments for testimonials grid */
 @media (max-width: 767px) {
     .aboutus-testimonials-section {
         padding: 3rem 1rem;
     }
-    
+
     .aboutus-testimonials-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
+        grid-template-columns: 1fr;
     }
 }
 
@@ -632,7 +615,6 @@
     margin-bottom: 0;
 }
 
-/* ---------------------------------- Company Timeline Section ---------------------------------- */
 .aboutus-timeline-section {
     padding: 5rem 1.5rem;
     background-color: var(--bg-primary);
@@ -647,19 +629,16 @@
     position: relative;
 }
 
-/* Mobile adjustments for timeline section */
 @media (max-width: 767px) {
     .aboutus-timeline-section {
         padding: 3rem 1rem;
     }
-    
-    /* Remove the centered line and dots on mobile */
+
     .aboutus-timeline-line,
     .aboutus-timeline-dot {
         display: none;
     }
 
-    /* Stack items vertically and align to the left */
     .aboutus-timeline-items {
         flex-direction: column;
         gap: 2rem;
@@ -668,12 +647,12 @@
     .aboutus-timeline-item,
     .aboutus-timeline-item:nth-child(even) {
         justify-content: flex-start;
-        display: block; /* Change to block to allow full width stacking */
+        display: block;
     }
 
     .aboutus-timeline-content {
-        margin: 0; /* Remove horizontal margin */
-        max-width: 100%; /* Take up full width */
+        margin: 0;
+        max-width: 100%;
     }
 }
 

@@ -1,4 +1,3 @@
-/* 404 Error Page Styling */
 .error404-wrapper {
   min-height: 100vh;
   background: var(--bg-primary);
@@ -14,7 +13,7 @@
   background: var(--bg-secondary);
   padding: 3rem 2rem;
   border-radius: 1.5rem;
-  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.08);
   max-width: 400px;
   width: 100%;
 }
@@ -48,22 +47,21 @@
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
+
 .error404-home-btn:hover {
   background: var(--kovalty-blue-dark);
   transform: scale(1.04);
 }
 
-
-/* Tablet & mobile adjustments */
 @media (max-width: 768px) {
   .error404-wrapper {
-    padding-top: 60px; /* slightly less top padding */
+    padding-top: 60px;
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
   .error404-content {
-    padding: 2rem 1.5rem; /* reduced padding for smaller screens */
+    padding: 2rem 1.5rem;
     border-radius: 1rem;
   }
 
@@ -82,7 +80,6 @@
   }
 }
 
-/* Small mobile adjustments */
 @media (max-width: 480px) {
   .error404-wrapper {
     padding-top: 50px;

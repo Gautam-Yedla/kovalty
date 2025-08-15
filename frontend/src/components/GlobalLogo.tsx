@@ -1,5 +1,5 @@
-import Logo from '../assets/Screenshot_2024-06-23_173525-removebg-preview 1.svg';
-import '../styles/GlobalLogo.css';
+import Logo from "../assets/kovalty-main-logo.svg";
+import "../styles/GlobalLogo.css";
 
 const GlobalLogo = () => (
   <div className="global-logo">

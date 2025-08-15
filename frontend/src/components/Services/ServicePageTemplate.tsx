@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/ServiceStyling/ServicesTemplate.css";
 import { ArrowRight } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export interface ServicePageData {
   hero: {
@@ -31,7 +31,6 @@ export interface ServicePageData {
 const ServicePageTemplate: React.FC<{ data: ServicePageData }> = ({ data }) => {
   return (
     <div className="services-template-page">
-      {/* Hero Section */}
       <header className="services-hero-section">
         <div className="services-hero-content">
           <h1 className="services-hero-title">{data.hero.title}</h1>
@@ -39,7 +38,6 @@ const ServicePageTemplate: React.FC<{ data: ServicePageData }> = ({ data }) => {
         </div>
       </header>
 
-      {/* Key Services Section */}
       <section className="key-services-section">
         <div className="services-container">
           <h2 className="services-section-title">{data.expertiseTitle}</h2>
@@ -56,7 +54,6 @@ const ServicePageTemplate: React.FC<{ data: ServicePageData }> = ({ data }) => {
         </div>
       </section>
 
-      {/* How We Work Section */}
       <section className="how-we-work-section">
         <div className="services-container">
           <h2 className="services-section-title">{data.processTitle}</h2>
@@ -73,12 +70,10 @@ const ServicePageTemplate: React.FC<{ data: ServicePageData }> = ({ data }) => {
         </div>
       </section>
 
-      {/* Call to Action Section */}
       <section className="services-cta-section">
         <div className="services-cta-content">
           <h2 className="services-cta-title">{data.ctaTitle}</h2>
           <p className="services-cta-subtitle">{data.ctaSubtitle}</p>
-          {/* Call to Action Section */}
           <div className="services-cta-buttons">
             <Link to="/services" className="services-cta-button-secondary">
               <ArrowRight className="services-cta-button-icon" />

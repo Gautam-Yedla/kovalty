@@ -1,11 +1,9 @@
-
 import "../styles/Footer.css";
 import { ScrollToTopIcon } from "../icons/Icons";
 import { Mail, Phone } from "lucide-react";
 // import { Link } from 'react-router-dom';
 
 const Footer = () => {
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

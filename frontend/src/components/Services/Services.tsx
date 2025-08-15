@@ -71,8 +71,6 @@ const Services: React.FC = () => {
         </div>
         <div className="right">{renderedCards}</div>
       </div>
-
-
     </>
   );
 };

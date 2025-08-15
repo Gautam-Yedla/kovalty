@@ -1,276 +1,265 @@
-/* Existing and new styles for the header component */
 .header {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    min-width: 0;
-    max-width: 1200px;
-    z-index: 1001;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 1.5rem;
-    background: rgba(var(--bg-secondary-rgb, 15, 15, 35), 0.95);
-    border-radius: 25px;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: auto;
+  min-width: 0;
+  max-width: 1200px;
+  z-index: 1001;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: rgba(var(--bg-secondary-rgb, 15, 15, 35), 0.95);
+  border-radius: 25px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .header-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
 }
 
 .header-content {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
 }
 
-/* --- Desktop Navigation --- */
 .header-nav {
-    display: flex;
-    flex: 1;
-    justify-content: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
 }
 
 .header-nav-wrapper {
-    position: relative;
-    width: auto;
-    display: flex;
-    justify-content: center;
+  position: relative;
+  width: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .header-nav-list {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.25rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .header-nav-item {
-    position: relative;
+  position: relative;
 }
 
 .header-nav-link {
-    text-decoration: none;
-    color: var(--text-primary);
-    font-weight: 500;
-    font-size: 0.95rem;
-    padding: 0.65rem 1rem;
-    transition: all 0.2s ease;
-    position: relative;
-    border-radius: 25px;
-    letter-spacing: 0.3px;
-    font-family: 'Inter', sans-serif;
-    display: block;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.65rem 1rem;
+  transition: all 0.2s ease;
+  position: relative;
+  border-radius: 25px;
+  letter-spacing: 0.3px;
+  font-family: 'Inter', sans-serif;
+  display: block;
 }
 
 .header-nav-link:hover {
-    background: var(--hover-bg, rgba(255, 255, 255, 0.1));
+  background: var(--hover-bg, rgba(255, 255, 255, 0.1));
 }
 
 .header-nav-link--active {
-    background: var(--active-bg, rgba(255, 255, 255, 0.15));
+  background: var(--active-bg, rgba(255, 255, 255, 0.15));
 }
 
 .header-nav-link--dropdown {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .header-dropdown-icon {
-    height: 1rem;
-    width: 1rem;
-    transition: transform 0.3s ease;
+  height: 1rem;
+  width: 1rem;
+  transition: transform 0.3s ease;
 }
 
 .header-dropdown-icon--open {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
-/* --- Services Dropdown --- */
 .header-nav-item--dropdown-container {
-    position: relative;
+  position: relative;
 }
 
 .header-dropdown-menu-wrapper {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-top: 1rem;
-    width: 240px;
-    background: rgba(var(--bg-secondary-rgb, 15, 15, 35), 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
-    padding: 0.75rem;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(-50%) translateY(-10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: 1rem;
+  width: 240px;
+  background: rgba(var(--bg-secondary-rgb, 15, 15, 35), 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-dropdown-menu-wrapper--open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .header-dropdown-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .header-dropdown-link {
-    display: block;
-    padding: 0.75rem 1rem;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    border-radius: 15px;
-    transition: all 0.2s ease;
+  display: block;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 15px;
+  transition: all 0.2s ease;
 }
 
 .header-dropdown-link:hover {
-    background: var(--hover-bg, rgba(255, 255, 255, 0.1));
-    color: var(--accent-primary);
-    transform: translateX(2px);
+  background: var(--hover-bg, rgba(255, 255, 255, 0.1));
+  color: var(--accent-primary);
+  transform: translateX(2px);
 }
 
-/* --- Header Actions & Contact Button --- */
 .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .header-contact-button {
-    background: #ffffff;
-    color: #000000;
-    padding: 0.75rem 1.25rem;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    font-size: 0.9rem;
-    border: 2px solid #ffffff;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  background: #ffffff;
+  color: #000000;
+  padding: 0.75rem 1.25rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .header-contact-button:hover {
-    background: #000000;
-    color: #ffffff;
-    transform: translateY(-1px);
+  background: #000000;
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 .header-contact-button-icon {
-    height: 0.75rem;
-    width: 0.75rem;
-    transition: transform 0.2s ease;
+  height: 0.75rem;
+  width: 0.75rem;
+  transition: transform 0.2s ease;
 }
 
 .header-contact-button:hover .header-contact-button-icon {
-    transform: translateX(2px);
+  transform: translateX(2px);
 }
 
-/* --- Mobile Menu Toggle / Hamburger (Initially Hidden) --- */
 .header-mobile-menu-toggle {
-    display: none; /* Hidden on desktop */
-    z-index: 1003; /* Ensure it's above other header content */
+  display: none;
+  z-index: 1003;
 }
 
 .header-mobile-menu-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: relative;
 }
 
 .hamburger-box {
-    width: 30px;
-    height: 24px;
-    display: inline-block;
-    position: relative;
+  width: 30px;
+  height: 24px;
+  display: inline-block;
+  position: relative;
 }
 
 .hamburger-inner,
 .hamburger-inner::before,
 .hamburger-inner::after {
-    width: 30px;
-    height: 2px;
-    background-color: #fff;
-    border-radius: 4px;
-    position: absolute;
-    transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
+  width: 30px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 4px;
+  position: absolute;
+  transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
 }
 
 .hamburger-inner::before,
 .hamburger-inner::after {
-    content: "";
-    display: block;
+  content: "";
+  display: block;
 }
 
 .hamburger-inner::before {
-    top: -10px;
+  top: -10px;
 }
 
 .hamburger-inner::after {
-    bottom: -10px;
+  bottom: -10px;
 }
 
-/* Hamburger to "X" Animation */
 .header-mobile-menu-button.open .hamburger-inner {
-    background-color: transparent; /* Center bar fades out */
+  background-color: transparent;
 }
 
 .header-mobile-menu-button.open .hamburger-inner::before {
-    transform: translateY(10px) rotate(45deg);
+  transform: translateY(10px) rotate(45deg);
 }
 
 .header-mobile-menu-button.open .hamburger-inner::after {
-    transform: translateY(-10px) rotate(-45deg);
+  transform: translateY(-10px) rotate(-45deg);
 }
 
 
-/* =================================================================== */
-/* ============== MOBILE RESPONSIVENESS (Below 1000px) =============== */
-/* =================================================================== */
-
 @media (max-width: 999px) {
-  /* --- General Header Adjustments --- */
   .header {
     width: 100%;
     top: 0;
     left: 0;
     transform: none;
     border-radius: 0;
-    padding: 1rem 1.5rem; /* Slightly reduced padding for a tighter header */
+    padding: 1rem 1.5rem;
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -279,34 +268,32 @@
   }
 
   .header-content {
-    justify-content: center; /* Center the contact button */
-    position: relative; /* Ensure positioning context for children */
+    justify-content: center;
+    position: relative;
   }
 
   .header-contact {
-    order: 1; /* Central item */
+    order: 1;
     display: flex;
-    align-items: center; /* Vertically center the contact button */
-    height: 100%; /* Ensure it takes the full height of the header */
+    align-items: center;
+    height: 100%;
   }
 
-  /* --- Contact Button (Smaller Size) --- */
   .header-contact-button {
-    padding: 0.5rem 0.9rem; /* Reduced padding for smaller size */
-    font-size: 0.8rem; /* Smaller font size */
-    border-radius: 25px; /* Slightly smaller border-radius for proportionality */
-    gap: 0.4rem; /* Reduced gap between text and icon */
+    padding: 0.5rem 0.9rem;
+    font-size: 0.8rem;
+    border-radius: 25px;
+    gap: 0.4rem;
   }
 
   .header-contact-button-icon {
-    height: 0.6rem; /* Smaller icon */
-    width: 0.6rem; /* Smaller icon */
+    height: 0.6rem;
+    width: 0.6rem;
   }
 
-  /* --- Navigation (Unchanged) --- */
   .header-nav {
     position: fixed;
-    top: 70px; /* Adjusted to account for smaller header height */
+    top: 70px;
     right: 1.5rem;
     width: auto;
     height: auto;
@@ -355,7 +342,6 @@
     display: none;
   }
 
-  /* --- Mobile Dropdown (Unchanged) --- */
   .header-dropdown-menu-wrapper {
     position: static;
     transform: none;
@@ -389,15 +375,14 @@
     color: var(--accent-primary);
   }
 
-  /* --- Show Hamburger and position it on the right (Smaller Size) --- */
   .header-actions {
-    order: 2; /* Right-most item */
+    order: 2;
     position: absolute;
     right: -0.5rem;
-    top: 80%; /* Center vertically */
+    top: 80%;
     transform: translateY(-50%);
     display: flex;
-    align-items: center; /* Ensure hamburger is vertically centered */
+    align-items: center;
   }
 
   .header-mobile-menu-toggle {
@@ -405,39 +390,38 @@
   }
 
   .header-mobile-menu-button {
-    padding: 8px; /* Reduced padding for smaller touch area */
+    padding: 8px;
   }
 
   .hamburger-box {
-    width: 24px; /* Reduced width for smaller hamburger */
-    height: 20px; /* Reduced height for smaller hamburger */
+    width: 24px;
+    height: 20px;
   }
 
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
-    width: 24px; /* Match the reduced width */
-    height: 1.5px; /* Thinner lines for a smaller appearance */
+    width: 24px;
+    height: 1.5px;
   }
 
   .hamburger-inner::before {
-    top: -8px; /* Adjusted for smaller hamburger */
+    top: -8px;
   }
 
   .hamburger-inner::after {
-    bottom: -8px; /* Adjusted for smaller hamburger */
+    bottom: -8px;
   }
 
-  /* Hamburger to "X" Animation (Unchanged) */
   .header-mobile-menu-button.open .hamburger-inner {
     background-color: transparent;
   }
 
   .header-mobile-menu-button.open .hamburger-inner::before {
-    transform: translateY(8px) rotate(45deg); /* Adjusted for smaller hamburger */
+    transform: translateY(8px) rotate(45deg);
   }
 
   .header-mobile-menu-button.open .hamburger-inner::after {
-    transform: translateY(-8px) rotate(-45deg); /* Adjusted for smaller hamburger */
+    transform: translateY(-8px) rotate(-45deg);
   }
 }

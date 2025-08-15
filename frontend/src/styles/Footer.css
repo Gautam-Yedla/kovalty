@@ -14,10 +14,9 @@ main {
     flex: 1 0 auto;
 }
 
-/* Footer Component Styles */
 .footer {
-    background-color: var(--bg-primary); 
-    color: #ffffff; 
+    background-color: var(--bg-primary);
+    color: #ffffff;
     padding-top: 3rem;
     padding-bottom: 1rem;
     text-align: center;
@@ -113,7 +112,6 @@ main {
     color: var(--accent-primary);
 }
 
-/* Divider and Up Arrow */
 .footer-divider-container {
     position: relative;
     width: 100%;
@@ -154,7 +152,7 @@ main {
     transform: translate(-50%, -50%) scale(1.05);
 }
 
-.footer-up-arrow > svg {
+.footer-up-arrow>svg {
     width: 24px;
     height: 24px;
     color: var(--text-primary);
@@ -192,7 +190,6 @@ main {
     color: var(--accent-primary);
 }
 
-/* Footer CTA Contact Icon */
 .footer-cta-contact-icon {
     width: 20px;
     height: 20px;
@@ -209,37 +206,29 @@ main {
     color: var(--kovalty-blue-light);
 }
 
-/* =================================================================== */
-/* ============== RESPONSIVE DESIGN (TABLET & MOBILE) ================ */
-/* =================================================================== */
-
 @media (max-width: 768px) {
     .footer {
         padding-top: 2.5rem;
         padding-bottom: 1.5rem;
     }
 
-    /* Stack main navigation links and adjust spacing */
     .footer-nav-list {
         flex-direction: column;
         gap: 0.75rem;
     }
-    
-    /* Stack the main content blocks (contact and social) */
+
     .footer-content {
         flex-direction: column;
-        gap: 2rem; /* Give more space between contact and social sections */
+        gap: 2rem;
         align-items: center;
     }
-    
-    /* Center text and content within the stacked blocks */
+
     .footer-contact-info,
     .footer-social-media {
         text-align: center;
         align-items: center;
     }
 
-    /* Ensure social icons are centered when stacked */
     .footer-social-icons {
         justify-content: center;
     }
@@ -249,44 +238,40 @@ main {
         margin-bottom: 2.5rem;
     }
 
-    /* Stack bottom info (copyright and legal links) */
     .footer-bottom-info {
-        flex-direction: column-reverse; /* Show legal links before copyright */
+        flex-direction: column-reverse;
         gap: 1.5rem;
         text-align: center;
     }
-    
+
     .footer-legal-links {
-        gap: 1rem; /* Reduce gap for a tighter look on mobile */
+        gap: 1rem;
     }
 }
 
 
-/* =================================================================== */
-/* ============= RESPONSIVE DESIGN (SMALL MOBILE) =================== */
-/* =================================================================== */
-
 @media (max-width: 480px) {
     .footer-container {
-        padding: 0 1rem; /* Reduce side padding for more content space */
+        padding: 0 1rem;
     }
 
     .footer-divider-container {
-        margin-bottom: 2.5rem; /* Reduce top margin for smaller screens */
+        margin-bottom: 2.5rem;
     }
 
-    /* Stack the legal links vertically to prevent awkward wrapping */
     .footer-legal-links {
         flex-direction: column;
         gap: 0.75rem;
     }
 }
 
-/* Keyframe animation for the bouncing arrow */
 @keyframes bounce-icon {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-5px);
     }

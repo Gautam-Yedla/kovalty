@@ -1,6 +1,6 @@
 .global-logo {
   position: fixed;
-  top: 20px; 
+  top: 20px;
   left: 2.5rem;
   z-index: 2000;
   background: transparent;
@@ -11,22 +11,21 @@
 }
 
 .global-logo-img {
-  height: 80px; 
-  width: 160px; 
+  height: 80px;
+  width: 160px;
   object-fit: contain;
   border-radius: 1.5rem;
   transition: transform 0.3s ease;
 }
 
 .global-logo-img:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
 }
 
-/* Match header's mobile responsiveness trigger */
 @media (max-width: 999px) {
   .global-logo {
-    position: fixed; 
-    top: 0.75rem; 
+    position: fixed;
+    top: 0.75rem;
     left: 1rem;
     padding: 0;
     z-index: 1003;
@@ -39,34 +38,34 @@
   }
 }
 
-/* Tablet adjustments */
 @media (max-width: 740px) {
   .global-logo {
     top: 0.8rem;
     left: 0.75rem;
   }
+
   .global-logo-img {
     height: 50px;
   }
 }
 
-/* Small mobile */
 @media (max-width: 570px) {
   .global-logo {
     top: 1rem;
     left: 0.5rem;
   }
+
   .global-logo-img {
     height: 45px;
   }
 }
 
-/* Extra-small mobile */
 @media (max-width: 400px) {
   .global-logo {
     top: 1rem;
     left: 0.4rem;
   }
+
   .global-logo-img {
     height: 40px;
   }

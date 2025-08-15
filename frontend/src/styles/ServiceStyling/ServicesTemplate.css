@@ -1,14 +1,10 @@
-/* General Page Layout */
-
 .services-template-page {
 	font-family: var(--font-primary);
 	background: var(--bg-primary);
 	color: var(--text-primary);
 	min-height: 100vh;
-    margin-top: 100px;
+	margin-top: 100px;
 }
-
-/* Hero Section */
 
 .services-hero-section {
 	background: linear-gradient(120deg, var(--bg-primary) 0%, var(--bg-primary) 100%);
@@ -42,7 +38,6 @@
 	color: var(--text-secondary);
 }
 
-/* Section Titles */
 
 .services-section-title {
 	font-size: var(--font-size-3xl);
@@ -60,7 +55,6 @@
 	text-align: center;
 }
 
-/* Container */
 
 .services-container {
 	max-width: 1100px;
@@ -68,7 +62,6 @@
 	padding: 0 24px;
 }
 
-/* Key Services Section */
 
 .key-services-section {
 	padding: 48px 0;
@@ -117,7 +110,6 @@
 	color: var(--text-secondary);
 }
 
-/* How We Work Section */
 
 .how-we-work-section {
 	padding: 48px 0;
@@ -174,9 +166,6 @@
 	color: var(--text-muted);
 }
 
-/* CTA Section */
-
-/* Services CTA – Same Styling as Home CTA */
 .services-cta-section {
 	padding: 5rem 1.5rem;
 	background: linear-gradient(90deg, var(--bg-primary), var(--bg-tertiary), var(--bg-primary));
@@ -213,7 +202,6 @@
 	margin-bottom: 2rem;
 }
 
-/* Secondary Button Style */
 .services-cta-button-secondary {
 	display: flex;
 	align-items: center;
@@ -234,36 +222,34 @@
 	transform: translateY(-2px) scale(1.04);
 }
 
-/* Icon inside button */
 .services-cta-button-icon {
 	width: 1.25rem;
 	height: 1.25rem;
 }
 
 
-/* Responsive */
 @media (max-width: 768px) {
 	.services-hero-title {
 		font-size: 2rem;
 	}
-	
+
 	.services-container,
 	.services-hero-content,
 	.services-cta-content {
 		padding: 0 16px;
 	}
-	
+
 	.key-services-grid,
 	.work-process-steps-grid {
 		gap: 18px;
 		grid-template-columns: 1fr;
 	}
-	
+
 	.services-cta-section {
 		padding: 36px 0 28px 0;
 		margin-top: 32px;
 	}
-	
+
 	.key-services-section,
 	.how-we-work-section {
 		padding: 32px 0;
@@ -274,16 +260,16 @@
 	.services-hero-title {
 		font-size: 1.75rem;
 	}
-	
+
 	.services-section-title {
 		font-size: var(--font-size-2xl);
 	}
-	
+
 	.key-service-card,
 	.work-process-step {
 		padding: 24px 16px 20px 16px;
 	}
-	
+
 	.services-cta-button {
 		padding: 12px 24px;
 		font-size: var(--font-size-base);

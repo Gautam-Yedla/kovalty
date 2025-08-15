@@ -4,7 +4,6 @@ import MobileCards from "../../cards/MobileCards";
 import "../../styles/ServiceStyling/ResponsiveServices.css";
 import approachVenn from "../../assets/approach-venn.jpg";
 
-// Import icons for the new section
 import {
   IoSettingsSharp,
   IoSearch,
@@ -20,19 +19,15 @@ const ResponsiveServices: React.FC = () => {
       setIsMobile(window.innerWidth <= 1000);
     };
 
-    // Check on mount
     checkScreenSize();
 
-    // Add event listener for window resize
     window.addEventListener("resize", checkScreenSize);
 
-    // Cleanup
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   return (
     <>
-      {/* Desktop Services - Hidden on mobile */}
       <div
         className="desktop-services"
         style={{ display: isMobile ? "none" : "block" }}
@@ -40,7 +35,6 @@ const ResponsiveServices: React.FC = () => {
         <Services />
       </div>
 
-      {/* Mobile Cards - Hidden on desktop */}
       <div
         className="mobile-services"
         style={{ display: isMobile ? "block" : "none" }}
@@ -48,7 +42,6 @@ const ResponsiveServices: React.FC = () => {
         <MobileCards />
       </div>
 
-      {/* Our Approach Section */}
       <section className="services-approach-section">
         <div className="services-approach-container">
           <h2 className="services-approach-title">Our Approach</h2>
@@ -66,9 +59,8 @@ const ResponsiveServices: React.FC = () => {
         </div>
       </section>
 
-      {/* Our Principles Section */}
       <section className="principles-section">
-          <h2 className="principles-header">Our Principles</h2>
+        <h2 className="principles-header">Our Principles</h2>
         <div className="principles-container">
           <div className="principle-card">
             <div className="principle-icon-wrapper">
@@ -98,7 +90,9 @@ const ResponsiveServices: React.FC = () => {
               <IoRocketSharp />
             </div>
             <h3 className="principle-title">Think Like Founders</h3>
-            <p className="principle-description">Because we've been there too.</p>
+            <p className="principle-description">
+              Because we've been there too.
+            </p>
           </div>
         </div>
       </section>

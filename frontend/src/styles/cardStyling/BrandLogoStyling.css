@@ -3,16 +3,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10rem; /* w-40 */
-  height: 5rem; /* h-20 */
-  margin-left: 1.5rem; /* mx-6 */
+  width: 10rem;
+  height: 5rem;
+  margin-left: 1.5rem;
   margin-right: 1.5rem;
 }
 
 .brand-logo-content {
   display: flex;
   align-items: center;
-  gap: 0.75rem; /* gap-3 */
+  gap: 0.75rem;
   opacity: 0.6;
   transition: opacity 0.3s;
 }
@@ -23,12 +23,12 @@
 }
 
 .brand-logo-icon {
-  width: 2rem; /* w-8 */
-  height: 2rem; /* h-8 */
+  width: 2rem;
+  height: 2rem;
 }
 
 .brand-logo-name {
-  font-weight: 600; /* font-semibold */
-  color: #374151; /* text-gray-700 */
-  font-size: 1.125rem; /* text-lg */
+  font-weight: 600;
+  color: #374151;
+  font-size: 1.125rem;
 }
