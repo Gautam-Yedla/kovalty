@@ -1,55 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Serif+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background          : #ffffff;
-    --foreground          : #0f172a;
-    --primary             : #0a1628;
-    --primary-foreground   : #ffffff;
-    --secondary           : #1e3a5f;
-    --secondary-foreground: #ffffff;
-    --accent              : #1dd3b0;
-    --accent-foreground   : #0a1628;
-    --muted               : #f1f5f9;
-    --muted-foreground    : #64748b;
-    --border              : #e2e8f0;
-    --input               : #e2e8f0;
-    --ring                : #1dd3b0;
-    --card                : #ffffff;
-    --card-foreground     : #0f172a;
-    --success             : #10b981;
-    --success-foreground  : #ffffff;
-    --warning             : #f59e0b;
-    --warning-foreground : #ffffff;
-    --destructive         : #ef4444;
-    --destructive-foreground: #ffffff;
-  }
+    /* Primary Brand Colors */
+    --kovalty-blue: #3b82f6;
+    --kovalty-blue-light: #7bb8e6;
+    --kovalty-blue-dark: #1e40af;
 
-  .dark {
-    --background          : #0a1628;
-    --foreground          : #f8fafc;
-    --primary             : #1e3a5f;
-    --primary-foreground  : #ffffff;
-    --secondary           : #2d4a6f;
-    --card                : #0f1f35;
-    --border              : #1e3a5f;
-    --muted               : #1e3a5f;
-    --muted-foreground    : #94a3b8;
+    /* Background Colors */
+    --bg-primary: #000000;
+    --bg-secondary: #1d2233;
+    --bg-secondary-rgb: 29, 34, 51;
+    --bg-tertiary: #232946;
+
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #b6d0fa;
+
+    /* Border Colors */
+    --border-primary: #3b82f6;
+    --border-secondary: #1e40af;
+
+    /* Accent Colors */
+    --accent-primary: #3b82f6;
+    --accent-secondary: #1e40af;
+
+    /* Tailwind Compatible Variables */
+    --background: #000000;
+    --foreground: #ffffff;
+    --primary: #1d2233;
+    --primary-foreground: #ffffff;
+    --secondary: #232946;
+    --secondary-foreground: #ffffff;
+    --accent: #3b82f6;
+    --accent-foreground: #ffffff;
+    --muted: #1d2233;
+    --muted-foreground: #b6d0fa;
+    --border: rgba(59, 130, 246, 0.2);
+    --input: rgba(59, 130, 246, 0.1);
+    --ring: #3b82f6;
+    --card: #1d2233;
+    --card-foreground: #ffffff;
+    --success: #10b981;
+    --success-foreground: #ffffff;
+    --warning: #f59e0b;
+    --warning-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+
+    /* Font Families */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    --font-serif: 'Source Serif Pro', 'Georgia', serif;
+    --font-display: 'Playfair Display', 'Georgia', serif;
+    --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
   }
 
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
   }
 
   section,
   [class*="section"] {
     scroll-margin-top: 130px;
   }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--kovalty-blue);
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--kovalty-blue-light);
+  }
 }
 
+@layer utilities {
+  .glass {
+    background: rgba(29, 34, 51, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--kovalty-blue), var(--kovalty-blue-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  .glow-lg {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+  }
+}

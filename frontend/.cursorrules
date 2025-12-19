@@ -195,7 +195,7 @@
    - Always make the UI responsive for all devices from 350px to 2560px.
    - Use `clsx` or `tailwind-merge` for conditional class names.
    - Never hardcode colors directly - always use predefined color variables or Tailwind classes.
-   - **Buttons must have sharp borders (no border-radius)** and include hover animations.
+   - **Interactive elements should have rounded borders (typically 0.5rem or as defined in index.css)** and include hover animations.
    - All interactive elements should have smooth transitions and hover/active states.
 
 5. **Routing:**
@@ -493,104 +493,141 @@ src/components/
 
 ## Color Palette (Hex Values)
 
-### Light Mode Colors
-- **Background**: `#ffffff` - Main background color (White)
-- **Foreground**: `#0f172a` - Main text color (Dark Slate)
-- **Primary**: `#0a1628` - Main brand color (Deep Navy - from CTA section)
-- **Primary Foreground**: `#ffffff` - Text on primary background
-- **Secondary**: `#1e3a5f` - Supporting brand color (Medium Navy - from footer)
-- **Secondary Foreground**: `#ffffff` - Text on secondary background
-- **Accent**: `#1dd3b0` - Highlight/CTA color (Bright Teal - from buttons)
-- **Accent Foreground**: `#0a1628` - Text on accent background
-- **Muted**: `#f1f5f9` - Subtle background
-- **Muted Foreground**: `#64748b` - Subtle text
-- **Border**: `#e2e8f0` - Border color
-- **Input**: `#e2e8f0` - Input border color
-- **Ring**: `#1dd3b0` - Focus ring color (Teal)
-- **Card**: `#ffffff` - Card background
-- **Card Foreground**: `#0f172a` - Card text
+### Main Design Colors (Black Background Theme)
+- **Background Primary**: `#000000` - Main background color (Black)
+- **Background Secondary**: `#1d2233` - Secondary background (Dark Blue-Gray)
+- **Background Tertiary**: `#232946` - Tertiary background (Darker Blue-Gray)
+- **Text Primary**: `#ffffff` - Main text color (White)
+- **Text Secondary**: `#e0e0e0` - Secondary text (Light Gray)
+- **Text Muted**: `#b6d0fa` - Muted text (Light Blue)
+- **Primary Brand Color (Kovalty Blue)**: `#3b82f6` - Main brand color (Blue)
+- **Primary Light**: `#7bb8e6` - Light blue variant
+- **Primary Dark**: `#1e40af` - Dark blue variant
+- **Accent Primary**: `#3b82f6` - Accent/CTA color (Blue)
+- **Accent Secondary**: `#1e40af` - Secondary accent (Dark Blue)
+- **Border Primary**: `#3b82f6` - Primary border color (Blue)
+- **Border Secondary**: `#1e40af` - Secondary border (Dark Blue)
+- **Card Background**: `#1d2233` - Card background (Dark Blue-Gray)
+- **Card Foreground**: `#ffffff` - Card text (White)
 - **Success**: `#10b981` - Success state (Emerald)
-- **Success Foreground**: `#ffffff` - Text on success background
 - **Warning**: `#f59e0b` - Warning state (Amber)
-- **Warning Foreground**: `#ffffff` - Text on warning background
 - **Destructive/Error**: `#ef4444` - Error state (Red)
-- **Destructive Foreground**: `#ffffff` - Text on error background
 
-### Dark Mode Colors
-- **Background**: `#0a1628` - Main background (Deep Navy)
-- **Foreground**: `#f8fafc` - Main text (Very Light)
-- **Primary**: `#1e3a5f` - Lighter navy for dark mode
-- **Primary Foreground**: `#ffffff` - Text on primary
-- **Secondary**: `#2d4a6f` - Medium navy for dark mode
-- **Card**: `#0f1f35` - Card background (Slightly lighter navy)
-- **Border**: `#1e3a5f` - Dark border
-- **Muted**: `#1e3a5f` - Dark muted background
-- **Muted Foreground**: `#94a3b8` - Dark muted text
-- **Accent**: `#1dd3b0` - Bright teal (same as light mode)
-- **Accent Foreground**: `#0a1628` - Dark text on accent
-- **Success**: `#10b981` - Emerald for dark mode
-- **Destructive**: `#ef4444` - Red for dark mode
+### CSS Variable Mapping
+The design uses CSS variables that map to the above colors:
+- `--bg-primary`: `#000000`
+- `--bg-secondary`: `#1d2233`
+- `--bg-tertiary`: `#232946`
+- `--text-primary`: `#ffffff`
+- `--text-secondary`: `#e0e0e0`
+- `--text-muted`: `#b6d0fa`
+- `--kovalty-blue`: `#3b82f6`
+- `--kovalty-blue-light`: `#7bb8e6`
+- `--kovalty-blue-dark`: `#1e40af`
+- `--accent-primary`: `#3b82f6`
+- `--accent-secondary`: `#1e40af`
+- `--border-primary`: `#3b82f6`
+- `--border-secondary`: `#1e40af`
 
 ## Typography
 
 ### Font Families
-- **Primary (Sans)**: DM Sans - Default body font
-  - Weights: 400 (Regular), 500 (Medium), 700 (Bold)
-  - Usage: Body text, UI components, default text
+- **Primary (Sans)**: Inter - Default body font
+  - Weights: 100-900 (all weights available)
+  - CSS Variable: `--font-primary`
+  - Usage: Body text, UI components, default text, headings
   
-- **Secondary (Serif)**: Montserrat - For emphasis and headings
-  - Weights: 300 (Light), 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold), 800 (Extra Bold), 900 (Black)
-  - Usage: Headings, emphasis, visual hierarchy
+- **Serif**: Source Serif Pro - For serif text
+  - Weights: 200, 300, 400, 600, 700, 900 (normal and italic)
+  - CSS Variable: `--font-serif`
+  - Usage: Serif text elements when needed
+  
+- **Display**: Playfair Display - For display/heading text
+  - Weights: 400, 500, 600, 700, 800, 900 (normal and italic)
+  - CSS Variable: `--font-display`
+  - Usage: Large headings, display text, emphasis
+  
+- **Mono**: SF Mono / Monaco - For code snippets
+  - CSS Variable: `--font-mono`
+  - Usage: Code snippets, technical text
 
 ### Font Usage
-- Use `font-sans` for default/body text
-- Use `font-serif` for headings and emphasis
+- Use `font-primary` (Inter) for default/body text and most UI elements
+- Use `font-display` (Playfair Display) for large headings and display text
+- Use `font-serif` (Source Serif Pro) for serif text when needed
 - Use `font-mono` for code snippets
+
+### Typography System
+The design uses a comprehensive typography system with CSS variables:
+- Font sizes: `--font-size-xs` through `--font-size-7xl`
+- Font weights: `--font-weight-thin` through `--font-weight-black`
+- Line heights: `--line-height-none` through `--line-height-loose`
+- Letter spacing: `--letter-spacing-tighter` through `--letter-spacing-widest`
 
 ## Usage Examples
 
 ```tsx
-// Correct - Using Tailwind color classes
-<div className="bg-primary text-primary-foreground">Navy Button</div>
-<div className="bg-accent text-accent-foreground">Teal CTA Button</div>
-<div className="bg-secondary text-secondary-foreground">Navy Header</div>
-<div className="border border-border bg-card text-card-foreground">White Card</div>
-
-// Correct - Full opacity text on dark backgrounds for readability
-<div className="bg-primary py-20">
-  <h2 className="text-primary-foreground">Fully readable white text</h2>
-  <p className="text-primary-foreground">Always use full opacity on dark backgrounds</p>
+// Correct - Using CSS variables (preferred method)
+<div style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+  Black Background Section
+</div>
+<div style={{ backgroundColor: 'var(--kovalty-blue)', color: 'var(--text-primary)' }}>
+  Blue CTA Button
+</div>
+<div style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)' }}>
+  Secondary Background Card
 </div>
 
-// Correct - Using CSS variables
-<div style={{ backgroundColor: 'var(--primary)' }}>Deep Navy Section</div>
-<div style={{ backgroundColor: 'var(--accent)' }}>Teal Button</div>
+// Correct - Using CSS classes with variables
+<div className="bg-[var(--bg-primary)] text-[var(--text-primary)]">
+  Black Background with White Text
+</div>
+<div className="bg-[var(--kovalty-blue)] text-[var(--text-primary)]">
+  Blue Button
+</div>
+
+// Correct - Full opacity text on dark backgrounds for readability
+<div style={{ backgroundColor: 'var(--bg-primary)' }}>
+  <h2 style={{ color: 'var(--text-primary)' }}>Fully readable white text</h2>
+  <p style={{ color: 'var(--text-secondary)' }}>Secondary text color</p>
+</div>
 
 // Incorrect - Never do this
-<div style={{ backgroundColor: '#0a1628' }}>Don't hardcode colors</div>
-<div className="bg-[#1dd3b0]">Don't use arbitrary values for brand colors</div>
-<div className="bg-primary text-primary-foreground/80">Avoid opacity on dark backgrounds - hard to read</div>
+<div style={{ backgroundColor: '#000000' }}>Don't hardcode colors</div>
+<div className="bg-[#3b82f6]">Don't use arbitrary values for brand colors</div>
+<div style={{ color: 'var(--text-primary)' }} className="opacity-80">
+  Avoid opacity on dark backgrounds - hard to read
+</div>
 ```
 
 ## Button Styling Guidelines
 
-### Sharp Borders (No Curves)
-All buttons must have **sharp, angular borders** with no border-radius:
+### Rounded Borders (Style Alignment)
+All interactive elements should have **rounded borders** to match the project's aesthetic. The design uses various border-radius values:
+- Buttons: `rounded-lg` (0.5rem) or `rounded-[25px]` / `rounded-[30px]` for pill-shaped buttons
+- Cards and containers: `rounded-lg` (0.5rem) to `rounded-[20px]`
+- Header navigation: `rounded-[25px]` for pill-shaped nav items
+- Header container: `border-radius: 25px` with backdrop blur effect
+- Dropdown menus: `border-radius: 20px` or `border-radius: 18px` for mobile
 
 ```tsx
-// ✅ Correct - Sharp borders with hover animations
-<button className="px-6 py-3 bg-accent text-accent-foreground font-semibold transition-all duration-200 hover:brightness-110 hover:shadow-lg hover:translate-y-[-2px] active:scale-95">
+// ✅ Correct - Rounded borders with hover animations
+<button className="px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-lg transition-all duration-200 hover:brightness-110 hover:shadow-lg hover:translate-y-[-2px] active:scale-95">
   CTA Button
 </button>
 
-// ✅ Correct - Outline button with sharp borders
-<button className="px-6 py-3 border-2 border-border text-foreground font-semibold transition-all duration-200 hover:bg-muted hover:border-foreground hover:shadow-md active:scale-95">
+// ✅ Correct - Pill-shaped button (like header contact button)
+<button className="px-6 py-3 bg-white text-black font-semibold rounded-[30px] transition-all duration-200 hover:bg-black hover:text-white hover:translate-y-[-1px]">
+  Contact Button
+</button>
+
+// ✅ Correct - Outline button with rounded borders
+<button className="px-6 py-3 border-2 border-border text-foreground font-semibold rounded-lg transition-all duration-200 hover:bg-muted hover:border-foreground hover:shadow-md active:scale-95">
   Outline Button
 </button>
 
-// ❌ Incorrect - Don't use rounded corners
-<button className="rounded-lg">Button</button>
-<button className="rounded">Button</button>
+// ❌ Incorrect - Don't use sharp corners
+<button className="rounded-none">Button</button>
 ```
 
 ### Required Hover Animations
@@ -604,24 +641,55 @@ Every button must include these transitions:
 ### Button Variants
 
 ```tsx
-// Primary Navy Button
-<button className="px-6 py-3 bg-primary text-primary-foreground font-semibold transition-all duration-200 hover:brightness-110 hover:shadow-lg active:scale-95">
+// Primary Blue Button (Kovalty Blue)
+<button 
+  style={{ 
+    backgroundColor: 'var(--kovalty-blue)', 
+    color: 'var(--text-primary)' 
+  }}
+  className="px-6 py-3 font-semibold rounded-lg transition-all duration-200 hover:brightness-110 hover:shadow-lg active:scale-95"
+>
   Primary
 </button>
 
-// Accent Teal CTA (with lift animation)
-<button className="px-6 py-3 bg-accent text-accent-foreground font-semibold transition-all duration-200 hover:brightness-110 hover:shadow-lg hover:translate-y-[-2px] active:scale-95">
+// Accent Blue CTA (with lift animation)
+<button 
+  style={{ 
+    backgroundColor: 'var(--accent-primary)', 
+    color: 'var(--text-primary)' 
+  }}
+  className="px-6 py-3 font-semibold rounded-lg transition-all duration-200 hover:brightness-110 hover:shadow-lg hover:translate-y-[-2px] active:scale-95"
+>
   CTA Button
 </button>
 
-// Outline Button
-<button className="px-6 py-3 border-2 border-border text-foreground font-semibold transition-all duration-200 hover:bg-muted hover:border-foreground hover:shadow-md active:scale-95">
+// Outline Button (Blue border)
+<button 
+  style={{ 
+    borderColor: 'var(--border-primary)', 
+    color: 'var(--text-primary)' 
+  }}
+  className="px-6 py-3 border-2 font-semibold rounded-lg transition-all duration-200 hover:bg-[var(--bg-secondary)] hover:shadow-md active:scale-95"
+>
   Outline
 </button>
 
-// Outline on Dark Background
-<button className="px-6 py-3 border-2 border-primary-foreground/30 text-primary-foreground font-semibold transition-all duration-200 hover:bg-primary-foreground/10 hover:border-primary-foreground/50 hover:shadow-md active:scale-95">
-  View More
+// Header Contact Button (White with black text, pill-shaped)
+<button 
+  className="px-5 py-3 bg-white text-black font-semibold rounded-[30px] border-2 border-white transition-all duration-200 hover:bg-black hover:text-white hover:translate-y-[-1px]"
+>
+  CONTACT
+</button>
+
+// Secondary Background Button
+<button 
+  style={{ 
+    backgroundColor: 'var(--bg-secondary)', 
+    color: 'var(--text-primary)' 
+  }}
+  className="px-6 py-3 font-semibold rounded-lg transition-all duration-200 hover:brightness-110 hover:shadow-lg active:scale-95"
+>
+  Secondary
 </button>
 ```
 

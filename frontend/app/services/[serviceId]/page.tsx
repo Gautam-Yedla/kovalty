@@ -1,7 +1,8 @@
-import { FC }                             from 'react';
-import { notFound }                       from 'next/navigation';
-import ServicePageTemplate                 from '@/components/Services/ServicePageTemplate';
-import allServicesData                    from '@/data/allServicesData';
+import { FC } from 'react';
+import { notFound } from 'next/navigation';
+import { ServicePageTemplate } from '@/components/features/services/ServicePageTemplate';
+import { IServicePageData } from '@/types/services';
+import allServicesData from '@/data/allServicesData';
 
 interface IServicePageProps {
   params: {
@@ -10,13 +11,13 @@ interface IServicePageProps {
 }
 
 const ServicePage: FC<IServicePageProps> = ({ params }) => {
-  const data = params.serviceId ? allServicesData[params.serviceId] : undefined;
+  const data = params.serviceId ? (allServicesData as Record<string, IServicePageData>)[params.serviceId] : undefined;
 
   if (!data) {
     notFound();
   }
 
-  return <ServicePageTemplate data = {data} />;
+  return <ServicePageTemplate data={data} />;
 };
 
 export default ServicePage;

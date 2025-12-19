@@ -1,8 +1,8 @@
-import { FC }                            from 'react';
-import ResponsiveServices                 from '@/components/Services/ResponsiveServices';
+import { FC } from 'react';
+import { Services } from '@/components/features/services/Services';
 
 const ServicesPage: FC = () => {
-  return <ResponsiveServices />;
+  return <Services />;
 };
 
 export default ServicesPage;
