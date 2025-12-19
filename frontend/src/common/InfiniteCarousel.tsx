@@ -1,28 +1,28 @@
-import React from "react";
-import "../styles/Testimonials.css";
+import { FC, ReactNode, Children }          from 'react';
+import '@/styles/Testimonials.css';
 
-interface InfiniteCarouselProps {
-  children: React.ReactNode;
-  speed?: number;
+interface IProps {
+  children: ReactNode;
+  speed   ?: number;
 }
 
-const InfiniteCarousel: React.FC<InfiniteCarouselProps> = ({
+const InfiniteCarousel: FC<IProps> = ({
   children,
   speed = 30,
 }) => {
-  const childrenArray = React.Children.toArray(children);
+  const childrenArray = Children.toArray(children);
 
   return (
-    <div className="infinite-carousel-outer">
+    <div className = "infinite-carousel-outer">
       <div
-        className="infinite-carousel-inner"
-        style={{
+        className = "infinite-carousel-inner"
+        style     = {{
           animationDuration: `${speed}s`,
         }}
       >
-        <div className="carousel-track">{childrenArray}</div>
-        <div className="carousel-track">{childrenArray}</div>
-        <div className="carousel-track">{childrenArray}</div>
+        <div className = "carousel-track">{childrenArray}</div>
+        <div className = "carousel-track">{childrenArray}</div>
+        <div className = "carousel-track">{childrenArray}</div>
       </div>
     </div>
   );

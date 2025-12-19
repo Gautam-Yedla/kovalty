@@ -1,12 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
-import { services } from "../../data/services";
-import ServiceCard from "../../cards/ServiceCard";
-import "../../styles/ServiceStyling/Services.css";
+'use client';
 
-const Services: React.FC = () => {
+import { FC, useEffect, useRef, useState } from 'react';
+import { services }                        from '@/data/services';
+import ServiceCard                         from '@/cards/ServiceCard';
+import '@/styles/ServiceStyling/Services.css';
+
+const Services: FC = () => {
   const stackRef = useRef<HTMLDivElement>(null);
   const [awayIndex, setAwayIndex] = useState(-1);
-  const [scrollHeight, setScrollHeight] = useState(window.innerHeight);
+  const [scrollHeight, setScrollHeight] = useState(
+    typeof window !== 'undefined' ? window.innerHeight : 0
+  );
 
   useEffect(() => {
     const calculateHeight = () => {
@@ -43,11 +47,11 @@ const Services: React.FC = () => {
 
     return (
       <ServiceCard
-        key={service.id}
-        service={service}
-        angle={cardAngle}
-        isAway={isAway}
-        zIndex={services.length - i}
+        key     = {service.id}
+        service = {service}
+        angle   = {cardAngle}
+        isAway  = {isAway}
+        zIndex  = {services.length - i}
       />
     );
   });

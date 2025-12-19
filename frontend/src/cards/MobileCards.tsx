@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../styles/ServiceStyling/MobileCards.css";
+'use client';
 
-import ApplicationDevelopmentIcon from "../assets/icons/application-development.png";
-import MobileAppDevelopmentIcon from "../assets/icons/mobile-development.png";
-import AiMlIcon from "../assets/icons/ai-ml.png";
-import ProductManagementIcon from "../assets/icons/product-management.png";
-import QaAutomationIcon from "../assets/icons/qa-automation.png";
-import CloudServicesIcon from "../assets/icons/cloud-service.png";
-
-import BgApplicationDevelopment from "../assets/images/bg-application-development.png";
-import BgMobileAppDevelopment from "../assets/images/bg-mobile-app-development.png";
-import BgAiMl from "../assets/images/bg-ai-ml.png";
-import BgProductManagement from "../assets/images/bg-product-management.png";
-import BgQaAutomation from "../assets/images/bg-qa-automation.png";
-import BgCloudServices from "../assets/images/bg-cloud-services.png";
-
-import type { ServiceCard, MobileCardsProps } from "../types";
+import { FC, useState, MouseEvent }         from 'react';
+import { useRouter }                       from 'next/navigation';
+import Image                                from 'next/image';
+import '@/styles/ServiceStyling/MobileCards.css';
+import ApplicationDevelopmentIcon          from '@/assets/icons/application-development.png';
+import MobileAppDevelopmentIcon             from '@/assets/icons/mobile-development.png';
+import AiMlIcon                             from '@/assets/icons/ai-ml.png';
+import ProductManagementIcon                from '@/assets/icons/product-management.png';
+import QaAutomationIcon                     from '@/assets/icons/qa-automation.png';
+import CloudServicesIcon                    from '@/assets/icons/cloud-service.png';
+import BgApplicationDevelopment            from '@/assets/images/bg-application-development.png';
+import BgMobileAppDevelopment               from '@/assets/images/bg-mobile-app-development.png';
+import BgAiMl                               from '@/assets/images/bg-ai-ml.png';
+import BgProductManagement                  from '@/assets/images/bg-product-management.png';
+import BgQaAutomation                       from '@/assets/images/bg-qa-automation.png';
+import BgCloudServices                      from '@/assets/images/bg-cloud-services.png';
+import type { ServiceCard, MobileCardsProps } from '@/types';
 
 const defaultServices: ServiceCard[] = [
   {
     id: 1,
     icon: (
-      <img src={ApplicationDevelopmentIcon} alt="Application Development" />
+      <Image src = {ApplicationDevelopmentIcon} alt = "Application Development" width = {48} height = {48} />
     ),
     serviceName: "Application Development",
     title: "Bespoke Applications Engineered for Performance",
@@ -31,7 +31,7 @@ const defaultServices: ServiceCard[] = [
   },
   {
     id: 2,
-    icon: <img src={MobileAppDevelopmentIcon} alt="Mobile App Development" />,
+    icon: <Image src = {MobileAppDevelopmentIcon} alt = "Mobile App Development" width = {48} height = {48} />,
     serviceName: "Mobile App Development",
     title: "Crafting Seamless Mobile Experiences",
     description: "Deliver feature-rich, high-performance mobile apps that engage users and drive results on Android and iOS.",
@@ -39,7 +39,7 @@ const defaultServices: ServiceCard[] = [
   },
   {
     id: 3,
-    icon: <img src={AiMlIcon} alt="AI & ML" />,
+    icon: <Image src = {AiMlIcon} alt = "AI & ML" width = {48} height = {48} />,
     serviceName: "AI & ML",
     title: "Intelligent Solutions Powered by AI & Machine Learning",
     description: "Leverage data-driven intelligence to automate processes, enhance decision-making, and innovate faster.",
@@ -47,7 +47,7 @@ const defaultServices: ServiceCard[] = [
   },
   {
     id: 4,
-    icon: <img src={ProductManagementIcon} alt="Product Management" />,
+    icon: <Image src = {ProductManagementIcon} alt = "Product Management" width = {48} height = {48} />,
     serviceName: "Product Management",
     title: "Guiding Your Product from Concept to Launch",
     description: "Strategically plan, execute, and optimize every stage of your product’s lifecycle for maximum market impact.",
@@ -55,7 +55,7 @@ const defaultServices: ServiceCard[] = [
   },
   {
     id: 5,
-    icon: <img src={QaAutomationIcon} alt="QA & Automation" />,
+    icon: <Image src = {QaAutomationIcon} alt = "QA & Automation" width = {48} height = {48} />,
     serviceName: "QA & Automation",
     title: "Automated Testing for Quality at Speed",
     description: "Streamline testing with intelligent automation to ensure flawless performance and faster releases.",
@@ -63,7 +63,7 @@ const defaultServices: ServiceCard[] = [
   },
   {
     id: 6,
-    icon: <img src={CloudServicesIcon} alt="Cloud Services" />,
+    icon: <Image src = {CloudServicesIcon} alt = "Cloud Services" width = {48} height = {48} />,
     serviceName: "Cloud Services",
     title: "Future-Ready Cloud Infrastructure & Solutions",
     description: "Design, deploy, and manage secure cloud architectures that scale with your business needs.",
@@ -72,17 +72,17 @@ const defaultServices: ServiceCard[] = [
 ];
 
 
-const MobileCards: React.FC<MobileCardsProps> = ({
+const MobileCards: FC<MobileCardsProps> = ({
   services = defaultServices,
 }) => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const togglePopup = (cardId: number) => {
     setActiveCard(activeCard === cardId ? null : cardId);
   };
 
-  const closePopup = (event: React.MouseEvent) => {
+  const closePopup = (event: MouseEvent) => {
     event.stopPropagation();
     setActiveCard(null);
   };
@@ -92,16 +92,16 @@ const MobileCards: React.FC<MobileCardsProps> = ({
       .toLowerCase()
       .replace(/ & /g, "-")
       .replace(/ /g, "-");
-    navigate(`/services/${slug}`);
+    router.push(`/services/${slug}`);
   };
 
-  const handleOutsideClick = (event: React.MouseEvent) => {
+  const handleOutsideClick = (event: MouseEvent) => {
     if (!(event.target as Element).closest(".mobile-cards-card")) {
       setActiveCard(null);
     }
   };
 
-  const handlePopupClick = (event: React.MouseEvent) => {
+  const handlePopupClick = (event: MouseEvent) => {
     event.stopPropagation();
   };
 
@@ -125,7 +125,12 @@ const MobileCards: React.FC<MobileCardsProps> = ({
             onClick={() => togglePopup(service.id)}
           >
             <div className="mobile-cards-background">
-              <img src={service.backgroundImage} alt={service.title} />
+              <Image 
+                src = {service.backgroundImage} 
+                alt = {service.title}
+                fill
+                className = "object-cover"
+              />
             </div>
             <div className="mobile-cards-content">
               <div className="mobile-cards-icon-wrapper">

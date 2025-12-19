@@ -1,4 +1,4 @@
-import React from "react";
+import { FC }                            from 'react';
 
 // export const LogoIcon: React.FC<{ className?: string }> = ({ className }) => (
 //   <svg
@@ -13,9 +13,11 @@ import React from "react";
 //   </svg>
 // );
 
-export const ContactArrowIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+interface IIconProps {
+  className?: string;
+}
+
+export const ContactArrowIcon: FC<IIconProps> = ({ className }) => (
   <svg
     width="12"
     height="12"
@@ -41,9 +43,7 @@ export const ContactArrowIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
-export const ChevronDownIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+export const ChevronDownIcon: FC<IIconProps> = ({ className }) => (
   <svg
     width="16"
     height="16"
@@ -62,9 +62,7 @@ export const ChevronDownIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
-export const FooterLogoIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+export const FooterLogoIcon: FC<IIconProps> = ({ className }) => (
   <svg
     width="24"
     height="24"
@@ -90,9 +88,7 @@ export const FooterLogoIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
-export const ScrollToTopIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+export const ScrollToTopIcon: FC<IIconProps> = ({ className }) => (
   <svg
     width="24"
     height="24"
@@ -118,7 +114,7 @@ export const ScrollToTopIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
-export const MenuIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const MenuIcon: FC<IIconProps> = ({ className }) => (
   <svg
     width="24"
     height="24"
@@ -151,7 +147,7 @@ export const MenuIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-export const CloseIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const CloseIcon: FC<IIconProps> = ({ className }) => (
   <svg
     width="24"
     height="24"
@@ -177,9 +173,7 @@ export const CloseIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-export const CornerCurveTopRightIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+export const CornerCurveTopRightIcon: FC<IIconProps> = ({ className }) => (
   <svg
     className={className}
     width="16"
@@ -192,9 +186,7 @@ export const CornerCurveTopRightIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
-export const CornerCurveBottomLeftIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+export const CornerCurveBottomLeftIcon: FC<IIconProps> = ({ className }) => (
   <svg
     className={className}
     width="16"
@@ -207,9 +199,7 @@ export const CornerCurveBottomLeftIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
-export const ReadAllArrowIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+export const ReadAllArrowIcon: FC<IIconProps> = ({ className }) => (
   <svg
     className={className}
     viewBox="0 0 256 256"
@@ -221,7 +211,7 @@ export const ReadAllArrowIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
-export const BrainIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const BrainIcon: FC<IIconProps> = ({ className }) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"
@@ -239,7 +229,7 @@ export const BrainIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-export const GearsIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const GearsIcon: FC<IIconProps> = ({ className }) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"
@@ -257,9 +247,7 @@ export const GearsIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-export const DashboardIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+export const DashboardIcon: FC<IIconProps> = ({ className }) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"
@@ -279,7 +267,7 @@ export const DashboardIcon: React.FC<{ className?: string }> = ({
   </svg>
 );
 
-export const GraphIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const GraphIcon: FC<IIconProps> = ({ className }) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"
@@ -297,7 +285,7 @@ export const GraphIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-export const ShieldIcon: React.FC<{ className?: string }> = ({ className }) => (
+export const ShieldIcon: FC<IIconProps> = ({ className }) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"
@@ -314,9 +302,7 @@ export const ShieldIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-export const HeadsetIcon: React.FC<{ className?: string }> = ({
-  className,
-}) => (
+export const HeadsetIcon: FC<IIconProps> = ({ className }) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"

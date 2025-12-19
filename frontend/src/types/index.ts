@@ -25,13 +25,15 @@ export interface Brand {
   color: string;
 }
 
+import type { StaticImageData } from 'next/image';
+
 export interface ServiceCard {
   id: number;
   icon: React.ReactNode;
   serviceName: string;
   title: string;
   description: string;
-  backgroundImage: string;
+  backgroundImage: StaticImageData | string;
 }
 
 export interface MobileCardsProps {

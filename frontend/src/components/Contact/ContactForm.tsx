@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import { Mail, Phone, MapPin, Send, Clock, Globe } from "lucide-react";
-import "../../styles/Contact/ContactForm.css";
+'use client';
 
-const Contact = () => {
+import { FC, useState, FormEvent, ChangeEvent, Fragment } from 'react';
+import { Mail, Phone, MapPin, Send, Clock, Globe } from 'lucide-react';
+import '@/styles/Contact/ContactForm.css';
+
+const ContactForm: FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -10,13 +12,13 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({
       ...formData,
@@ -79,10 +81,10 @@ const Contact = () => {
                     <h4 className="contact-info-title">{info.title}</h4>
                     <p className="contact-info-details">
                       {info.details.split("\n").map((line, i) => (
-                        <React.Fragment key={i}>
+                        <Fragment key = {i}>
                           {line}
                           {i < info.details.split("\n").length - 1 && <br />}
-                        </React.Fragment>
+                        </Fragment>
                       ))}
                     </p>
                     <p className="contact-info-desc">{info.description}</p>
@@ -186,4 +188,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactForm;

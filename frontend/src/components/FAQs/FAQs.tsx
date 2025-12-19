@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { ChevronDownIcon } from "../../icons/Icons";
-import "../../styles/FAQs/FAQs.css";
-import { faqs } from "../../data/faqs";
+'use client';
 
-const FAQs: React.FC = () => {
+import { FC, useState }                      from 'react';
+import { ChevronDownIcon }                   from '@/icons/Icons';
+import '@/styles/FAQs/FAQs.css';
+import { faqs }                              from '@/data/faqs';
+
+const FAQs: FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -31,27 +33,27 @@ const FAQs: React.FC = () => {
                 }`}
               >
                 <button
-                  className="faq-question"
-                  onClick={() => toggleFAQ(index)}
-                  aria-expanded={activeIndex === index}
-                  aria-controls={`faq-answer-${index}`}
+                  className   = "faq-question"
+                  onClick     = {() => toggleFAQ(index)}
+                  aria-expanded = {activeIndex === index}
+                  aria-controls = {`faq-answer-${index}`}
                 >
-                  <span className="faq-question-text">{faq.question}</span>
+                  <span className = "faq-question-text">{faq.question}</span>
                   <ChevronDownIcon
-                    className={`faq-chevron ${
+                    className = {`faq-chevron ${
                       activeIndex === index ? "faq-chevron--rotated" : ""
                     }`}
                   />
                 </button>
                 <div
-                  id={`faq-answer-${index}`}
-                  className={`faq-answer ${
+                  id            = {`faq-answer-${index}`}
+                  className     = {`faq-answer ${
                     activeIndex === index ? "faq-answer--open" : ""
                   }`}
-                  role="region"
-                  aria-labelledby={`faq-question-${index}`}
+                  role          = "region"
+                  aria-labelledby = {`faq-question-${index}`}
                 >
-                  <div className="faq-answer-content">
+                  <div className = "faq-answer-content">
                     <p>{faq.answer}</p>
                   </div>
                 </div>

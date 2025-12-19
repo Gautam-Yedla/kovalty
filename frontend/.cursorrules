@@ -1,0 +1,1072 @@
+# Project Rules
+
+## Tech Stack
+- Next.js 14+ (App Router)
+- TypeScript
+- Tailwind CSS
+- Shadcn UI (if you plan to use it)
+
+## Constraints & Best Practices
+
+1. **Server Components by Default:**
+   - All components in `app/` are Server Components by default.
+   - Do NOT use `useState`, `useEffect`, or event handlers (onClick) in Server Components.
+   - If you need interactivity, add `'use client'` at the very top of the file.
+   - **Separate Client Components:** When a Server Component needs client-side interactivity, separate the Client Component into a separate file to keep the parent Server Component async.
+
+2. **Data Fetching:**
+
+   - **Server Components:** Fetch data directly in Server Components using `await fetch()`.
+   
+   - **Client Components:** ALL API calls MUST use React Query (see rule #3 below).
+   
+   - Do not use `useEffect` for data fetching in Client Components - use React Query instead.
+
+2.1. **State Persistence:**
+
+   - **FORBIDDEN:** Do NOT use `localStorage` or `sessionStorage` to store application state.
+   
+   - **Use React Query Cache:** React Query automatically persists data via query keys in memory cache.
+   
+   - **Use Redux Persist:** For global application state that needs persistence, use Redux Persist (already configured).
+   
+   - **Use URL/Query Params:** For shareable state (filters, selections), use URL search params.
+   
+   - **Use Cookies:** Only for authentication tokens (handled automatically by axios interceptor).
+
+3. **React Query for ALL API Calls (Client Components):**
+
+   - **MANDATORY:** React Query (`useQuery`, `useMutation`, `useQueries`) is the **ONLY** way to make API calls in Client Components.
+   
+   - **FORBIDDEN:** Do NOT use `useState` + `useEffect` + `axios`/`fetch` for ANY API requests.
+   
+   - **FORBIDDEN:** Do NOT manually manage loading states (`isLoading`, `setLoading`) - use React Query's built-in states.
+   
+   - **FORBIDDEN:** Do NOT manually manage error states - use React Query's `isError` and `error`.
+   
+   - **Query Keys:** All queries MUST use descriptive, hierarchical query keys from `@/constants/queryKeys.ts` for proper caching and invalidation.
+   
+   - **Data Persistence:** Query keys automatically persist data in React Query cache. Use consistent key structures across the app.
+   
+   - **API Functions:** Keep API functions in `src/lib/api/` but wrap them with `useQuery`/`useMutation` in components.
+   
+   - **Loading States:** Use `isLoading`, `isFetching`, `isPending` from React Query hooks - never create custom loading state.
+   
+   - **Error States:** Use `isError`, `error` from React Query hooks - never create custom error state.
+   
+   - **Multiple Queries:** Use `useQueries` for fetching multiple resources (e.g., process areas for multiple LOBs).
+
+   **Query Key Structure:**
+
+   ```typescript
+   // ✅ Correct - Hierarchical query keys
+   ['ecosystems']                                    // List of all ecosystems
+   ['ecosystems', ecosystemId]                      // Single ecosystem
+   ['ecosystems', ecosystemId, 'stats']             // Ecosystem stats
+   ['ecosystems', ecosystemId, 'lobs']              // LOBs for ecosystem
+   ['lobs', lobId, 'process-areas']                  // Process areas for LOB
+   ['engagements']                                   // List of engagements
+   ['engagements', engagementId]                    // Single engagement
+   ```
+
+   **Usage Pattern:**
+
+   ```tsx
+   // ✅ Correct - Using React Query (ONLY way to make API calls)
+   import { useQuery, useQueries }                  from '@tanstack/react-query';
+   import { QUERY_KEYS }                           from '@/constants';
+   import { ecosystemsAPI }                        from '@/lib/api/ecosystems';
+
+   // Single query
+   const { 
+     data      : stats, 
+     isLoading : statsLoading, 
+     isError   : statsError,
+     error     : statsErrorObj 
+   } = useQuery({
+     queryKey : QUERY_KEYS.ECOSYSTEM_STATS(ecosystemId),
+     queryFn  : async () => {
+       const result = await ecosystemsAPI.getEcosystemStats(ecosystemId);
+       if (result.success && result.data) {
+         return result.data;
+       }
+       throw new Error(result.error?.message || 'Failed to fetch stats');
+     },
+     enabled  : !!ecosystemId, // Only fetch when ecosystemId exists
+   });
+
+   // Multiple queries (for fetching multiple resources)
+   const processAreaQueries = useQueries({
+     queries: lobIds.map((lobId) => ({
+       queryKey : QUERY_KEYS.LOB_PROCESS_AREAS(lobId),
+       queryFn  : async () => {
+         const result = await ecosystemsAPI.getProcessAreas(lobId);
+         if (result.success && result.data) {
+           return result.data;
+         }
+         throw new Error(result.error?.message || 'Failed to fetch process areas');
+       },
+       enabled : expandedLobs.has(lobId),
+     })),
+   });
+
+   // ❌ FORBIDDEN - Using useState + useEffect + API call
+   const [stats, setStats] = useState(null);
+   const [loading, setLoading] = useState(false);
+   useEffect(() => {
+     const fetchStats = async () => {
+       setLoading(true);
+       const result = await ecosystemsAPI.getEcosystemStats(ecosystemId);
+       setStats(result.data);
+       setLoading(false);
+     };
+     fetchStats();
+   }, [ecosystemId]);
+
+   // ❌ FORBIDDEN - Manual loading/error state management
+   const [isLoading, setIsLoading] = useState(false);
+   const [error, setError] = useState(null);
+   ```
+
+   **Query Options:**
+
+   ```tsx
+   // Standard query with default options
+   const { data, isLoading, error } = useQuery({
+     queryKey : ['resource', id],
+     queryFn  : () => apiFunction(id),
+   });
+
+   // Query with custom options
+   const { data } = useQuery({
+     queryKey    : ['resource', id],
+     queryFn     : () => apiFunction(id),
+     enabled     : !!id,                    // Conditional fetching
+     staleTime   : 5 * 60 * 1000,          // 5 minutes
+     gcTime      : 10 * 60 * 1000,         // 10 minutes (formerly cacheTime)
+     refetchOnWindowFocus : false,          // Disable refetch on focus
+   });
+   ```
+
+   **Error Handling & Loading States:**
+
+   ```tsx
+   // ✅ Correct - Using React Query states
+   const { 
+     data, 
+     isLoading,      // Initial load
+     isFetching,     // Any fetch (including refetch)
+     isPending,      // No data yet (v5+)
+     isError, 
+     error,
+     refetch,
+   } = useQuery({
+     queryKey : QUERY_KEYS.RESOURCE(id),
+     queryFn  : () => apiFunction(id),
+   });
+
+   // Use React Query's built-in states
+   if (isLoading || isPending) return <LoadingSpinner />;
+   if (isError) return <ErrorMessage error = {error} />;
+   if (!data) return null;
+
+   // ❌ FORBIDDEN - Creating custom loading/error states
+   const [loading, setLoading] = useState(false);
+   const [error, setError] = useState(null);
+   ```
+
+   **Query Key Constants (Recommended):**
+
+   ```typescript
+   // src/constants/queryKeys.ts
+   export const QUERY_KEYS = {
+     ECOSYSTEMS         : ['ecosystems'] as const,
+     ECOSYSTEM          : (id: string) => ['ecosystems', id] as const,
+     ECOSYSTEM_STATS    : (id: string) => ['ecosystems', id, 'stats'] as const,
+     ECOSYSTEM_LOBS     : (id: string) => ['ecosystems', id, 'lobs'] as const,
+     LOB_PROCESS_AREAS  : (lobId: string) => ['lobs', lobId, 'process-areas'] as const,
+     ENGAGEMENTS        : ['engagements'] as const,
+     ENGAGEMENT         : (id: string) => ['engagements', id] as const,
+   } as const;
+   ```
+
+4. **Styling:**
+   - Use Tailwind CSS for all styling.
+   - Always make the UI responsive for all devices from 350px to 2560px.
+   - Use `clsx` or `tailwind-merge` for conditional class names.
+   - Never hardcode colors directly - always use predefined color variables or Tailwind classes.
+   - **Buttons must have sharp borders (no border-radius)** and include hover animations.
+   - All interactive elements should have smooth transitions and hover/active states.
+
+5. **Routing:**
+   - Use `next/link` for navigation.
+   - Use `next/navigation` (useRouter, usePathname) instead of `next/router` (legacy).
+
+6. **TypeScript Build Errors:**
+   - **MANDATORY:** All code MUST pass TypeScript compilation without errors.
+   - Before committing, run `npm run build` or `npx tsc --noEmit` to check for TypeScript errors.
+   - Fix all TypeScript errors immediately - do not use `@ts-ignore` or `@ts-expect-error` unless absolutely necessary.
+   - If you encounter type errors:
+     1. Check if types are properly imported from `@/types` or generated from API schemas.
+     2. Ensure all function parameters and return types are properly typed.
+     3. Use type assertions (`as Type`) only when you're certain about the type at runtime.
+     4. Prefer type guards and proper type narrowing over type assertions.
+   - Common fixes:
+     - Add proper type annotations to function parameters and return values.
+     - Use `type` or `interface` definitions instead of `any`.
+     - Import missing types from `@/types` directory.
+     - Ensure Redux state types are properly exported from store.
+
+## Code Formatting & Style
+
+### 1. Import/Export Alignment (CRITICAL)
+
+**Rule:** All `import` and `export` statements must align the `from` keyword at **column 40**.
+
+#### Requirements:
+- **Vertical Anchor:** The `from` keyword must align perfectly at column 40
+- **The 40-Column Barrier:** The `from` keyword must NEVER start after column 40
+- **Padding Strategy:** Add spaces before `from` to reach column 40 exactly
+- **Wrapping Strategy:** If the list would push `from` past column 40, format as multi-line block
+
+#### Examples:
+
+```typescript
+// ✅ Correct - Single line with 'from' at column 40
+import { useState }                      from 'react';
+import { AppProviders }                  from '@/providers';
+import type { Metadata }                 from 'next';
+
+// ✅ Correct - Multi-line when list is too long
+import {
+  QueryClient,
+  QueryClientProvider,
+}                                        from '@tanstack/react-query';
+
+export {
+  setEmail,
+  clearEmail,
+  resetUser,
+}                                        from './slices/userSlice';
+
+// ❌ Incorrect - Not aligned
+import { useState } from 'react';
+import { AppProviders } from '@/providers';
+
+// ❌ Incorrect - Long list not wrapped
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+```
+
+**This rule applies to ALL TypeScript/JavaScript files in the project.**
+
+## JSX/TSX Formatting Rules
+
+1. **Prop Placement:**
+   - If a JSX component has **more than one prop**, every prop must be placed on its own new line.
+
+2. **Vertical Alignment & Spacing (Strict):**
+   - **Alignment Target:** Align all assignment operators (`=`) vertically based on the longest prop name.
+   - **Whitespace Buffer (CRITICAL):** - There must always be **at least one space** before the `=` (between the prop name and the operator).
+   - There must always be **exactly one space** after the `=` (between the operator and the value).
+   
+   - **Calculation Strategy:** 1. Identify the longest prop name in the component (e.g., `maxLength` is 9 chars).
+     2. Set the `=` column index to: `(length of longest prop) + 1 space`.
+     3. Pad all shorter prop names with extra spaces so their `=` lands on that specific column.
+
+   **Desired Example:**
+   ```tsx
+   <ReadonlyTextField
+     fullWidth
+     label       = 'Current Usage'  // Single space after prop, Single space after =
+     value       = {metrics.val}    // Padded to align, Single space after =
+     placeholder = 'Enter value'    // Longest prop defines the column
+   />
+   ```
+
+**IMPORTANT:** This spacing rule applies to **ALL** props, even single-prop components:
+
+```tsx
+// ✅ Correct - Space before and after = (even for single prop)
+<div className = "bg-primary text-white">
+
+// ❌ Incorrect - No spaces
+<div className="bg-primary text-white">
+```
+
+## React Component Syntax
+
+1. **Functional Components:**
+   - **Arrow Functions Only:** Use arrow function syntax (`const`) instead of `function`.
+   - **Type Annotation:** You must use the `FC` type from React.
+   - **Generic Usage:** Pass the props interface (e.g., `IProps`) as a generic to `FC`.
+   - **Destructuring:** Destructure props directly in the function arguments.
+
+2. **Imports:**
+   - Ensure `FC` is imported from `'react'`.
+
+   **Desired Example:**
+   ```tsx
+   import { FC } from 'react';
+
+   interface IProps {
+     title: string;
+     isActive: boolean;
+   }
+   
+   // ✅ REQUIRED FORMAT
+   export const MyComponent: FC<IProps> = ({ title, isActive }) => {
+     return <div>{title}</div>;
+   };
+
+## Naming Conventions (TypeScript)
+
+1. **Type Definitions:**
+   - **Interfaces:** Must start with a capital `I` (PascalCase).
+     - *Example:* `interface IUser { ... }`
+   - **Types:** Must start with a capital `T` (PascalCase).
+     - *Example:* `type TStatus = 'active' | 'inactive';`
+   - **Enums:** Must start with a capital `E` (PascalCase).
+     - *Example:* `enum ERoles { Admin, User }`
+
+2. **Component Props Strategy:**
+   - **Local Definition:** If the props interface is defined inside the component file and **not meant to be exported** for global use, name it strictly **`IProps`**.
+   - **Avoid Redundancy:** Do not name it `MyComponentProps` if it lives inside `MyComponent.tsx`. Just use `IProps`.
+
+   **Desired Example:**
+   ```tsx
+   // Defined locally
+   interface IProps {
+     title: string;
+     isActive: boolean;
+   }
+   
+   // Component using the IProps interface
+    export const MyComponent: FC<IProps> = ({ title, isActive }) => {
+     return <div>{title}</div>;
+   };
+
+## Constants Management
+
+1. **Centralized Constants Location:**
+   - **All frontend constants MUST be declared in `src/constants/` folder**
+   - Constants should be organized by domain/feature (e.g., `persistedStateKeys.ts`, `apiEndpoints.ts`, `routes.ts`)
+   - Never hardcode string/number constants directly in components or utilities
+   - Import constants from the centralized location: `import { CONSTANT_NAME } from '@/constants/fileName'`
+
+2. **Persisted State Keys:**
+   - All keys for `usePersistState` hook MUST be declared in `src/constants/persistedStateKeys.ts`
+   - Use the exported `PERSISTED_STATE_KEYS` object to prevent key collisions
+   - Never use string literals directly when calling `usePersistState`
+
+   **Desired Example:**
+   ```tsx
+   // ✅ Correct - Using centralized constants
+   import { PERSISTED_STATE_KEYS } from '@/constants/persistedStateKeys';
+   const [isCollapsed, setIsCollapsed] = usePersistState(PERSISTED_STATE_KEYS.SIDEBAR_COLLAPSED, true);
+
+   // ❌ Incorrect - Hardcoded string
+   const [isCollapsed, setIsCollapsed] = usePersistState('sidebar-collapsed', true);
+   ```
+
+3. **Adding New Constants:**
+   - When adding new constants, add them to the appropriate file in `src/constants/`
+   - Use descriptive, UPPER_SNAKE_CASE names
+   - Group related constants together
+   - Export as `const` objects with `as const` for type safety
+
+   **Desired Example:**
+   ```typescript
+   // src/constants/persistedStateKeys.ts
+   export const PERSISTED_STATE_KEYS = {
+     SIDEBAR_COLLAPSED : 'sidebar-collapsed',
+     THEME             : 'theme',
+     USER_PREFERENCES  : 'user-preferences',
+   } as const;
+   ```
+
+## Component Isolation & Architecture
+
+1. **The "Feature Fortress" Rule (Horizontal Isolation):**
+   - **Constraint:** A component inside one feature folder (e.g., `src/components/features/auth`) must **NEVER** import directly from another feature folder (e.g., `src/components/features/dashboard`).
+   - **Resolution:** If logic or UI needs to be shared between features, it must be moved to:
+     - `src/components/ui` (for generic UI).
+     - `src/lib` (for shared helper logic).
+     - `src/store` (for shared state).
+
+2. **The "Pure UI" Mandate (Vertical Isolation):**
+   - **Constraint:** Components in `src/components/ui` (Atoms/Molecules) must be **purely presentational**.
+   - **Forbidden:** They cannot import:
+     - API calls or Services.
+     - Redux Stores/Slices.
+     - Custom Business Hooks (e.g., `useAuth`).
+   - **Communication:** They must receive all data via **Props** and communicate actions via **Event Callbacks** (e.g., `onSave()`).
+
+3. **The "Container vs. Presenter" Split:**
+   - **Constraint:** Clearly distinguish between Data Fetching and Rendering.
+   - **Smart Components (Containers):** Located in `app/` pages or top-level `features/` wrappers. They interact with Redux, APIs, and Context.
+   - **Dumb Components (Presenters):** Receive ready-to-use data. They do not know where the data comes from.
+   - **Validation:** If a "List Item" component is calling `useQuery`, it is violating isolation. It should receive the data as a prop.
+
+## Component Size & Complexity Limits
+
+1. **Max File Size:**
+   - **Limit:** No React component file should exceed **500 lines**.
+   - **Action:** If a file approaches or exceeds this limit, you must Refactor immediately.
+
+2. **Refactoring Strategies:**
+   - **Extract Sub-Components:** Move independent UI sections (render methods or large JSX blocks) into smaller, dedicated components.
+   - **Custom Hooks:** Move complex state logic (`useState`, `useEffect`) and handlers into custom hooks (e.g., `useUserForm.ts`).
+   - **Utility Functions:** Move helper functions and non-React logic to `src/utils` or `src/lib`.
+
+## Component Location Rules
+
+### Component Directory Structure
+
+```
+src/components/
+├── ui/          # Generic, reusable UI atoms/molecules (Buttons, Inputs, Cards)
+├── layout/      # Navigation, headers, footers, shells (MainHeader, Sidebar, DashboardLayout)
+└── features/    # Feature-specific domain logic (EngagementForm, QuestionnaireBuilder)
+```
+
+### Placement Guidelines
+
+1. **Generic UI Components (`src/components/ui/`):**
+   - Reusable UI elements with no business logic
+   - Examples: Button, Input, Card, Modal, Badge, Tooltip
+   - No API calls, no Redux, highly configurable
+   - Import: `import { Button } from '@/components/ui'`
+
+2. **Layout Components (`src/components/layout/`):**
+   - Navigation, page structure, app shell components
+   - Examples: MainHeader, Footer, Sidebar, DashboardLayout, AppShell
+   - Can use routing and auth state
+   - Import: `import { MainHeader } from '@/components/layout'`
+
+3. **Feature Components (`src/components/features/[feature-name]/`):**
+   - Feature-specific components with business logic
+   - Examples: EngagementForm, QuestionnaireBuilder, UserProfileSettings
+   - Can use API calls, Redux, domain-specific validation
+   - Organized by feature domain (auth, engagements, questionnaires)
+   - Import: `import { EngagementForm } from '@/components/features/engagements'`
+
+4. **App Directory Restriction:**
+   - The `app/` directory is strictly for Routing (`page.tsx`, `layout.tsx`, `route.ts`)
+   - Do NOT define complex component logic inside `app/`
+   - Import components from `src/components/` instead
+   - Exception: Small, single-use page-specific components can be placed in `app/[route]/_components/`
+
+## Route Protection & Middleware Protocol
+
+1. **Security Model:**
+   - **Inverse Access:** - Authenticated Users -> BLOCKED from Public Routes (Login, Register). Redirect to Dashboard.
+     - Unauthenticated Users -> BLOCKED from Protected Routes (Dashboard). Redirect to Login.
+  
+2. **Middleware Implementation:**
+   - Use `middleware.ts` in the root for all auth redirects.
+   - Do NOT use `useEffect` or client-side checks for security redirects (prevents content flashing).
+   - Always exclude static assets (`_next`, `favicon`) in the middleware matcher to preserve performance.
+
+3. **Cookie Strategy:**
+   - Read the auth token strictly from `request.cookies`.
+   - Do not rely on LocalStorage in Middleware (Middleware runs on server, LocalStorage is browser-only).
+
+## Object Literal Formatting
+
+1. **Vertical Colon Alignment:**
+   - **Scope:** Applies to any multi-line object literal (like configuration objects, state definitions, or style objects).
+   - **Alignment Target:** All colons (`:`) within a specific object block must align vertically.
+   - **Strategy:**
+     1. Identify the **longest key** in the current object block.
+     2. Insert space padding after every shorter key so that its colon aligns perfectly with the colon of the longest key.
+   - **Spacing Rules:**
+     - **Before Colon:** Variable number of spaces (for alignment).
+     - **After Colon:** Exactly one space.
+
+   **Desired Example:**
+   ```typescript
+   const queryOptions = {
+     staleTime              : 60 * 1000,
+     refetchOnWindowFocus   : false,
+     retry                  : 1
+   }
+
+## Color Palette (Hex Values)
+
+### Light Mode Colors
+- **Background**: `#ffffff` - Main background color (White)
+- **Foreground**: `#0f172a` - Main text color (Dark Slate)
+- **Primary**: `#0a1628` - Main brand color (Deep Navy - from CTA section)
+- **Primary Foreground**: `#ffffff` - Text on primary background
+- **Secondary**: `#1e3a5f` - Supporting brand color (Medium Navy - from footer)
+- **Secondary Foreground**: `#ffffff` - Text on secondary background
+- **Accent**: `#1dd3b0` - Highlight/CTA color (Bright Teal - from buttons)
+- **Accent Foreground**: `#0a1628` - Text on accent background
+- **Muted**: `#f1f5f9` - Subtle background
+- **Muted Foreground**: `#64748b` - Subtle text
+- **Border**: `#e2e8f0` - Border color
+- **Input**: `#e2e8f0` - Input border color
+- **Ring**: `#1dd3b0` - Focus ring color (Teal)
+- **Card**: `#ffffff` - Card background
+- **Card Foreground**: `#0f172a` - Card text
+- **Success**: `#10b981` - Success state (Emerald)
+- **Success Foreground**: `#ffffff` - Text on success background
+- **Warning**: `#f59e0b` - Warning state (Amber)
+- **Warning Foreground**: `#ffffff` - Text on warning background
+- **Destructive/Error**: `#ef4444` - Error state (Red)
+- **Destructive Foreground**: `#ffffff` - Text on error background
+
+### Dark Mode Colors
+- **Background**: `#0a1628` - Main background (Deep Navy)
+- **Foreground**: `#f8fafc` - Main text (Very Light)
+- **Primary**: `#1e3a5f` - Lighter navy for dark mode
+- **Primary Foreground**: `#ffffff` - Text on primary
+- **Secondary**: `#2d4a6f` - Medium navy for dark mode
+- **Card**: `#0f1f35` - Card background (Slightly lighter navy)
+- **Border**: `#1e3a5f` - Dark border
+- **Muted**: `#1e3a5f` - Dark muted background
+- **Muted Foreground**: `#94a3b8` - Dark muted text
+- **Accent**: `#1dd3b0` - Bright teal (same as light mode)
+- **Accent Foreground**: `#0a1628` - Dark text on accent
+- **Success**: `#10b981` - Emerald for dark mode
+- **Destructive**: `#ef4444` - Red for dark mode
+
+## Typography
+
+### Font Families
+- **Primary (Sans)**: DM Sans - Default body font
+  - Weights: 400 (Regular), 500 (Medium), 700 (Bold)
+  - Usage: Body text, UI components, default text
+  
+- **Secondary (Serif)**: Montserrat - For emphasis and headings
+  - Weights: 300 (Light), 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold), 800 (Extra Bold), 900 (Black)
+  - Usage: Headings, emphasis, visual hierarchy
+
+### Font Usage
+- Use `font-sans` for default/body text
+- Use `font-serif` for headings and emphasis
+- Use `font-mono` for code snippets
+
+## Usage Examples
+
+```tsx
+// Correct - Using Tailwind color classes
+<div className="bg-primary text-primary-foreground">Navy Button</div>
+<div className="bg-accent text-accent-foreground">Teal CTA Button</div>
+<div className="bg-secondary text-secondary-foreground">Navy Header</div>
+<div className="border border-border bg-card text-card-foreground">White Card</div>
+
+// Correct - Full opacity text on dark backgrounds for readability
+<div className="bg-primary py-20">
+  <h2 className="text-primary-foreground">Fully readable white text</h2>
+  <p className="text-primary-foreground">Always use full opacity on dark backgrounds</p>
+</div>
+
+// Correct - Using CSS variables
+<div style={{ backgroundColor: 'var(--primary)' }}>Deep Navy Section</div>
+<div style={{ backgroundColor: 'var(--accent)' }}>Teal Button</div>
+
+// Incorrect - Never do this
+<div style={{ backgroundColor: '#0a1628' }}>Don't hardcode colors</div>
+<div className="bg-[#1dd3b0]">Don't use arbitrary values for brand colors</div>
+<div className="bg-primary text-primary-foreground/80">Avoid opacity on dark backgrounds - hard to read</div>
+```
+
+## Button Styling Guidelines
+
+### Sharp Borders (No Curves)
+All buttons must have **sharp, angular borders** with no border-radius:
+
+```tsx
+// ✅ Correct - Sharp borders with hover animations
+<button className="px-6 py-3 bg-accent text-accent-foreground font-semibold transition-all duration-200 hover:brightness-110 hover:shadow-lg hover:translate-y-[-2px] active:scale-95">
+  CTA Button
+</button>
+
+// ✅ Correct - Outline button with sharp borders
+<button className="px-6 py-3 border-2 border-border text-foreground font-semibold transition-all duration-200 hover:bg-muted hover:border-foreground hover:shadow-md active:scale-95">
+  Outline Button
+</button>
+
+// ❌ Incorrect - Don't use rounded corners
+<button className="rounded-lg">Button</button>
+<button className="rounded">Button</button>
+```
+
+### Required Hover Animations
+Every button must include these transitions:
+1. **Brightness increase** on hover (`hover:brightness-110`)
+2. **Shadow effect** (`hover:shadow-lg` or `hover:shadow-md`)
+3. **Scale effect** on click (`active:scale-95`)
+4. **Smooth transition** (`transition-all duration-200`)
+5. **Optional**: Slight upward movement for primary CTAs (`hover:translate-y-[-2px]`)
+
+### Button Variants
+
+```tsx
+// Primary Navy Button
+<button className="px-6 py-3 bg-primary text-primary-foreground font-semibold transition-all duration-200 hover:brightness-110 hover:shadow-lg active:scale-95">
+  Primary
+</button>
+
+// Accent Teal CTA (with lift animation)
+<button className="px-6 py-3 bg-accent text-accent-foreground font-semibold transition-all duration-200 hover:brightness-110 hover:shadow-lg hover:translate-y-[-2px] active:scale-95">
+  CTA Button
+</button>
+
+// Outline Button
+<button className="px-6 py-3 border-2 border-border text-foreground font-semibold transition-all duration-200 hover:bg-muted hover:border-foreground hover:shadow-md active:scale-95">
+  Outline
+</button>
+
+// Outline on Dark Background
+<button className="px-6 py-3 border-2 border-primary-foreground/30 text-primary-foreground font-semibold transition-all duration-200 hover:bg-primary-foreground/10 hover:border-primary-foreground/50 hover:shadow-md active:scale-95">
+  View More
+</button>
+```
+
+## Text Readability Guidelines
+
+1. **Always use full opacity text on dark backgrounds** (primary, secondary)
+2. **Pair backgrounds with their designated foreground colors**:
+   - `bg-primary` → `text-primary-foreground` (white)
+   - `bg-secondary` → `text-secondary-foreground` (white)
+   - `bg-accent` → `text-accent-foreground` (dark navy)
+3. **Avoid opacity modifiers on dark backgrounds** (e.g., `/80`, `/70`)
+4. **For subtle text on light backgrounds**, use `text-muted-foreground`
+
+## UI Component Usage Rules
+
+### Button Component Strictness
+
+- **ALWAYS** use the custom `Button` component imported from `@/components/ui/Button` (or relative path).
+
+- **NEVER** use the native HTML `<button>` tag directly in JSX.
+
+- **NEVER** use generic `<div>` with `onClick` to mimic buttons.
+
+- If a button requires a specific style not currently available in the `Button` component, **DO NOT** write inline Tailwind classes to override it. Instead, propose adding a new `variant` or `size` to the `Button.tsx` definition using CVA.
+
+### Button Component API
+
+The `Button` component supports the following:
+
+**Variants:**
+- `primary` (default) - Main brand button with primary colors
+- `secondary` - Secondary brand button
+- `destructive` - For destructive actions (delete, remove, etc.)
+- `accent` - Accent/CTA button with teal color
+- `outline` - Outlined button with border
+- `ghost` - Transparent button with hover background
+- `link` - Link-style button with underline
+
+**Sizes:**
+- `sm` - Small button
+- `default` - Default size
+- `lg` - Large button
+- `icon` - Square icon button
+
+**Usage Examples:**
+```tsx
+// ✅ Correct - Using Button component
+import { Button } from '@/components/ui';
+
+<Button variant = "primary" size = "default" onClick = {handleClick}>
+  Click Me
+</Button>
+
+<Button variant = "accent" size = "lg" onClick = {handleSubmit}>
+  Submit
+</Button>
+
+<Button variant = "outline" size = "sm" onClick = {handleCancel}>
+  Cancel
+</Button>
+
+<Button variant = "destructive" onClick = {handleDelete}>
+  Delete
+</Button>
+
+// ✅ Correct - With HTML attributes
+<Button
+  variant   = "primary"
+  onClick   = {handleClick}
+  disabled  = {isLoading}
+  aria-label = "Submit form"
+  type      = "submit"
+>
+  Submit
+</Button>
+
+// ❌ Incorrect - Using native button
+<button onClick = {handleClick}>Click Me</button>
+
+// ❌ Incorrect - Using div as button
+<div onClick = {handleClick} className = "cursor-pointer">Click Me</div>
+
+// ❌ Incorrect - Overriding styles with inline classes
+<Button className = "bg-custom-color">Custom</Button>
+```
+
+### Prop Handling
+
+- When passing standard HTML attributes (id, aria-label, data-attributes), pass them directly to the `Button` component. It is configured to forward these props to the DOM node.
+
+- The `Button` component extends `React.ButtonHTMLAttributes<HTMLButtonElement>`, so all standard button props (onClick, type, disabled, etc.) are automatically supported.
+
+### Modals and Dialogs
+
+- **SINGLE SOURCE:** Always use the `@/components/ui/Modal.tsx` component for any overlay, dialog, or popup window that blocks user interaction with the main page.
+
+- **NO CUSTOM OVERLAYS:** Do not build custom modals using fixed `divs` and z-index manually. The base Modal component handles accessibility, portals, and focus management correctly; stick to it.
+
+- **Usage Pattern:** Use with `useModalState` hook for state management.
+
+**Usage Examples:**
+```tsx
+// ✅ Correct - Using Modal component
+import { Modal } from '@/components/ui';
+import { useModalState } from '@/hooks';
+
+const { isOpen, openModal, closeModal } = useModalState();
+
+<Button onClick = {openModal}>Open Modal</Button>
+<Modal
+  isOpen  = {isOpen}
+  onClose = {closeModal}
+  title   = "Modal Title"
+  description = "Optional description text"
+>
+  <div>Your modal content here</div>
+</Modal>
+
+// ✅ Correct - Without title/description
+<Modal
+  isOpen  = {isOpen}
+  onClose = {closeModal}
+>
+  <div>Custom content</div>
+</Modal>
+
+// ✅ Correct - Custom width
+<Modal
+  isOpen   = {isOpen}
+  onClose  = {closeModal}
+  className = "max-w-2xl"
+>
+  <div>Wider modal content</div>
+</Modal>
+
+// ❌ Incorrect - Custom modal implementation
+<div className = "fixed inset-0 z-50">
+  <div className = "fixed inset-0 bg-black/50" />
+  <div className = "fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+    Content
+  </div>
+</div>
+
+// ❌ Incorrect - Not using Modal component
+const [showDialog, setShowDialog] = useState(false);
+```
+
+## State Management Rules
+
+### Boolean/Visibility State
+
+- **Modal/Drawer/Dialog Logic:** When managing the open/closed state of a UI overlay (Modal, Dialog, Drawer, Sheet), **ALWAYS** use the `useModalState` hook.
+
+- **FORBIDDEN:** Do not use raw `useState(false)` for visibility toggles.
+
+- **Naming:** Destructure the hook with specific names if using multiple modals in one file.
+
+  - *Example:* `const { isOpen: isLoginOpen, openModal: openLogin } = useModalState();`
+
+**Usage Examples:**
+```tsx
+// ✅ Correct - Using useModalState hook
+import { useModalState } from '@/hooks/use-modal-state';
+
+const { isOpen, openModal, closeModal, toggleModal } = useModalState();
+
+<Button onClick = {openModal}>Open Dialog</Button>
+<Modal isOpen = {isOpen} onClose = {closeModal}>Content</Modal>
+
+// ✅ Correct - Multiple modals
+const { isOpen: isLoginOpen, openModal: openLogin, closeModal: closeLogin } = useModalState();
+const { isOpen: isSignupOpen, openModal: openSignup, closeModal: closeSignup } = useModalState();
+
+// ❌ Incorrect - Using raw useState
+const [isOpen, setIsOpen] = useState(false);
+const openModal = () => setIsOpen(true);
+const closeModal = () => setIsOpen(false);
+
+// ❌ Incorrect - Inline state management
+const [showDialog, setShowDialog] = useState(false);
+```
+
+## Documentation Rules
+
+### Documentation Location
+
+- **ALL documentation files (.md) MUST be located in the `Docs/` folder**
+- **NO .md files should exist in the root directory** (except `README.md`)
+- **NO .md files should exist in component/feature directories** (move to `Docs/`)
+
+### Documentation Structure
+
+- **Core Standards:** `Docs/CODE_STANDARDS.md` - Code formatting rules
+- **Authentication:** `Docs/AUTHENTICATION.md` - Auth and routing guide
+- **Architecture:** `Docs/COMPONENTS.md`, `Docs/STORE.md`, `Docs/API.md` - Architecture docs
+- **Setup Guides:** `Docs/THEMING_GUIDE.md`, `Docs/FONTS_GUIDE.md` - Feature guides
+- **Index:** `Docs/README.md` - Documentation index
+
+### Creating Documentation
+
+- **Consolidate related docs** - Don't create multiple files for the same topic
+- **Keep it minimal** - Remove redundant documentation
+- **Update index** - Add new docs to `Docs/README.md`
+- **Reference in code** - Link to docs when needed, but keep code self-documenting
+
+### Forbidden
+
+- ❌ Creating .md files in root directory
+- ❌ Creating .md files in component directories
+- ❌ Duplicate documentation across multiple files
+- ❌ Outdated or redundant documentation files
+
+## Validation Rules
+
+### Validation Schema Location
+
+- **ALL validation schemas MUST be defined in `src/lib/validations/` directory**
+- **NO validation schemas should exist in component files or other directories**
+- **Organize by feature:** Create `[feature].schema.ts` files (e.g., `workspace.schema.ts`, `auth.schema.ts`)
+
+### Validation Schema Structure
+
+1. **File Naming:** `[feature].schema.ts` (e.g., `workspace.schema.ts`, `user.schema.ts`)
+2. **Export Pattern:** Export both the schema and the inferred type:
+   ```typescript
+   export const createWorkspaceSchema = z.object({ ... });
+   export type CreateWorkspaceInput = z.infer<typeof createWorkspaceSchema>;
+   ```
+3. **Import Pattern:** Import from `@/lib/validations/[feature].schema`
+   ```typescript
+   import { createWorkspaceSchema, type CreateWorkspaceInput } from '@/lib/validations/workspace.schema';
+   ```
+
+### Forbidden
+
+- ❌ Defining Zod schemas inline in components
+- ❌ Defining Zod schemas in Server Action files
+- ❌ Defining Zod schemas in component directories
+- ❌ Duplicate validation logic across files
+
+### Examples
+
+**✅ Correct:**
+```typescript
+// src/lib/validations/workspace.schema.ts
+import { z } from 'zod';
+
+export const createWorkspaceSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+});
+
+export type CreateWorkspaceInput = z.infer<typeof createWorkspaceSchema>;
+```
+
+**❌ Incorrect:**
+```typescript
+// Component file - DON'T DO THIS
+const schema = z.object({ name: z.string() });
+
+// Server Action file - DON'T DO THIS
+const validateInput = z.object({ name: z.string() });
+```
+
+## Form Patterns & Server Actions
+
+### FormWrapper Pattern
+
+- **ALWAYS** use the `FormWrapper` component from `@/components/ui/FormWrapper` for forms that require Server Actions.
+
+- **Pattern:** Client Validation → Server Action → Server Error Handling
+
+- **Schema:** Define Zod schemas in `src/lib/validations/` for form validation.
+
+- **Server Actions:** Create Server Actions in `src/lib/actions/` with standardized response type `IServerActionResponse<T>`.
+
+### Form Implementation Steps
+
+1. **Create Zod Schema** in `src/lib/validations/[feature].schema.ts`:
+   ```typescript
+   export const createWorkspaceSchema = z.object({
+     name: z.string().min(1, 'Name is required'),
+   });
+   ```
+
+2. **Create Server Action** in `src/lib/actions/[feature].actions.ts`:
+   ```typescript
+   'use server';
+   export async function createWorkspaceAction(
+     input: CreateWorkspaceInput
+   ): Promise<IServerActionResponse> {
+     // Validation, business logic, return { success, data, error }
+   }
+   ```
+
+3. **Use FormWrapper** in your component:
+   ```tsx
+   <FormWrapper
+     schema      = {createWorkspaceSchema}
+     onSubmit    = {createWorkspaceAction}
+     submitLabel = "Create"
+     onSuccess   = {handleSuccess}
+     onError     = {handleError}
+   >
+     <FormField name="name" label="Name">
+       {({ field }) => <Input {...field} />}
+     </FormField>
+   </FormWrapper>
+   ```
+
+### Server Error Handling
+
+- **Field-Specific Errors:** Server Actions can return `error.field` to set errors on specific RHF fields using `form.setError()`.
+
+- **Response Type:** All Server Actions must return `IServerActionResponse<T>`:
+   ```typescript
+   {
+     success: boolean;
+     data?: T;
+     error?: {
+       message: string;
+       field?: string; // For field-specific errors
+     };
+   }
+   ```
+
+### Form Components
+
+- **FormWrapper:** Handles form state, validation, and submission
+- **FormField:** Wraps inputs with label, error display, and RHF integration
+- **Input/Textarea:** Reusable form inputs with error state styling
+
+**Usage Example:**
+```tsx
+// ✅ Correct - Using FormWrapper pattern
+import { FormWrapper, FormField, Input } from '@/components/ui';
+import { createWorkspaceSchema } from '@/lib/validations/workspace.schema';
+import { createWorkspaceAction } from '@/lib/actions/workspace.actions';
+
+<FormWrapper
+  schema      = {createWorkspaceSchema}
+  onSubmit    = {createWorkspaceAction}
+  submitLabel = "Create Workspace"
+>
+  <FormField name="name" label="Name">
+    {({ field, fieldState }) => (
+      <Input {...field} error={!!fieldState.error} />
+    )}
+  </FormField>
+</FormWrapper>
+
+// ❌ Incorrect - Not using FormWrapper
+const [errors, setErrors] = useState({});
+const handleSubmit = async () => { /* manual handling */ };
+```
+
+## Component Architecture Rules
+
+### Form Components (Decoupling)
+
+- **Layer 1: Base UI (`@/components/ui/*`)**: 
+
+  - These components must be PURE UI. 
+
+  - They must NOT import `react-hook-form`.
+
+  - They must rely on `value` and `onChange` (or `onValueChange`) props.
+
+  - *Example:* Use `<Select>` for a standalone filter on a dashboard.
+
+- **Layer 2: Form Wrappers (`@/components/ui/form/*`)**:
+
+  - These components are specifically for Forms.
+
+  - They MUST import the Base UI component.
+
+  - They MUST accept `control` and `name` props (via useFormContext).
+
+  - They handle Labels, Error Messages, and Description text automatically.
+
+  - *Naming Convention:* Prefix with `Form` (e.g., `FormSelect`, `FormInput`, `FormCheckbox`).
+
+### Usage
+
+- When building a form with Zod/RHF, **ALWAYS** use the components from Layer 2 (`@/components/ui/form/*`).
+
+- Do not manually write `<Controller>` logic inside page files; reuse the wrappers.
+
+- Base UI components can be used standalone for non-form use cases (filters, search bars, etc.).
+
+### Examples
+
+**✅ Correct - Using Form Wrappers:**
+```tsx
+import { FormWrapper, FormInput, FormSelect, FormCheckbox } from '@/components/ui/form';
+import { createWorkspaceSchema } from '@/lib/validations/workspace.schema';
+
+<FormWrapper schema={createWorkspaceSchema} onSubmit={handleSubmit}>
+  <FormInput
+    name        = "name"
+    label       = "Workspace Name"
+    description = "Enter a unique name"
+    placeholder = "My Workspace"
+  />
+  <FormSelect
+    name  = "type"
+    label = "Workspace Type"
+    items = {[
+      { label: 'Private', value: 'private' },
+      { label: 'Shared', value: 'shared' },
+    ]}
+  />
+  <FormCheckbox
+    name  = "isPublic"
+    label = "Make this workspace public"
+  />
+</FormWrapper>
+```
+
+**✅ Correct - Using Base UI Standalone:**
+```tsx
+import { Select } from '@/components/ui';
+
+// Standalone filter dropdown (not in a form)
+<Select
+  value         = {filterValue}
+  onValueChange = {setFilterValue}
+  items         = {filterOptions}
+  placeholder   = "Filter by..."
+/>
+```
+
+**❌ Incorrect - Manual Controller Logic:**
+```tsx
+// DON'T DO THIS - Use FormInput instead
+<Controller
+  name="email"
+  control={control}
+  render={({ field }) => <Input {...field} />}
+/>
+```
+
+**❌ Incorrect - Base Component in Form:**
+```tsx
+// DON'T DO THIS - Use FormInput instead
+<FormWrapper schema={schema} onSubmit={onSubmit}>
+  <Input value={...} onChange={...} /> {/* Missing label, error handling */}
+</FormWrapper>
+```

@@ -1,26 +1,28 @@
-import { useState, useRef, useEffect, useCallback } from "react";
-import { ContactArrowIcon, ChevronDownIcon } from "../icons/Icons";
-import { navItems, services } from "../data/header";
-import "../styles/Header.css";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+'use client';
 
-const Header = () => {
-  const [activeNav, setActiveNav] = useState("Home");
+import { FC, useState, useRef, useEffect, useCallback } from 'react';
+import { usePathname, useRouter }                      from 'next/navigation';
+import Link                                             from 'next/link';
+import { ContactArrowIcon, ChevronDownIcon }            from '@/icons/Icons';
+import { navItems, services }                           from '@/data/header';
+
+const Header: FC = () => {
+  const [activeNav, setActiveNav] = useState('Home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   const navContainerRef = useRef<HTMLDivElement | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const getActiveNavFromPath = useCallback((pathname: string) => {
-    if (pathname === "/") return "Home";
-    if (pathname === "/about") return "About";
-    if (pathname === "/contact") return "Contact";
-    if (pathname.startsWith("/services")) return "Services";
-    return "Home";
+    if (pathname === '/') return 'Home';
+    if (pathname === '/about') return 'About';
+    if (pathname === '/contact') return 'Contact';
+    if (pathname.startsWith('/services')) return 'Services';
+    return 'Home';
   }, []);
 
   const handleNavClick = (item: string) => {
@@ -43,16 +45,18 @@ const Header = () => {
       e.preventDefault();
       setIsServicesOpen((prev) => !prev);
     } else {
-      setActiveNav("Services");
+      setActiveNav('Services');
       setIsMenuOpen(false);
       setIsServicesOpen(false);
     }
   };
 
   useEffect(() => {
-    const currentNav = getActiveNavFromPath(location.pathname);
-    setActiveNav(currentNav);
-  }, [location.pathname, getActiveNavFromPath]);
+    if (pathname) {
+      const currentNav = getActiveNavFromPath(pathname);
+      setActiveNav(currentNav);
+    }
+  }, [pathname, getActiveNavFromPath]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -67,74 +71,77 @@ const Header = () => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isMenuOpen]);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     };
   }, [isMenuOpen]);
 
   return (
-    <header className="header">
-      <div className="header-container">
-        <div className="header-content">
+    <header className = "fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
+      <div className = "max-w-7xl mx-auto px-4">
+        <div className = "flex items-center justify-between h-[130px]">
           <nav
-            ref={navContainerRef}
-            className={`header-nav ${isMenuOpen ? "header-nav--open" : ""}`}
+            ref       = {navContainerRef}
+            className  = {`${
+              isMenuOpen
+                ? 'fixed inset-0 bg-background flex flex-col items-center justify-center'
+                : 'hidden md:flex'
+            }`}
           >
-            <div className="header-nav-wrapper">
-              <ul className="header-nav-list">
+            <div className = "flex flex-col md:flex-row items-center gap-6">
+              <ul className = "flex flex-col md:flex-row items-center gap-6">
                 {navItems.map((item) => {
-                  if (item === "Services") {
+                  if (item === 'Services') {
                     return (
                       <li
-                        key={item}
-                        className="header-nav-item header-nav-item--dropdown-container"
-                        onMouseEnter={() =>
+                        key       = {item}
+                        className  = "relative"
+                        onMouseEnter = {() =>
                           window.innerWidth >= 1000 && setIsServicesOpen(true)
                         }
-                        onMouseLeave={() =>
+                        onMouseLeave = {() =>
                           window.innerWidth >= 1000 && setIsServicesOpen(false)
                         }
-                        data-navitem="Services"
                       >
                         <Link
-                          to="/services"
-                          className={`header-nav-link header-nav-link--dropdown ${
-                            activeNav === "Services"
-                              ? "header-nav-link--active"
-                              : ""
+                          href      = "/services"
+                          className  = {`flex items-center gap-1 px-4 py-2 transition-colors ${
+                            activeNav === 'Services'
+                              ? 'text-accent'
+                              : 'text-foreground hover:text-accent'
                           }`}
-                          onClick={handleServicesToggle}
+                          onClick = {handleServicesToggle}
                         >
                           Services
                           <ChevronDownIcon
-                            className={`header-dropdown-icon ${
-                              isServicesOpen ? "header-dropdown-icon--open" : ""
+                            className = {`transition-transform ${
+                              isServicesOpen ? 'rotate-180' : ''
                             }`}
                           />
                         </Link>
                         <div
-                          className={`header-dropdown-menu-wrapper ${
+                          className = {`absolute top-full left-0 mt-2 bg-card border border-border shadow-lg transition-all ${
                             isServicesOpen
-                              ? "header-dropdown-menu-wrapper--open"
-                              : ""
+                              ? 'opacity-100 visible'
+                              : 'opacity-0 invisible'
                           }`}
                         >
-                          <ul className="header-dropdown-menu">
-                            <li className="header-dropdown-item">
+                          <ul className = "py-2 min-w-[200px]">
+                            <li>
                               <Link
-                                to="/services"
-                                className="header-dropdown-link"
-                                onClick={() => {
-                                  setActiveNav("Services");
+                                href      = "/services"
+                                className  = "block px-4 py-2 hover:bg-muted transition-colors"
+                                onClick    = {() => {
+                                  setActiveNav('Services');
                                   setIsMenuOpen(false);
                                   setIsServicesOpen(false);
                                 }}
@@ -144,21 +151,18 @@ const Header = () => {
                             </li>
                             {services.map((service) => {
                               const servicePath =
-                                "/services/" +
+                                '/services/' +
                                 service
                                   .toLowerCase()
-                                  .replace(/ & /g, "-")
-                                  .replace(/ /g, "-");
+                                  .replace(/ & /g, '-')
+                                  .replace(/ /g, '-');
                               return (
-                                <li
-                                  key={service}
-                                  className="header-dropdown-item"
-                                >
+                                <li key = {service}>
                                   <Link
-                                    to={servicePath}
-                                    className="header-dropdown-link"
-                                    onClick={() => {
-                                      setActiveNav("Services");
+                                    href      = {servicePath}
+                                    className  = "block px-4 py-2 hover:bg-muted transition-colors"
+                                    onClick    = {() => {
+                                      setActiveNav('Services');
                                       setIsMenuOpen(false);
                                       setIsServicesOpen(false);
                                     }}
@@ -174,23 +178,21 @@ const Header = () => {
                     );
                   }
 
-                  let to = "/";
-                  if (item === "Home") to = "/";
-                  else if (item === "About") to = "/about";
-                  else if (item === "Contact") to = "/contact";
+                  let to = '/';
+                  if (item === 'Home') to = '/';
+                  else if (item === 'About') to = '/about';
+                  else if (item === 'Contact') to = '/contact';
 
                   return (
-                    <li
-                      key={item}
-                      data-navitem={item}
-                      className="header-nav-item"
-                    >
+                    <li key = {item}>
                       <Link
-                        to={to}
-                        className={`header-nav-link ${
-                          activeNav === item ? "header-nav-link--active" : ""
+                        href      = {to}
+                        className  = {`px-4 py-2 transition-colors ${
+                          activeNav === item
+                            ? 'text-accent'
+                            : 'text-foreground hover:text-accent'
                         }`}
-                        onClick={() => handleNavClick(item)}
+                        onClick = {() => handleNavClick(item)}
                       >
                         {item}
                       </Link>
@@ -201,34 +203,50 @@ const Header = () => {
             </div>
           </nav>
 
-          <div className="header-actions">
-            <div className="header-mobile-menu-toggle">
+          <div className = "flex items-center gap-4">
+            <div className = "md:hidden">
               <button
-                ref={menuButtonRef}
-                onClick={toggleMenu}
-                className={`header-mobile-menu-button ${
-                  isMenuOpen ? "open" : ""
+                ref         = {menuButtonRef}
+                onClick     = {toggleMenu}
+                className   = {`relative w-8 h-8 flex items-center justify-center ${
+                  isMenuOpen ? 'open' : ''
                 }`}
-                aria-label="Toggle menu"
-                aria-expanded={isMenuOpen}
+                aria-label  = "Toggle menu"
+                aria-expanded = {isMenuOpen}
               >
-                <div className="hamburger-box">
-                  <div className="hamburger-inner"></div>
+                <div className = "relative w-6 h-4">
+                  <span
+                    className = {`absolute top-0 left-0 w-full h-0.5 bg-foreground transition-all ${
+                      isMenuOpen
+                        ? 'rotate-45 top-2'
+                        : ''
+                    }`}
+                  />
+                  <span
+                    className = {`absolute top-2 left-0 w-full h-0.5 bg-foreground transition-all ${
+                      isMenuOpen ? 'opacity-0' : ''
+                    }`}
+                  />
+                  <span
+                    className = {`absolute bottom-0 left-0 w-full h-0.5 bg-foreground transition-all ${
+                      isMenuOpen
+                        ? '-rotate-45 top-2'
+                        : ''
+                    }`}
+                  />
                 </div>
               </button>
             </div>
-          </div>
-          <div className="header-contact">
             <button
-              className="header-contact-button"
-              onClick={() => {
+              className  = "flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground font-semibold transition-all duration-200 hover:brightness-110 hover:shadow-lg active:scale-95"
+              onClick     = {() => {
                 setIsMenuOpen(false);
-                setActiveNav("Contact");
-                navigate("/contact");
+                setActiveNav('Contact');
+                router.push('/contact');
               }}
             >
               <span>CONTACT</span>
-              <ContactArrowIcon className="header-contact-button-icon" />
+              <ContactArrowIcon className = "w-3 h-3" />
             </button>
           </div>
         </div>

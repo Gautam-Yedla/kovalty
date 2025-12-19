@@ -1,6 +1,6 @@
-import type { ServicePageData } from "../components/Services/ServicePageTemplate";
+import type { IServicePageData } from '@/components/Services/ServicePageTemplate';
 
-const allServicesData: Record<string, ServicePageData> = {
+const allServicesData: Record<string, IServicePageData> = {
   "ai-ml": {
     hero: {
       title: "AI & Machine Learning Services",

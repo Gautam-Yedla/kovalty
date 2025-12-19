@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
-import Services from "./Services";
-import MobileCards from "../../cards/MobileCards";
-import "../../styles/ServiceStyling/ResponsiveServices.css";
-import approachVenn from "../../assets/approach-venn.jpg";
+'use client';
 
+import { FC, useState, useEffect }          from 'react';
+import Image                                from 'next/image';
+import Services                             from './Services';
+import MobileCards                          from '@/cards/MobileCards';
+import '@/styles/ServiceStyling/ResponsiveServices.css';
+import approachVenn                         from '@/assets/approach-venn.jpg';
 import {
   IoSettingsSharp,
   IoSearch,
   IoBarChart,
   IoRocketSharp,
-} from "react-icons/io5";
+}                                          from 'react-icons/io5';
 
-const ResponsiveServices: React.FC = () => {
+const ResponsiveServices: FC = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -29,15 +31,15 @@ const ResponsiveServices: React.FC = () => {
   return (
     <>
       <div
-        className="desktop-services"
-        style={{ display: isMobile ? "none" : "block" }}
+        className = "desktop-services"
+        style     = {{ display: isMobile ? "none" : "block" }}
       >
         <Services />
       </div>
 
       <div
-        className="mobile-services"
-        style={{ display: isMobile ? "block" : "none" }}
+        className = "mobile-services"
+        style     = {{ display: isMobile ? "block" : "none" }}
       >
         <MobileCards />
       </div>
@@ -51,10 +53,12 @@ const ResponsiveServices: React.FC = () => {
             innovative solutions, robust products, and exceptional client
             experiences.
           </p>
-          <img
-            src={approachVenn}
-            alt="Technology, Product, Customer Success Venn Diagram"
-            className="services-approach-image"
+          <Image
+            src       = {approachVenn}
+            alt       = "Technology, Product, Customer Success Venn Diagram"
+            className = "services-approach-image"
+            width     = {800}
+            height    = {600}
           />
         </div>
       </section>

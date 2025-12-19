@@ -1,9 +1,11 @@
-import React from "react";
-import "../../styles/ServiceStyling/ServicesTemplate.css";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+'use client';
 
-export interface ServicePageData {
+import { FC }                              from 'react';
+import { ArrowRight }                       from 'lucide-react';
+import Link                                 from 'next/link';
+import '@/styles/ServiceStyling/ServicesTemplate.css';
+
+export interface IServicePageData {
   hero: {
     title: string;
     subtitle: string;
@@ -28,7 +30,11 @@ export interface ServicePageData {
   ctaButton: string;
 }
 
-const ServicePageTemplate: React.FC<{ data: ServicePageData }> = ({ data }) => {
+interface IProps {
+  data: IServicePageData;
+}
+
+const ServicePageTemplate: FC<IProps> = ({ data }) => {
   return (
     <div className="services-template-page">
       <header className="services-hero-section">
@@ -75,8 +81,11 @@ const ServicePageTemplate: React.FC<{ data: ServicePageData }> = ({ data }) => {
           <h2 className="services-cta-title">{data.ctaTitle}</h2>
           <p className="services-cta-subtitle">{data.ctaSubtitle}</p>
           <div className="services-cta-buttons">
-            <Link to="/services" className="services-cta-button-secondary">
-              <ArrowRight className="services-cta-button-icon" />
+            <Link
+              href      = "/services"
+              className = "services-cta-button-secondary"
+            >
+              <ArrowRight className = "services-cta-button-icon" />
               {data.ctaButton}
             </Link>
           </div>

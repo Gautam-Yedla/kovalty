@@ -1,15 +1,15 @@
-import React from "react";
-import "../styles/cardStyling/ServiceCardStyling.css";
-import type { Service } from "../data/services";
+import { FC }                              from 'react';
+import type { Service }                     from '@/data/services';
+import '@/styles/cardStyling/ServiceCardStyling.css';
 
-interface Props {
+interface IProps {
   service: Service;
   isAway: boolean;
-  angle: number | null;
-  zIndex: number;
+  angle  : number | null;
+  zIndex : number;
 }
 
-const ServiceCard: React.FC<Props> = ({ service, isAway, angle, zIndex }) => {
+const ServiceCard: FC<IProps> = ({ service, isAway, angle, zIndex }) => {
   const style = isAway
     ? {
         transform: "translateY(-120vh) rotate(-48deg)",
@@ -22,11 +22,11 @@ const ServiceCard: React.FC<Props> = ({ service, isAway, angle, zIndex }) => {
 
   return (
     <div
-      className={`card ${isAway ? "away" : ""}`}
-      style={{ ...style, background: service.background }}
+      className = {`card ${isAway ? "away" : ""}`}
+      style     = {{ ...style, background: service.background }}
     >
-      <div className="sub">{service.sub}</div>
-      <div className="content">{service.content}</div>
+      <div className = "sub">{service.sub}</div>
+      <div className = "content">{service.content}</div>
     </div>
   );
 };

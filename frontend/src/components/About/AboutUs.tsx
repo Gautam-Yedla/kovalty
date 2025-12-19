@@ -1,3 +1,4 @@
+import { FC }                              from 'react';
 import {
   Star,
   Users,
@@ -10,13 +11,10 @@ import {
   Heart,
   Target,
   CheckCircle,
-} from "lucide-react";
-import "../../styles/About/AboutUs.css";
-// import FAQs from '../FAQs/FAQs';
-// import Testimonials from '../Testimonials';
-// import { teamMembers } from '../../data/aboutUs';
+}                                          from 'lucide-react';
+import '@/styles/About/AboutUs.css';
 
-const AboutUsPage = () => {
+const AboutUsPage: FC = () => {
   return (
     <div className="aboutus-root">
       {/* Hero Section */}

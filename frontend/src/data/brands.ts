@@ -8,7 +8,7 @@ import {
   Smartphone as Mobile,
   Zap,
 } from "lucide-react";
-import type { Brand } from "../types";
+import type { Brand } from '@/types';
 
 export const brands: Brand[] = [
   { id: "1", name: "TechCorp", logo: Building2, color: "text-blue-600" },
