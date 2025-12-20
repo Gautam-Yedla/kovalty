@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send, Clock, Globe } from "lucide-react";
 import "../../styles/Contact/ContactForm.css";
@@ -39,7 +40,14 @@ const Contact = () => {
     },
     {
       icon: MapPin,
-      title: "Visit Us",
+      title: "Visit Us (USA)",
+      details:
+        "32969 Hamilton Ct. E, Suite 138D,\nFarmington Hills, MI 48334,\nUnited States",
+      description: "Visit our US office",
+    },
+    {
+      icon: MapPin,
+      title: "Visit Us (India)",
       details:
         "Plot No 54, Tripura Landmark-II,\nBowrampet, Hyderabad - 500043,\nTelangana, India",
       description: "Come say hello at our office",

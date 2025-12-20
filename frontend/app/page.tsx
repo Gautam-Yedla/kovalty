@@ -1,7 +1,10 @@
-// This file is deprecated - use app/page.tsx instead
-// Keeping for reference only
+import { Phone, ArrowRight } from "lucide-react";
+import "../src/styles/HomePage.css";
+import HeroSection from "@/components/HeroSection";
+import { servicesData } from "@/data/services";
+import Link from "next/link";
 
-const HomePage = () => {
+export default function HomePage() {
   return (
     <>
       <HeroSection />
@@ -19,7 +22,7 @@ const HomePage = () => {
             {servicesData.map((service) => (
               <Link
                 key={service.slug}
-                to={`/services/${service.slug}`}
+                href={`/services/${service.slug}`}
                 className="home-service-card"
               >
                 <h3 className="home-service-title">{service.title}</h3>
@@ -42,32 +45,19 @@ const HomePage = () => {
           </p>
 
           <div className="home-cta-buttons">
-            <Link to="/contact" className="home-cta-button-primary">
+            <Link href="/contact" className="home-cta-button-primary">
               <Phone className="home-cta-button-icon" />
               Schedule Free Consultation
             </Link>
 
-            <Link to="/services" className="home-cta-button-secondary">
+            <Link href="/services" className="home-cta-button-secondary">
               <ArrowRight className="home-cta-button-icon" />
               Explore Our Services
             </Link>
           </div>
-
-          {/* <div className="home-cta-contact">
-            <div className="home-cta-contact-item">
-              <Mail className="home-cta-contact-icon" />
-              <span>hello@kovalty.com</span>
-            </div>
-            <div className="home-cta-divider">|</div>
-            <div className="home-cta-contact-item">
-              <Phone className="home-cta-contact-icon" />
-              <span>+1 (555) 123-TECH</span>
-            </div>
-          </div> */}
         </div>
       </section>
     </>
   );
-};
+}
 
-export default HomePage;

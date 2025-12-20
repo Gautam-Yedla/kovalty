@@ -1,6 +1,7 @@
+'use client';
 import React, { useEffect } from "react";
 import "../styles/HeroSection.css";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const HeroSection: React.FC = () => {
   useEffect(() => {
@@ -47,7 +48,7 @@ const HeroSection: React.FC = () => {
           </span>
         </p>
 
-        <Link to="/contact" className="cta-button cta-link">
+        <Link href="/contact" className="cta-button cta-link">
           Contact Us
         </Link>
       </section>

@@ -1,7 +1,7 @@
+'use client';
 import "../styles/Footer.css";
 import { ScrollToTopIcon } from "../icons/Icons";
 import { Mail, Phone } from "lucide-react";
-// import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -11,30 +11,6 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* <nav className="footer-nav">
-          <ul className="footer-nav-list">
-            <li className="footer-nav-item">
-              <Link to="/" className="footer-nav-link">
-                Home
-              </Link>
-            </li>
-            <li className="footer-nav-item">
-              <Link to="/about" className="footer-nav-link">
-                About
-              </Link>
-            </li>
-            <li className="footer-nav-item">
-              <Link to="/services" className="footer-nav-link">
-                Services
-              </Link>
-            </li>
-            <li className="footer-nav-item">
-              <Link to="/contact" className="footer-nav-link">
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </nav> */}
         <div className="footer-content">
           <div className="footer-contact-info">
             <p className="footer-contact-text">Drop us a Line at :</p>
@@ -51,7 +27,22 @@ const Footer = () => {
             </a>
           </div>
           <div className="footer-contact-info">
-            <p className="footer-contact-text">Address :</p>
+            <p className="footer-contact-text">Address (USA) :</p>
+            <a
+              href="https://maps.google.com/?q=32969+Hamilton+Ct+E+Suite+138D+Farmington+Hills+MI+48334"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-link"
+            >
+              32969 Hamilton Ct. E, Suite 138D,
+              <br />
+              Farmington Hills, MI 48334
+              <br />
+              United States
+            </a>
+          </div>
+          <div className="footer-contact-info">
+            <p className="footer-contact-text">Address (India) :</p>
             <a
               href="https://maps.app.goo.gl/FrizC6mKpXe8YWS29"
               target="_blank"

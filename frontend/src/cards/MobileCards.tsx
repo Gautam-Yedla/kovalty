@@ -1,5 +1,6 @@
+'use client';
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import "../styles/ServiceStyling/MobileCards.css";
 
 import ApplicationDevelopmentIcon from "../assets/icons/application-development.png";
@@ -76,7 +77,7 @@ const MobileCards: React.FC<MobileCardsProps> = ({
   services = defaultServices,
 }) => {
   const [activeCard, setActiveCard] = useState<number | null>(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const togglePopup = (cardId: number) => {
     setActiveCard(activeCard === cardId ? null : cardId);
@@ -92,7 +93,7 @@ const MobileCards: React.FC<MobileCardsProps> = ({
       .toLowerCase()
       .replace(/ & /g, "-")
       .replace(/ /g, "-");
-    navigate(`/services/${slug}`);
+    router.push(`/services/${slug}`);
   };
 
   const handleOutsideClick = (event: React.MouseEvent) => {

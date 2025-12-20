@@ -1,8 +1,10 @@
+'use client';
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ContactArrowIcon, ChevronDownIcon } from "../icons/Icons";
 import { navItems, services } from "../data/header";
 import "../styles/Header.css";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 const Header = () => {
   const [activeNav, setActiveNav] = useState("Home");
@@ -12,8 +14,8 @@ const Header = () => {
   const navContainerRef = useRef<HTMLDivElement | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const getActiveNavFromPath = useCallback((pathname: string) => {
     if (pathname === "/") return "Home";
@@ -50,9 +52,9 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const currentNav = getActiveNavFromPath(location.pathname);
+    const currentNav = getActiveNavFromPath(pathname);
     setActiveNav(currentNav);
-  }, [location.pathname, getActiveNavFromPath]);
+  }, [pathname, getActiveNavFromPath]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -106,7 +108,7 @@ const Header = () => {
                         data-navitem="Services"
                       >
                         <Link
-                          to="/services"
+                          href="/services"
                           className={`header-nav-link header-nav-link--dropdown ${
                             activeNav === "Services"
                               ? "header-nav-link--active"
@@ -131,7 +133,7 @@ const Header = () => {
                           <ul className="header-dropdown-menu">
                             <li className="header-dropdown-item">
                               <Link
-                                to="/services"
+                                href="/services"
                                 className="header-dropdown-link"
                                 onClick={() => {
                                   setActiveNav("Services");
@@ -155,7 +157,7 @@ const Header = () => {
                                   className="header-dropdown-item"
                                 >
                                   <Link
-                                    to={servicePath}
+                                    href={servicePath}
                                     className="header-dropdown-link"
                                     onClick={() => {
                                       setActiveNav("Services");
@@ -186,7 +188,7 @@ const Header = () => {
                       className="header-nav-item"
                     >
                       <Link
-                        to={to}
+                        href={to}
                         className={`header-nav-link ${
                           activeNav === item ? "header-nav-link--active" : ""
                         }`}
@@ -224,7 +226,7 @@ const Header = () => {
               onClick={() => {
                 setIsMenuOpen(false);
                 setActiveNav("Contact");
-                navigate("/contact");
+                router.push("/contact");
               }}
             >
               <span>CONTACT</span>

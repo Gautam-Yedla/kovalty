@@ -1,7 +1,8 @@
+'use client';
 import React from "react";
 import "../../styles/ServiceStyling/ServicesTemplate.css";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export interface ServicePageData {
   hero: {
@@ -75,7 +76,7 @@ const ServicePageTemplate: React.FC<{ data: ServicePageData }> = ({ data }) => {
           <h2 className="services-cta-title">{data.ctaTitle}</h2>
           <p className="services-cta-subtitle">{data.ctaSubtitle}</p>
           <div className="services-cta-buttons">
-            <Link to="/services" className="services-cta-button-secondary">
+            <Link href="/services" className="services-cta-button-secondary">
               <ArrowRight className="services-cta-button-icon" />
               {data.ctaButton}
             </Link>
