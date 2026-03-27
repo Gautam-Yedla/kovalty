@@ -39,8 +39,8 @@ const Footer = () => {
           <div className="footer-contact-info">
             <p className="footer-contact-text">Drop us a Line at :</p>
             <Mail className="footer-cta-contact-icon" />
-            <a href="mailto:info@kovalty.com" className="footer-link">
-              info@kovalty.com
+            <a href="mailto:admin@kovalty.com" className="footer-link">
+              admin@kovalty.com
             </a>
           </div>
           <div className="footer-contact-info">
@@ -51,18 +51,16 @@ const Footer = () => {
             </a>
           </div>
           <div className="footer-contact-info">
-            <p className="footer-contact-text">Address :</p>
+            <p className="footer-contact-text">USA Office :</p>
             <a
-              href="https://maps.app.goo.gl/FrizC6mKpXe8YWS29"
+              href="https://maps.google.com/?q=32969+Hamilton+Ct.+E,+Suite+138D,+Farmington+Hills,+MI+48334"
               target="_blank"
               rel="noopener noreferrer"
               className="footer-link"
             >
-              Plot No 54, Tripura Landmark-II,
+              32969 Hamilton Ct. E, Suite 138D,
               <br />
-              Bowrampet, Hyderabad - 500043
-              <br />
-              Telangana, India
+              Farmington Hills, MI 48334
             </a>
           </div>
 

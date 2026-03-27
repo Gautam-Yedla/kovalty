@@ -28,7 +28,7 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      details: "info@kovalty.com",
+      details: "admin@kovalty.com",
       description: "Send us an email anytime",
     },
     {
@@ -41,7 +41,7 @@ const Contact = () => {
       icon: MapPin,
       title: "Visit Us",
       details:
-        "Plot No 54, Tripura Landmark-II,\nBowrampet, Hyderabad - 500043,\nTelangana, India",
+        "32969 Hamilton Ct. E, Suite 138D,\nFarmington Hills, MI 48334,\nUSA",
       description: "Come say hello at our office",
     },
   ];
