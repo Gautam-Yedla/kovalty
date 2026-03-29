@@ -1,6 +1,6 @@
 import "../styles/Footer.css";
 import { ScrollToTopIcon } from "../icons/Icons";
-import { Mail, Phone } from "lucide-react";
+import { Mail } from "lucide-react";
 // import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -43,13 +43,13 @@ const Footer = () => {
               admin@kovalty.com
             </a>
           </div>
-          <div className="footer-contact-info">
+          {/* <div className="footer-contact-info">
             <p className="footer-contact-text">Phone :</p>
             <Phone className="footer-cta-contact-icon" />
             <a href="tel:+917661805678" className="footer-link">
               +91 76618 05678
             </a>
-          </div>
+          </div> */}
           <div className="footer-contact-info">
             <p className="footer-contact-text">USA Office :</p>
             <a

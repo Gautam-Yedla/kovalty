@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mail, Phone, MapPin, Send, Clock, Globe } from "lucide-react";
+import { Mail, MapPin, Send, Clock, Globe } from "lucide-react";
 import "../../styles/Contact/ContactForm.css";
 
 const Contact = () => {
@@ -31,12 +31,12 @@ const Contact = () => {
       details: "admin@kovalty.com",
       description: "Send us an email anytime",
     },
-    {
-      icon: Phone,
-      title: "Call Us",
-      details: "+91 76618 05678",
-      description: "Mon-Fri from 8am to 6pm",
-    },
+    // {
+    //   icon: Phone,
+    //   title: "Call Us",
+    //   details: "+91 76618 05678",
+    //   description: "Mon-Fri from 8am to 6pm",
+    // },
     {
       icon: MapPin,
       title: "Visit Us",
